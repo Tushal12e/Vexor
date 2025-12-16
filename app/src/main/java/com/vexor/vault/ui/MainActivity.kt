@@ -2,22 +2,19 @@ package com.vexor.vault.ui
 
 import android.Manifest
 import android.app.Activity
-import android.app.RecoverableSecurityException
-import android.content.ContentResolver
 import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Intent
-import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -52,20 +49,30 @@ class MainActivity : AppCompatActivity() {
     private var isSelectionMode = false
     private val selectedFiles = mutableSetOf<VaultFile>()
     private var lastPauseTime = 0L
+    private var pendingDeleteUris = mutableListOf<Uri>()
     
     companion object {
         private const val LOCK_TIMEOUT = 30000L
+        private const val DELETE_REQUEST_CODE = 1001
     }
     
     private val pickFiles = registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { uris ->
         if (uris.isNotEmpty()) {
             uris.forEach { uri ->
                 try {
-                    contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    contentResolver.takePersistableUriPermission(uri, 
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
                 } catch (e: Exception) { }
             }
             importFiles(uris)
         }
+    }
+    
+    private val deleteRequest = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            Toast.makeText(this, "Original files deleted from gallery", Toast.LENGTH_SHORT).show()
+        }
+        pendingDeleteUris.clear()
     }
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +91,6 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun setupUI() {
-        // Toolbar
         binding.toolbar.title = if (isFakeVault) "Vexor (Decoy)" else "Vexor"
         binding.btnSettings.setOnClickListener {
             if (!isFakeVault) {
@@ -94,7 +100,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
         
-        // Tabs
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 currentFilter = when (tab?.position) {
@@ -110,7 +115,6 @@ class MainActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
         
-        // RecyclerView
         adapter = VaultFileAdapter(
             encryptionManager = encryptionManager,
             onItemClick = { file -> openFile(file) },
@@ -119,10 +123,8 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.layoutManager = GridLayoutManager(this, 3)
         binding.recyclerView.adapter = adapter
         
-        // FAB
         binding.fabAdd.setOnClickListener { showAddOptions() }
         
-        // Selection toolbar buttons
         binding.btnCancelSelection.setOnClickListener { exitSelectionMode() }
         binding.btnDeleteSelected.setOnClickListener { showSelectionOptions() }
     }
@@ -169,6 +171,8 @@ class MainActivity : AppCompatActivity() {
         
         lifecycleScope.launch {
             var count = 0
+            val urisToDelete = mutableListOf<Uri>()
+            
             for (uri in uris) {
                 count++
                 withContext(Dispatchers.Main) {
@@ -178,6 +182,12 @@ class MainActivity : AppCompatActivity() {
                 val vaultFile = encryptionManager.encryptFile(uri, isFakeVault)
                 if (vaultFile != null) {
                     repository.addFile(vaultFile)
+                    
+                    // Try to delete original
+                    val deleted = tryDeleteFile(uri)
+                    if (!deleted) {
+                        urisToDelete.add(uri)
+                    }
                 }
             }
             
@@ -186,6 +196,47 @@ class MainActivity : AppCompatActivity() {
                 binding.tvProgress.visibility = View.GONE
                 Toast.makeText(this@MainActivity, "✅ $count files added to vault!", Toast.LENGTH_SHORT).show()
                 loadFiles()
+                
+                // If some files couldn't be deleted, ask user
+                if (urisToDelete.isNotEmpty() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    requestDeletePermission(urisToDelete)
+                }
+            }
+        }
+    }
+    
+    private suspend fun tryDeleteFile(uri: Uri): Boolean = withContext(Dispatchers.IO) {
+        try {
+            // Method 1: Direct delete
+            val deleted = contentResolver.delete(uri, null, null)
+            if (deleted > 0) return@withContext true
+            
+            // Method 2: DocumentsContract
+            try {
+                if (DocumentsContract.isDocumentUri(this@MainActivity, uri)) {
+                    DocumentsContract.deleteDocument(contentResolver, uri)
+                    return@withContext true
+                }
+            } catch (e: Exception) { }
+            
+            false
+        } catch (e: Exception) {
+            false
+        }
+    }
+    
+    private fun requestDeletePermission(uris: List<Uri>) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            try {
+                pendingDeleteUris.clear()
+                pendingDeleteUris.addAll(uris)
+                
+                val pendingIntent = MediaStore.createDeleteRequest(contentResolver, uris)
+                deleteRequest.launch(
+                    androidx.activity.result.IntentSenderRequest.Builder(pendingIntent.intentSender).build()
+                )
+            } catch (e: Exception) {
+                Toast.makeText(this, "Please delete original files manually from gallery", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -257,10 +308,8 @@ class MainActivity : AppCompatActivity() {
     private fun exportSelectedFiles() {
         MaterialAlertDialogBuilder(this)
             .setTitle("Restore to Device?")
-            .setMessage("Files will be decrypted and saved to your gallery/downloads folder.\n\nFiles will remain in vault until you delete them.")
-            .setPositiveButton("Restore") { _, _ ->
-                doExport()
-            }
+            .setMessage("Files will be decrypted and saved to your gallery/downloads folder.")
+            .setPositiveButton("Restore") { _, _ -> doExport() }
             .setNegativeButton("Cancel", null)
             .show()
     }
@@ -279,18 +328,16 @@ class MainActivity : AppCompatActivity() {
                 }
                 
                 val success = exportFileToDevice(file)
-                if (success) {
-                    successCount++
-                }
+                if (success) successCount++
             }
             
             withContext(Dispatchers.Main) {
                 binding.progressBar.visibility = View.GONE
                 binding.tvProgress.visibility = View.GONE
                 if (successCount > 0) {
-                    Toast.makeText(this@MainActivity, "✅ $successCount files restored to device!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, "✅ $successCount files restored!", Toast.LENGTH_LONG).show()
                 } else {
-                    Toast.makeText(this@MainActivity, "❌ Export failed. Try again.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "❌ Export failed", Toast.LENGTH_SHORT).show()
                 }
                 exitSelectionMode()
             }
@@ -299,12 +346,8 @@ class MainActivity : AppCompatActivity() {
     
     private suspend fun exportFileToDevice(file: VaultFile): Boolean = withContext(Dispatchers.IO) {
         try {
-            val decryptedBytes = encryptionManager.decryptFile(file)
-            if (decryptedBytes == null) {
-                return@withContext false
-            }
+            val decryptedBytes = encryptionManager.decryptFile(file) ?: return@withContext false
             
-            // Determine destination folder
             val relativePath = when (file.fileType) {
                 FileType.PHOTO -> Environment.DIRECTORY_PICTURES + "/Vexor"
                 FileType.VIDEO -> Environment.DIRECTORY_MOVIES + "/Vexor"
@@ -313,7 +356,6 @@ class MainActivity : AppCompatActivity() {
             }
             
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                // Android 10+
                 val collection = when (file.fileType) {
                     FileType.PHOTO -> MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                     FileType.VIDEO -> MediaStore.Video.Media.EXTERNAL_CONTENT_URI
@@ -331,14 +373,12 @@ class MainActivity : AppCompatActivity() {
                 val uri = contentResolver.insert(collection, values)
                 if (uri != null) {
                     contentResolver.openOutputStream(uri)?.use { it.write(decryptedBytes) }
-                    
                     values.clear()
                     values.put(MediaStore.MediaColumns.IS_PENDING, 0)
                     contentResolver.update(uri, values, null, null)
                     return@withContext true
                 }
             } else {
-                // Legacy
                 val dir = File(Environment.getExternalStoragePublicDirectory(
                     when (file.fileType) {
                         FileType.PHOTO -> Environment.DIRECTORY_PICTURES
@@ -350,7 +390,6 @@ class MainActivity : AppCompatActivity() {
                 
                 val outputFile = File(dir, file.originalName)
                 FileOutputStream(outputFile).use { it.write(decryptedBytes) }
-                
                 sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(outputFile)))
                 return@withContext true
             }
@@ -365,7 +404,7 @@ class MainActivity : AppCompatActivity() {
     private fun deleteSelectedFiles() {
         MaterialAlertDialogBuilder(this)
             .setTitle("Delete ${selectedFiles.size} file(s)?")
-            .setMessage("These files will be permanently deleted from the vault. This cannot be undone.")
+            .setMessage("These files will be permanently deleted from the vault.")
             .setPositiveButton("Delete") { _, _ ->
                 selectedFiles.forEach { file ->
                     encryptionManager.deleteFile(file)
