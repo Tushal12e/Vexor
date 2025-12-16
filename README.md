@@ -25,7 +25,7 @@ Hide and protect your private photos, videos, and documents with military-grade 
 
 ## 📥 Download
 
-### [⬇️ Download Vexor v1.1.0 APK](../../releases/download/v1.1.0/Vexor-v1.1.0.apk)
+### [⬇️ Download Vexor v1.2.0 APK](../../releases/download/v1.2.0/Vexor-v1.2.0.apk)
 
 **Size**: 11 MB | **Android**: 8.0+
 
