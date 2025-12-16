@@ -79,6 +79,18 @@
             android:name=".ui.IntruderLogActivity"
             android:exported="false" />
 
+        <!-- Change PIN -->
+        <activity
+            android:name=".ui.ChangePinActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <!-- Setup Fake PIN -->
+        <activity
+            android:name=".ui.SetupFakePinActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
         <!-- File Provider for sharing -->
         <provider
             android:name="androidx.core.content.FileProvider"

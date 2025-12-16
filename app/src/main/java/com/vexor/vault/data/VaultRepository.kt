@@ -104,6 +104,13 @@ class VaultRepository(private val context: Context) {
         saveIntruderLogs(logs)
     }
     
+    fun removeIntruderLog(log: IntruderLog) {
+        val logs = getAllIntruderLogs().toMutableList()
+        logs.removeAll { it.id == log.id }
+        cachedIntruderLogs = logs.toMutableList()
+        saveIntruderLogs(logs)
+    }
+    
     fun clearIntruderLogs() {
         cachedIntruderLogs = mutableListOf()
         intruderDbFile.delete()

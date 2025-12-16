@@ -1,5 +1,6 @@
 package com.vexor.vault.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,40 +29,51 @@ class SettingsActivity : AppCompatActivity() {
         setupUI()
     }
     
+    override fun onResume() {
+        super.onResume()
+        updateSwitches()
+    }
+    
+    private fun updateSwitches() {
+        binding.switchBiometric.isChecked = prefs.biometricEnabled
+        binding.switchIntruder.isChecked = prefs.intruderDetectionEnabled
+        binding.switchFakeVault.isChecked = prefs.fakeVaultEnabled
+    }
+    
     private fun setupUI() {
         binding.toolbar.setNavigationOnClickListener { finish() }
         
         // Biometric toggle
-        binding.switchBiometric.isChecked = prefs.biometricEnabled
         binding.switchBiometric.isEnabled = biometricHelper.isBiometricAvailable()
         binding.switchBiometric.setOnCheckedChangeListener { _, isChecked ->
             prefs.biometricEnabled = isChecked
         }
         
         // Intruder detection
-        binding.switchIntruder.isChecked = prefs.intruderDetectionEnabled
         binding.switchIntruder.setOnCheckedChangeListener { _, isChecked ->
             prefs.intruderDetectionEnabled = isChecked
+            if (isChecked) {
+                Toast.makeText(this, "Front camera will capture on wrong PIN", Toast.LENGTH_SHORT).show()
+            }
         }
         
         // Fake vault
-        binding.switchFakeVault.isChecked = prefs.fakeVaultEnabled
         binding.switchFakeVault.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
+            if (isChecked && !prefs.fakeVaultEnabled) {
                 showFakePinSetup()
-            } else {
+            } else if (!isChecked) {
                 prefs.fakeVaultEnabled = false
             }
         }
         
-        // Change PIN
+        // Change PIN - Launch ChangePinActivity
         binding.btnChangePin.setOnClickListener {
-            Toast.makeText(this, "Change PIN feature", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, ChangePinActivity::class.java))
         }
         
         // Intruder logs
         binding.btnIntruderLogs.setOnClickListener {
-            startActivity(android.content.Intent(this, IntruderLogActivity::class.java))
+            startActivity(Intent(this, IntruderLogActivity::class.java))
         }
         
         // Clear vault
@@ -74,14 +86,24 @@ class SettingsActivity : AppCompatActivity() {
             val packageInfo = packageManager.getPackageInfo(packageName, 0)
             binding.tvVersion.text = "Version ${packageInfo.versionName}"
         } catch (e: Exception) {
-            binding.tvVersion.text = "Version 1.0.0"
+            binding.tvVersion.text = "Version 1.3.0"
         }
     }
     
     private fun showFakePinSetup() {
-        Toast.makeText(this, "Set a different PIN for fake vault", Toast.LENGTH_LONG).show()
-        prefs.fakeVaultEnabled = true
-        prefs.setFakePin("0000") // Default fake PIN
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Setup Fake Vault PIN")
+            .setMessage("When you enter this PIN, a decoy vault will be shown.\n\nUse a different 4-digit PIN.")
+            .setPositiveButton("Setup") { _, _ ->
+                startActivity(Intent(this, SetupFakePinActivity::class.java))
+            }
+            .setNegativeButton("Cancel") { _, _ ->
+                binding.switchFakeVault.isChecked = false
+            }
+            .setOnCancelListener {
+                binding.switchFakeVault.isChecked = false
+            }
+            .show()
     }
     
     private fun showClearVaultConfirmation() {
