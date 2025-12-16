@@ -32,9 +32,9 @@
         android:requestLegacyExternalStorage="true"
         tools:targetApi="34">
 
-        <!-- Splash / Auth Screen -->
+        <!-- Splash Screen (Launcher) -->
         <activity
-            android:name=".ui.AuthActivity"
+            android:name=".ui.SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Vexor.Splash"
             android:screenOrientation="portrait">
@@ -43,6 +43,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Auth Screen -->
+        <activity
+            android:name=".ui.AuthActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Vexor.Splash"
+            android:screenOrientation="portrait" />
 
         <!-- Setup Activity (first time) -->
         <activity

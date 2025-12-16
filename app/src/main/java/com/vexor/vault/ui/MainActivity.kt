@@ -1,6 +1,7 @@
 package com.vexor.vault.ui
 
 import android.Manifest
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -47,17 +48,18 @@ class MainActivity : AppCompatActivity() {
     private var lastPauseTime = 0L
     
     companion object {
-        private const val LOCK_TIMEOUT = 30000L // 30 seconds
+        private const val LOCK_TIMEOUT = 30000L
     }
     
-    private val pickMedia = registerForActivityResult(ActivityResultContracts.GetMultipleContents()) { uris ->
-        if (uris.isNotEmpty()) {
-            importFiles(uris)
-        }
-    }
-    
+    // Use OpenDocument for all file types - works better than GetContent
     private val pickFiles = registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { uris ->
         if (uris.isNotEmpty()) {
+            // Take persistable permissions for later access
+            uris.forEach { uri ->
+                try {
+                    contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                } catch (e: Exception) { }
+            }
             importFiles(uris)
         }
     }
@@ -83,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             if (!isFakeVault) {
                 startActivity(Intent(this, SettingsActivity::class.java))
             } else {
-                Toast.makeText(this, "Settings not available in decoy mode", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Settings hidden in decoy mode", Toast.LENGTH_SHORT).show()
             }
         }
         
@@ -134,46 +136,25 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun showAddOptions() {
-        val options = arrayOf("Photos & Videos", "Documents", "All Files")
+        val options = arrayOf(
+            "📷 Photos", 
+            "🎬 Videos", 
+            "📄 Documents",
+            "📁 All Files"
+        )
         
         MaterialAlertDialogBuilder(this)
-            .setTitle("Add Files")
+            .setTitle("Add Files to Vault")
             .setItems(options) { _, which ->
                 when (which) {
-                    0 -> checkPermissionAndPick("image/*")
-                    1 -> pickFiles.launch(arrayOf("application/pdf", "application/*", "text/*"))
-                    2 -> pickFiles.launch(arrayOf("*/*"))
+                    0 -> pickFiles.launch(arrayOf("image/*"))
+                    1 -> pickFiles.launch(arrayOf("video/*"))
+                    2 -> pickFiles.launch(arrayOf("application/pdf", "application/*", "text/*"))
+                    3 -> pickFiles.launch(arrayOf("*/*"))
                 }
             }
+            .setNegativeButton("Cancel", null)
             .show()
-    }
-    
-    private fun checkPermissionAndPick(mimeType: String) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES) 
-                != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(arrayOf(
-                    Manifest.permission.READ_MEDIA_IMAGES,
-                    Manifest.permission.READ_MEDIA_VIDEO
-                ), 100)
-            } else {
-                pickMedia.launch(mimeType)
-            }
-        } else {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), 100)
-            } else {
-                pickMedia.launch(mimeType)
-            }
-        }
-    }
-    
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 100 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            pickMedia.launch("image/*")
-        }
     }
     
     private fun importFiles(uris: List<Uri>) {
@@ -192,29 +173,58 @@ class MainActivity : AppCompatActivity() {
                 val vaultFile = encryptionManager.encryptFile(uri, isFakeVault)
                 if (vaultFile != null) {
                     repository.addFile(vaultFile)
-                    deleteOriginalFile(uri)
+                    
+                    // Delete original from MediaStore to hide from gallery
+                    deleteFromMediaStore(uri)
                 }
             }
             
             withContext(Dispatchers.Main) {
                 binding.progressBar.visibility = View.GONE
                 binding.tvProgress.visibility = View.GONE
-                Toast.makeText(this@MainActivity, "$count files hidden in vault", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@MainActivity, "✅ $count files hidden!", Toast.LENGTH_SHORT).show()
                 loadFiles()
             }
         }
     }
     
-    private suspend fun deleteOriginalFile(uri: Uri) = withContext(Dispatchers.IO) {
+    private suspend fun deleteFromMediaStore(uri: Uri) = withContext(Dispatchers.IO) {
         try {
-            // Try multiple methods to delete
+            // Method 1: Direct delete via ContentResolver
+            val deleted = contentResolver.delete(uri, null, null)
+            if (deleted > 0) return@withContext
+            
+            // Method 2: Try DocumentsContract
             try {
-                contentResolver.delete(uri, null, null)
-            } catch (e: Exception) {
-                try {
-                    android.provider.DocumentsContract.deleteDocument(contentResolver, uri)
-                } catch (e2: Exception) { }
-            }
+                android.provider.DocumentsContract.deleteDocument(contentResolver, uri)
+            } catch (e: Exception) { }
+            
+            // Method 3: Query MediaStore and delete by ID
+            try {
+                val cursor = contentResolver.query(uri, arrayOf(MediaStore.MediaColumns._ID), null, null, null)
+                cursor?.use {
+                    if (it.moveToFirst()) {
+                        val id = it.getLong(0)
+                        
+                        // Try all media types
+                        listOf(
+                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                            MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+                            MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+                            MediaStore.Files.getContentUri("external")
+                        ).forEach { mediaUri ->
+                            try {
+                                contentResolver.delete(
+                                    mediaUri,
+                                    "${MediaStore.MediaColumns._ID}=?",
+                                    arrayOf(id.toString())
+                                )
+                            } catch (e: Exception) { }
+                        }
+                    }
+                }
+            } catch (e: Exception) { }
+            
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -228,14 +238,10 @@ class MainActivity : AppCompatActivity() {
         
         when (file.fileType) {
             FileType.PHOTO -> {
-                val intent = Intent(this, PhotoViewerActivity::class.java)
-                intent.putExtra("file", file)
-                startActivity(intent)
+                startActivity(Intent(this, PhotoViewerActivity::class.java).putExtra("file", file))
             }
             FileType.VIDEO -> {
-                val intent = Intent(this, VideoPlayerActivity::class.java)
-                intent.putExtra("file", file)
-                startActivity(intent)
+                startActivity(Intent(this, VideoPlayerActivity::class.java).putExtra("file", file))
             }
             else -> {
                 Toast.makeText(this, "Opening ${file.originalName}", Toast.LENGTH_SHORT).show()
@@ -288,16 +294,14 @@ class MainActivity : AppCompatActivity() {
     private fun exportSelectedFiles() {
         binding.progressBar.visibility = View.VISIBLE
         binding.tvProgress.visibility = View.VISIBLE
-        binding.tvProgress.text = "Exporting..."
         
         lifecycleScope.launch {
             var successCount = 0
-            val totalCount = selectedFiles.size
             val filesToExport = selectedFiles.toList()
             
             for ((index, file) in filesToExport.withIndex()) {
                 withContext(Dispatchers.Main) {
-                    binding.tvProgress.text = "Exporting ${index + 1}/$totalCount..."
+                    binding.tvProgress.text = "Exporting ${index + 1}/${filesToExport.size}..."
                 }
                 
                 val success = exportFileToDevice(file)
@@ -311,11 +315,7 @@ class MainActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 binding.progressBar.visibility = View.GONE
                 binding.tvProgress.visibility = View.GONE
-                if (successCount > 0) {
-                    Toast.makeText(this@MainActivity, "$successCount files moved to gallery", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(this@MainActivity, "Export failed. Please try again.", Toast.LENGTH_SHORT).show()
-                }
+                Toast.makeText(this@MainActivity, "✅ $successCount files moved to gallery!", Toast.LENGTH_SHORT).show()
                 exitSelectionMode()
                 loadFiles()
             }
@@ -324,13 +324,8 @@ class MainActivity : AppCompatActivity() {
     
     private suspend fun exportFileToDevice(file: VaultFile): Boolean = withContext(Dispatchers.IO) {
         try {
-            // Decrypt file
-            val decryptedBytes = encryptionManager.decryptFile(file)
-            if (decryptedBytes == null) {
-                return@withContext false
-            }
+            val decryptedBytes = encryptionManager.decryptFile(file) ?: return@withContext false
             
-            // Determine destination based on file type
             val relativePath = when (file.fileType) {
                 FileType.PHOTO -> Environment.DIRECTORY_PICTURES + "/Vexor"
                 FileType.VIDEO -> Environment.DIRECTORY_MOVIES + "/Vexor"
@@ -338,10 +333,7 @@ class MainActivity : AppCompatActivity() {
                 else -> Environment.DIRECTORY_DOCUMENTS + "/Vexor"
             }
             
-            val mimeType = file.mimeType
-            
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                // Android 10+ use MediaStore
                 val collection = when (file.fileType) {
                     FileType.PHOTO -> MediaStore.Images.Media.EXTERNAL_CONTENT_URI
                     FileType.VIDEO -> MediaStore.Video.Media.EXTERNAL_CONTENT_URI
@@ -351,31 +343,24 @@ class MainActivity : AppCompatActivity() {
                 
                 val values = ContentValues().apply {
                     put(MediaStore.MediaColumns.DISPLAY_NAME, file.originalName)
-                    put(MediaStore.MediaColumns.MIME_TYPE, mimeType)
+                    put(MediaStore.MediaColumns.MIME_TYPE, file.mimeType)
                     put(MediaStore.MediaColumns.RELATIVE_PATH, relativePath)
                     put(MediaStore.MediaColumns.IS_PENDING, 1)
                 }
                 
                 val uri = contentResolver.insert(collection, values)
                 if (uri != null) {
-                    contentResolver.openOutputStream(uri)?.use { outputStream ->
-                        outputStream.write(decryptedBytes)
-                    }
-                    
-                    // Mark as complete
+                    contentResolver.openOutputStream(uri)?.use { it.write(decryptedBytes) }
                     values.clear()
                     values.put(MediaStore.MediaColumns.IS_PENDING, 0)
                     contentResolver.update(uri, values, null, null)
-                    
                     return@withContext true
                 }
             } else {
-                // Legacy storage
                 val dir = File(Environment.getExternalStoragePublicDirectory(
                     when (file.fileType) {
                         FileType.PHOTO -> Environment.DIRECTORY_PICTURES
                         FileType.VIDEO -> Environment.DIRECTORY_MOVIES
-                        FileType.AUDIO -> Environment.DIRECTORY_MUSIC
                         else -> Environment.DIRECTORY_DOCUMENTS
                     }
                 ), "Vexor")
@@ -384,11 +369,7 @@ class MainActivity : AppCompatActivity() {
                 val outputFile = File(dir, file.originalName)
                 FileOutputStream(outputFile).use { it.write(decryptedBytes) }
                 
-                // Notify media scanner
-                val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
-                intent.data = Uri.fromFile(outputFile)
-                sendBroadcast(intent)
-                
+                sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(outputFile)))
                 return@withContext true
             }
             
@@ -408,7 +389,7 @@ class MainActivity : AppCompatActivity() {
                     encryptionManager.deleteFile(file)
                     repository.removeFile(file)
                 }
-                Toast.makeText(this, "${selectedFiles.size} files deleted permanently", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "🗑️ ${selectedFiles.size} files deleted!", Toast.LENGTH_SHORT).show()
                 exitSelectionMode()
                 loadFiles()
             }
@@ -424,13 +405,11 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         
-        // Check if we need to re-authenticate
         val timeSincePause = System.currentTimeMillis() - lastPauseTime
         if (lastPauseTime > 0 && timeSincePause > LOCK_TIMEOUT) {
-            // Go back to auth screen
-            val intent = Intent(this, AuthActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            startActivity(Intent(this, AuthActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            })
             finish()
             return
         }
@@ -442,7 +421,6 @@ class MainActivity : AppCompatActivity() {
         if (isSelectionMode) {
             exitSelectionMode()
         } else {
-            // Go to home instead of auth
             moveTaskToBack(true)
         }
     }

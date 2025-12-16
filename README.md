@@ -30,30 +30,18 @@ Hide and protect your private photos, videos, and documents with military-grade 
 
 ## 📥 Download
 
-### [⬇️ Download Vexor v1.3.0 APK](../../releases/download/v1.3.0/Vexor-v1.3.0.apk)
+### [⬇️ Download Vexor v1.4.0 APK](../../releases/download/v1.4.0/Vexor-v1.4.0.apk)
 
-**Size**: 11 MB | **Android**: 8.0+
+**Size**: 12 MB | **Android**: 8.0+
 
 ---
 
 ## 📲 Installation Guide
 
-### Step 1: Download APK
-- Click the download link above
-
-### Step 2: Enable Unknown Sources
-1. Open **Settings** → **Security**
-2. Enable **Install unknown apps** for your browser
-
-### Step 3: Install APK
-1. Open the downloaded APK
-2. Tap **Install** → **Open**
-
-### Step 4: Setup Vault
-1. **Create PIN** - Enter a 4-digit main PIN
-2. **Fake Vault PIN** - Set a different PIN for decoy vault
-3. **Fingerprint** - Enable biometric unlock
-4. **Done!** - Start hiding files!
+1. **Download** the APK above
+2. **Enable** "Install unknown apps" in Settings
+3. **Install** and open
+4. **Create PIN** and start hiding files!
 
 ---
 
@@ -61,7 +49,7 @@ Hide and protect your private photos, videos, and documents with military-grade 
 
 | Action | How |
 |--------|-----|
-| **Add Files** | Tap ➕ → Select files |
+| **Add Files** | Tap ➕ → Select files (photos/videos/docs) |
 | **Share to Vault** | Any app → Share → Vexor |
 | **Export to Device** | Long press → Move to Device |
 | **View Intruders** | Settings → Intruder Logs |
@@ -70,15 +58,13 @@ Hide and protect your private photos, videos, and documents with military-grade 
 
 ---
 
-## 🆕 What's New in v1.3.0
+## 🆕 What's New in v1.4.0
 
-- ✅ Fixed export to device
-- ✅ Fixed share intent (add from any app)
-- ✅ App locks after 30s when minimized
-- ✅ Intruder photos now viewable
-- ✅ Change PIN works properly
-- ✅ Fake vault PIN setup fixed
-- ✅ UI/UX improvements
+- ✅ New splash screen with logo
+- ✅ New app icon design
+- ✅ Fixed file picker for videos & documents
+- ✅ Improved file hiding from gallery
+- ✅ Better UI/UX
 
 ---
 
