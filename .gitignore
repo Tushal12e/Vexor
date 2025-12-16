@@ -1,0 +1,37 @@
+# Built files
+*.iml
+.gradle/
+build/
+local.properties
+
+# IDE
+.idea/
+*.iws
+*.ipr
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Android
+*.apk
+*.aab
+*.dex
+*.class
+
+# Gradle
+gradle-8.2/
+.gradle/
+gradle/wrapper/gradle-wrapper.jar
+
+# Logs
+*.log
+build_log.txt
+
+# Local configuration
+local.properties
+keystore.properties
+
+# Sensitive
+*.jks
+*.keystore

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors - Deep Purple/Violet -->
+    <color name="primary">#7C4DFF</color>
+    <color name="primary_dark">#651FFF</color>
+    <color name="primary_light">#B388FF</color>
+    <color name="on_primary">#FFFFFF</color>
+    
+    <!-- Secondary - Cyan -->
+    <color name="secondary">#00E5FF</color>
+    <color name="secondary_dark">#00B8D4</color>
+    <color name="on_secondary">#000000</color>
+    
+    <!-- Background - Dark -->
+    <color name="background">#0A0A0F</color>
+    <color name="background_secondary">#12121A</color>
+    <color name="surface">#1A1A24</color>
+    <color name="surface_elevated">#22222E</color>
+    
+    <!-- Cards -->
+    <color name="card_background">#1E1E2A</color>
+    <color name="card_border">#2D2D3D</color>
+    
+    <!-- Text -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#A0A0B0</color>
+    <color name="text_hint">#606070</color>
+    
+    <!-- Status Colors -->
+    <color name="status_success">#00E676</color>
+    <color name="status_warning">#FFAB00</color>
+    <color name="status_error">#FF5252</color>
+    <color name="status_info">#40C4FF</color>
+    
+    <!-- File Type Colors -->
+    <color name="file_photo">#FF6B9D</color>
+    <color name="file_video">#7C4DFF</color>
+    <color name="file_document">#00E5FF</color>
+    <color name="file_audio">#00E676</color>
+    
+    <!-- Security -->
+    <color name="lock_secure">#00E676</color>
+    <color name="lock_warning">#FFAB00</color>
+    
+    <!-- PIN Pad -->
+    <color name="pin_button">#22222E</color>
+    <color name="pin_button_pressed">#7C4DFF</color>
+    <color name="pin_dot_filled">#7C4DFF</color>
+    <color name="pin_dot_empty">#3D3D4D</color>
+    
+    <!-- Ripple -->
+    <color name="ripple_color">#337C4DFF</color>
+    
+    <!-- Gradient overlay -->
+    <color name="gradient_start">#007C4DFF</color>
+    <color name="gradient_end">#997C4DFF</color>
+</resources>

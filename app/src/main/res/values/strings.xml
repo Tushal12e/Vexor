@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vexor</string>
+    <string name="app_tagline">Your Private Vault</string>
+    
+    <!-- Auth -->
+    <string name="enter_pin">Enter PIN</string>
+    <string name="confirm_pin">Confirm PIN</string>
+    <string name="wrong_pin">Wrong PIN</string>
+    <string name="pins_dont_match">PINs don\'t match</string>
+    <string name="use_fingerprint">Use Fingerprint</string>
+    <string name="biometric_prompt_title">Unlock Vexor</string>
+    <string name="biometric_prompt_subtitle">Use your fingerprint to access vault</string>
+    <string name="biometric_prompt_negative">Use PIN</string>
+    
+    <!-- Setup -->
+    <string name="setup_title">Setup Your Vault</string>
+    <string name="create_pin">Create a 4-digit PIN</string>
+    <string name="enable_biometric">Enable Fingerprint?</string>
+    <string name="setup_complete">Vault Ready!</string>
+    
+    <!-- Main -->
+    <string name="photos">Photos</string>
+    <string name="videos">Videos</string>
+    <string name="documents">Documents</string>
+    <string name="audio">Audio</string>
+    <string name="all_files">All Files</string>
+    <string name="no_files">No files yet</string>
+    <string name="tap_to_add">Tap + to add files</string>
+    
+    <!-- Actions -->
+    <string name="add_files">Add Files</string>
+    <string name="import_from_gallery">Import from Gallery</string>
+    <string name="import_from_files">Import from Files</string>
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
+    <string name="export">Export</string>
+    <string name="select_all">Select All</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="ok">OK</string>
+    
+    <!-- Settings -->
+    <string name="settings">Settings</string>
+    <string name="change_pin">Change PIN</string>
+    <string name="biometric_unlock">Fingerprint Unlock</string>
+    <string name="intruder_detection">Intruder Detection</string>
+    <string name="intruder_detection_desc">Take photo on wrong PIN</string>
+    <string name="fake_vault">Fake Vault</string>
+    <string name="fake_vault_desc">Show decoy vault with alternate PIN</string>
+    <string name="app_disguise">App Disguise</string>
+    <string name="clear_vault">Clear Vault</string>
+    <string name="about">About</string>
+    <string name="version">Version</string>
+    
+    <!-- Dialogs -->
+    <string name="delete_confirm">Delete selected files?</string>
+    <string name="delete_confirm_msg">This action cannot be undone.</string>
+    <string name="clear_vault_confirm">Clear entire vault?</string>
+    <string name="clear_vault_msg">All files will be permanently deleted.</string>
+    
+    <!-- Intruder -->
+    <string name="intruder_logs">Intruder Logs</string>
+    <string name="no_intruders">No break-in attempts</string>
+    <string name="failed_attempts">%d failed attempts</string>
+</resources>
