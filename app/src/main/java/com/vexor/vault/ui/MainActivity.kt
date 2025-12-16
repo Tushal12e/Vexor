@@ -1,12 +1,9 @@
 package com.vexor.vault.ui
 
-import android.Manifest
 import android.app.Activity
 import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -17,7 +14,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -53,7 +49,6 @@ class MainActivity : AppCompatActivity() {
     
     companion object {
         private const val LOCK_TIMEOUT = 30000L
-        private const val DELETE_REQUEST_CODE = 1001
     }
     
     private val pickFiles = registerForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { uris ->
@@ -70,7 +65,9 @@ class MainActivity : AppCompatActivity() {
     
     private val deleteRequest = registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            Toast.makeText(this, "Original files deleted from gallery", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "✅ Original files deleted from gallery!", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Original files kept in gallery", Toast.LENGTH_SHORT).show()
         }
         pendingDeleteUris.clear()
     }
@@ -171,7 +168,7 @@ class MainActivity : AppCompatActivity() {
         
         lifecycleScope.launch {
             var count = 0
-            val urisToDelete = mutableListOf<Uri>()
+            val mediaStoreUris = mutableListOf<Uri>()
             
             for (uri in uris) {
                 count++
@@ -183,10 +180,10 @@ class MainActivity : AppCompatActivity() {
                 if (vaultFile != null) {
                     repository.addFile(vaultFile)
                     
-                    // Try to delete original
-                    val deleted = tryDeleteFile(uri)
-                    if (!deleted) {
-                        urisToDelete.add(uri)
+                    // Try to get MediaStore URI for this file
+                    val mediaUri = getMediaStoreUri(uri, vaultFile.mimeType)
+                    if (mediaUri != null) {
+                        mediaStoreUris.add(mediaUri)
                     }
                 }
             }
@@ -197,36 +194,114 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "✅ $count files added to vault!", Toast.LENGTH_SHORT).show()
                 loadFiles()
                 
-                // If some files couldn't be deleted, ask user
-                if (urisToDelete.isNotEmpty() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    requestDeletePermission(urisToDelete)
+                // Ask to delete originals if we have valid MediaStore URIs
+                if (mediaStoreUris.isNotEmpty()) {
+                    askToDeleteOriginals(mediaStoreUris)
                 }
             }
         }
     }
     
-    private suspend fun tryDeleteFile(uri: Uri): Boolean = withContext(Dispatchers.IO) {
+    private suspend fun getMediaStoreUri(documentUri: Uri, mimeType: String): Uri? = withContext(Dispatchers.IO) {
         try {
-            // Method 1: Direct delete
-            val deleted = contentResolver.delete(uri, null, null)
-            if (deleted > 0) return@withContext true
+            // If it's already a MediaStore URI, return it
+            if (documentUri.authority == "media") {
+                return@withContext documentUri
+            }
             
-            // Method 2: DocumentsContract
-            try {
-                if (DocumentsContract.isDocumentUri(this@MainActivity, uri)) {
-                    DocumentsContract.deleteDocument(contentResolver, uri)
-                    return@withContext true
+            // Get the file path from document URI
+            val filePath = getPathFromUri(documentUri) ?: return@withContext null
+            
+            // Query MediaStore to find this file
+            val collection = when {
+                mimeType.startsWith("image/") -> MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                mimeType.startsWith("video/") -> MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                mimeType.startsWith("audio/") -> MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                else -> MediaStore.Files.getContentUri("external")
+            }
+            
+            val projection = arrayOf(MediaStore.MediaColumns._ID)
+            val selection = "${MediaStore.MediaColumns.DATA} = ?"
+            val selectionArgs = arrayOf(filePath)
+            
+            contentResolver.query(collection, projection, selection, selectionArgs, null)?.use { cursor ->
+                if (cursor.moveToFirst()) {
+                    val id = cursor.getLong(0)
+                    return@withContext ContentUris.withAppendedId(collection, id)
                 }
-            } catch (e: Exception) { }
+            }
             
-            false
+            null
         } catch (e: Exception) {
-            false
+            e.printStackTrace()
+            null
         }
     }
     
-    private fun requestDeletePermission(uris: List<Uri>) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+    private fun getPathFromUri(uri: Uri): String? {
+        try {
+            // Handle document URIs
+            if (DocumentsContract.isDocumentUri(this, uri)) {
+                val docId = DocumentsContract.getDocumentId(uri)
+                
+                when (uri.authority) {
+                    "com.android.externalstorage.documents" -> {
+                        val split = docId.split(":")
+                        if (split[0] == "primary") {
+                            return Environment.getExternalStorageDirectory().absolutePath + "/" + split[1]
+                        }
+                    }
+                    "com.android.providers.downloads.documents" -> {
+                        if (docId.startsWith("raw:")) {
+                            return docId.substring(4)
+                        }
+                    }
+                    "com.android.providers.media.documents" -> {
+                        val split = docId.split(":")
+                        val type = split[0]
+                        val id = split[1]
+                        
+                        val contentUri = when (type) {
+                            "image" -> MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                            "video" -> MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                            "audio" -> MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                            else -> MediaStore.Files.getContentUri("external")
+                        }
+                        
+                        contentResolver.query(
+                            ContentUris.withAppendedId(contentUri, id.toLong()),
+                            arrayOf(MediaStore.MediaColumns.DATA),
+                            null, null, null
+                        )?.use { cursor ->
+                            if (cursor.moveToFirst()) {
+                                return cursor.getString(0)
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Handle content URIs
+            if (uri.scheme == "content") {
+                contentResolver.query(uri, arrayOf(MediaStore.MediaColumns.DATA), null, null, null)?.use { cursor ->
+                    if (cursor.moveToFirst()) {
+                        return cursor.getString(0)
+                    }
+                }
+            }
+            
+            // Handle file URIs
+            if (uri.scheme == "file") {
+                return uri.path
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+    
+    private fun askToDeleteOriginals(uris: List<Uri>) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && uris.isNotEmpty()) {
             try {
                 pendingDeleteUris.clear()
                 pendingDeleteUris.addAll(uris)
@@ -236,7 +311,27 @@ class MainActivity : AppCompatActivity() {
                     androidx.activity.result.IntentSenderRequest.Builder(pendingIntent.intentSender).build()
                 )
             } catch (e: Exception) {
-                Toast.makeText(this, "Please delete original files manually from gallery", Toast.LENGTH_LONG).show()
+                e.printStackTrace()
+                // Fallback: Ask user to delete manually
+                MaterialAlertDialogBuilder(this)
+                    .setTitle("Delete Original Files?")
+                    .setMessage("Files have been encrypted. Please delete the originals manually from your gallery to hide them.")
+                    .setPositiveButton("OK", null)
+                    .show()
+            }
+        } else if (uris.isNotEmpty()) {
+            // Android 10 and below - try direct delete
+            lifecycleScope.launch {
+                var deleted = 0
+                for (uri in uris) {
+                    try {
+                        val result = contentResolver.delete(uri, null, null)
+                        if (result > 0) deleted++
+                    } catch (e: Exception) { }
+                }
+                if (deleted > 0) {
+                    Toast.makeText(this@MainActivity, "Deleted $deleted original files", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
