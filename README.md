@@ -9,13 +9,11 @@ Hide and protect your private photos, videos, and documents with military-grade 
 - **4-Digit PIN Lock** - Quick secure access
 - **Fingerprint Unlock** - Biometric authentication
 - **Auto-Lock** - Locks after 30 seconds when minimized
-- **Change PIN** - Update your PIN anytime
 
 ### 🗂️ Vault
-- **Hide Photos & Videos** - Files removed from gallery
-- **Document Storage** - Store PDFs, docs, and more
+- **Hide Photos, Videos & Documents**
 - **In-App Viewer** - View encrypted media inside app
-- **Export to Device** - Move files back to gallery
+- **Restore to Device** - Decrypt & save back to gallery
 - **Secure Delete** - Permanently remove files
 
 ### 🕵️ Privacy
@@ -23,20 +21,17 @@ Hide and protect your private photos, videos, and documents with military-grade 
 - **Intruder Detection** - Captures selfie on wrong PIN
 - **Break-in Logs** - View photos of intruders
 
-### 📤 Share Integration
-- **Add from Any App** - Share → Vexor → Hidden!
-
 ---
 
 ## 📥 Download
 
-### [⬇️ Download Vexor v1.4.0 APK](../../releases/download/v1.4.0/Vexor-v1.4.0.apk)
+### [⬇️ Download Vexor v1.5.0 APK](../../releases/download/v1.5.0/Vexor-v1.5.0.apk)
 
 **Size**: 12 MB | **Android**: 8.0+
 
 ---
 
-## 📲 Installation Guide
+## 📲 Installation
 
 1. **Download** the APK above
 2. **Enable** "Install unknown apps" in Settings
@@ -49,30 +44,21 @@ Hide and protect your private photos, videos, and documents with military-grade 
 
 | Action | How |
 |--------|-----|
-| **Add Files** | Tap ➕ → Select files (photos/videos/docs) |
-| **Share to Vault** | Any app → Share → Vexor |
-| **Export to Device** | Long press → Move to Device |
-| **View Intruders** | Settings → Intruder Logs |
+| **Add Files** | Tap "Add Files" → Select type → Pick files |
+| **Restore to Device** | Long press → Options → Restore to Device |
+| **Delete Files** | Long press → Options → Delete |
 | **Change PIN** | Settings → Change PIN |
 | **Fake Vault** | Enter fake PIN at lock screen |
 
 ---
 
-## 🆕 What's New in v1.4.0
+## 🆕 What's New in v1.5.0
 
-- ✅ New splash screen with logo
 - ✅ New app icon design
-- ✅ Fixed file picker for videos & documents
-- ✅ Improved file hiding from gallery
-- ✅ Better UI/UX
-
----
-
-## ⚠️ Important Notes
-
-- Files are **moved** to vault (deleted from gallery)
-- Grant **Camera** permission for intruder detection
-- **Remember your PIN** - No recovery option!
+- ✅ Fixed file selection options
+- ✅ Better "Restore to Device" function
+- ✅ Improved UI with extended FAB
+- ✅ Better empty state design
 
 ---
 
