@@ -25,7 +25,7 @@ Hide and protect your private photos, videos, and documents with military-grade 
 
 ## 📥 Download
 
-### [⬇️ Download Vexor v1.5.0 APK](../../releases/download/v1.5.0/Vexor-v1.5.0.apk)
+### [⬇️ Download Vexor v1.6.0 APK](../../releases/download/v1.6.0/Vexor-v1.6.0.apk)
 
 **Size**: 12 MB | **Android**: 8.0+
 
@@ -44,21 +44,18 @@ Hide and protect your private photos, videos, and documents with military-grade 
 
 | Action | How |
 |--------|-----|
-| **Add Files** | Tap "Add Files" → Select type → Pick files |
-| **Restore to Device** | Long press → Options → Restore to Device |
-| **Delete Files** | Long press → Options → Delete |
-| **Change PIN** | Settings → Change PIN |
-| **Fake Vault** | Enter fake PIN at lock screen |
+| **Add Files** | Tap "Add Files" → Select files |
+| **Delete Originals** | Android 11+: App asks permission to delete |
+| **Restore to Device** | Long press → Options → Restore |
+| **Delete from Vault** | Long press → Options → Delete |
 
 ---
 
-## 🆕 What's New in v1.5.0
+## 🆕 What's New in v1.6.0
 
-- ✅ New app icon design
-- ✅ Fixed file selection options
-- ✅ Better "Restore to Device" function
-- ✅ Improved UI with extended FAB
-- ✅ Better empty state design
+- ✅ Fixed app icon
+- ✅ Splash screen shows app icon
+- ✅ Asks permission to delete originals (Android 11+)
 
 ---
 
