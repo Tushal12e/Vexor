@@ -1,52 +1,52 @@
-# Vexor - The Ultimate Secure Vault
+# Vexor - Calculator Vault Edition
 
-**Hide and protect your private photos, videos, and documents with military-grade encryption.**  
+**A fully functional Calculator that secretly hides your photos, videos, and files.**  
+Disguised as a Calculator on your home screen. Type your secret PIN and press `=` to unlock the hidden vault.
 Part of the Tushal12e App Series.
 
 ---
 
-## 🚀 Features
+## 🚀 Key Features
 
-### 🔒 Security Core
-- **AES-256 Encryption**: Every file is encrypted individually.
-- **Biometric Unlock**: Secure and fast access using Fingerprint/Face ID.
-- **Intruder Selfie**: Silently captures a photo of anyone entering the wrong PIN.
-- **Panic Switch (Face Down)**: Instantly locks the app when you turn your phone face down.
+### 🕵️ Calculator Disguise
+- **Fully Functional Math**: Appears and works exactly like a standard calculator.
+- **Stealth Entry**: Enter PIN + `=` to access your hidden data.
+- **Stealth Icon**: App shows as "Calculator" on your phone.
 
-### 📂 Organization (New!)
-- **Folders & Albums**: Create custom folders to organize your secrets.
+### 🎥 Secure Media & Files
+- **Private Gallery**: Hide photos and videos with AES-256 Encryption.
+- **Video Support**: Smoothly encrypt and playback large HD videos.
+- **Document Locker**: Secure PDF, Word, and Excel files.
+
+### 🚨 Intruder Detection
+- **Intruder Selfie**: Automatically captures a photo of anyone trying to break in.
+- **Break-in Alerts**: Shows you the photo and time of the attempt upon successful login.
+
+### 🛡️ Advanced Security
 - **Multi-Vault System**:
     - **Main Vault**: Your real data.
-    - **Decoy Vault**: A fake vault with a separate PIN to show snoops (stores dummy files).
-    - **Custom Vaults**: Create unlimited named vaults.
-
-### ⚔️ Privacy Tools
-- **Disguise Mode**: Change the app icon to a Calculator, Calendar, or Note app.
-- **Cloud Sync (Optional)**: Encrypted backup to Google Drive.
-- **Secure Browser**: Browse the web without leaving traces.
+    - **Fake Vault**: A decoy vault with a separate PIN to show snoops (stores dummy files).
+- **Biometric Unlock**: Fingerprint support for quick access (optional).
+- **Panic Switch**: Face-down lock trigger.
 
 ---
 
 ## 📥 Download
 
-### [👉 Download Vexor v1.8.0 (APK)](https://github.com/Tushal12e/Vexor/releases/tag/v1.8.0)
+### [👉 Download Vexor v2.0.0 (APK)](https://github.com/Tushal12e/Vexor/releases/tag/v2.0.0)
 
-**Version**: v1.8.0  
+**Version**: v2.0.0 (Calculator Edition)  
 **Size**: ~18 MB  
 **Android**: 8.0+
 
 ---
 
-## 🛠️ How to Install
-1. **Download** the APK from the link above.
-2. Tap the file to install.
-3. If prompted, enable **"Install from Unknown Sources"**.
-4. Open Vexor, set your PIN, and start securing your life!
-
----
-
-## 📸 Screenshots
-*(Coming Soon)*
+## 🛠️ How to Use
+1. **Launch "Calculator"**: It looks just like a normal calculator.
+2. **First Setup**: It will ask you to create a secure PIN (e.g., 1234).
+3. **Usage**:
+   - To calculating: Type `2 + 2 =` (Shows `4`).
+   - To Unlock: Type `1234` then `=` (Opens Vault).
 
 ---
 
