@@ -1,60 +1,61 @@
-# Vexor - Secure File Locker 🔐
+# Vexor - The Ultimate Secure Vault
 
-Hide and protect your private photos, videos, and documents with military-grade encryption.
+**Hide and protect your private photos, videos, and documents with military-grade encryption.**  
+Part of the Tushal12e App Series.
 
-## ✨ Features
+---
 
-### 🔒 Security
-- **AES-256 Encryption** - Military-grade file encryption
-- **4-Digit PIN Lock** - Quick secure access
-- **Fingerprint Unlock** - Biometric authentication
-- **Auto-Lock** - Locks after 30 seconds when minimized
+## 🚀 Features
 
-### 🗂️ Vault
-- **Hide Photos, Videos & Documents**
-- **Auto-Delete Originals** - Android asks to delete after import
-- **In-App Viewer** - View encrypted media inside app
-- **Restore to Device** - Decrypt & save back to gallery
+### 🔒 Security Core
+- **AES-256 Encryption**: Every file is encrypted individually.
+- **Biometric Unlock**: Secure and fast access using Fingerprint/Face ID.
+- **Intruder Selfie**: Silently captures a photo of anyone entering the wrong PIN.
+- **Panic Switch (Face Down)**: Instantly locks the app when you turn your phone face down.
 
-### 🕵️ Privacy
-- **Fake Vault** - Show decoy files with alternate PIN
-- **Intruder Detection** - Captures selfie on wrong PIN
+### 📂 Organization (New!)
+- **Folders & Albums**: Create custom folders to organize your secrets.
+- **Multi-Vault System**:
+    - **Main Vault**: Your real data.
+    - **Decoy Vault**: A fake vault with a separate PIN to show snoops (stores dummy files).
+    - **Custom Vaults**: Create unlimited named vaults.
+
+### ⚔️ Privacy Tools
+- **Disguise Mode**: Change the app icon to a Calculator, Calendar, or Note app.
+- **Cloud Sync (Optional)**: Encrypted backup to Google Drive.
+- **Secure Browser**: Browse the web without leaving traces.
 
 ---
 
 ## 📥 Download
 
-### [⬇️ Download Vexor v1.7.0 APK](../../releases/download/v1.7.0/Vexor-v1.7.0.apk)
+### [👉 Download Vexor v1.0.0 (APK)](https://github.com/Tushal12e/Vexor/releases/tag/v1.0.0-debug)
 
-**Size**: 12 MB | **Android**: 8.0+
-
----
-
-## 📲 Installation
-
-1. **Download** the APK above
-2. **Enable** "Install unknown apps" in Settings
-3. **Install** and open
-4. **Create PIN** and start hiding files!
+**Version**: v1.0.0  
+**Size**: ~18 MB  
+**Android**: 8.0+
 
 ---
 
-## 🎯 How to Use
-
-| Action | How |
-|--------|-----|
-| **Add Files** | Tap "Add Files" → Select files |
-| **Delete Originals** | Android asks after import → Tap Allow |
-| **Restore to Device** | Long press → Options → Restore |
-| **Delete from Vault** | Long press → Options → Delete |
+## 🛠️ How to Install
+1. **Download** the APK from the link above.
+2. Tap the file to install.
+3. If prompted, enable **"Install from Unknown Sources"**.
+4. Open Vexor, set your PIN, and start securing your life!
 
 ---
 
-## 🆕 What's New in v1.7.0
+## 📸 Screenshots
+*(Coming Soon)*
 
-- ✅ Fixed delete permission popup (Android 11+)
-- ✅ Properly converts document URIs for deletion
-- ✅ Shows "Allow Vexor to delete?" after import
+---
+
+## 📜 Complete App Series
+Check out other apps in the series:
+- **NetGuardPro**: Advanced Network Analysis & Security.
+- **AppXray**: Deep App Analysis & Permission Manager.
+- **Flownet**: Secure Offline Mesh Messenger.
+- **RatnaLedger**: Professional Diamond Inventory Management.
 
 ---
 
