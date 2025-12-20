@@ -1,0 +1,183 @@
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkKotlinGradlePluginConfigurationErrors
+> Task :app:dataBindingMergeDependencyArtifactsDebug UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:dataBindingGenBaseClassesDebug UP-TO-DATE
+> Task :app:generateDebugBuildConfig UP-TO-DATE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+
+> Task :app:compileDebugKotlin
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/data/NoteRepository.kt:13:33 Expression 'CryptoManager' of type 'CryptoManager' cannot be invoked as a function. The function 'invoke()' is not found
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/data/NoteRepository.kt:33:18 Overload resolution ambiguity: 
+public open fun <T : Any!> fromJson(p0: JsonElement!, p1: Type!): TypeVariable(T)! defined in com.google.gson.Gson
+public open fun <T : Any!> fromJson(p0: JsonReader!, p1: Type!): TypeVariable(T)! defined in com.google.gson.Gson
+public open fun <T : Any!> fromJson(p0: Reader!, p1: Type!): TypeVariable(T)! defined in com.google.gson.Gson
+public open fun <T : Any!> fromJson(p0: String!, p1: Type!): TypeVariable(T)! defined in com.google.gson.Gson
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/data/VaultRepository.kt:74:21 None of the following functions can be called with the arguments supplied: 
+public final fun getAllFiles(isFakeVault: Boolean): List<VaultFile> defined in com.vexor.vault.data.VaultRepository
+public final fun getAllFiles(vaultId: String): List<VaultFile> defined in com.vexor.vault.data.VaultRepository
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/data/VaultRepository.kt:75:27 Unresolved reference: it
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/data/VaultRepository.kt:114:21 None of the following functions can be called with the arguments supplied: 
+public final fun getAllFiles(isFakeVault: Boolean): List<VaultFile> defined in com.vexor.vault.data.VaultRepository
+public final fun getAllFiles(vaultId: String): List<VaultFile> defined in com.vexor.vault.data.VaultRepository
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/data/VaultRepository.kt:115:27 Unresolved reference: it
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/AuthActivity.kt:222:23 Type mismatch: inferred type is String but Boolean was expected
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/CameraActivity.kt:84:43 Suspend function 'encryptFile' should be called only from a coroutine or another suspend function
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/ChangePinActivity.kt:88:21 Type mismatch: inferred type is String? but Boolean was expected
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:634:13 Expecting member declaration
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:634:24 Expecting member declaration
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:634:25 Expecting member declaration
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:634:36 Expecting member declaration
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:634:37 Expecting member declaration
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:634:41 Expecting member declaration
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:634:43 Expecting member declaration
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:645:5 Expecting a top level declaration
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:759:1 Expecting a top level declaration
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:76:13 Unresolved reference: importFiles
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:107:24 Unresolved reference: currentFolderId
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:108:17 Unresolved reference: navigateUp
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:116:9 Unresolved reference: loadFiles
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:141:17 Unresolved reference: loadFiles
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:149:37 Unresolved reference: onVaultItemClick
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:152:17 Unresolved reference: updateActionMode
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:158:45 Unresolved reference: showAddOptions
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:160:57 Unresolved reference: exitSelectionMode
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:161:56 Unresolved reference: showSelectionOptions
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:164:13 Unresolved reference: loadFiles
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:168:5 Modifier 'override' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:178:17 Unresolved reference: loadFiles
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:185:5 Modifier 'override' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:196:17 Unresolved reference: loadFiles
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:201:17 Unresolved reference: loadFiles
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:206:17 Unresolved reference: loadFiles
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:213:5 Modifier 'private' is not applicable to 'local variable'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:214:5 Modifier 'private' is not applicable to 'local variable'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:216:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:266:17 Unresolved reference: emptyState
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:266:28 Variable expected
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:270:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:274:17 Unresolved reference: enterFolder
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:277:17 Unresolved reference: openFile
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:282:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:288:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:300:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:314:26 Unresolved reference: showCreateFolderDialog
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:326:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:336:21 Unresolved reference: createFolder
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:345:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:356:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:376:36 Unresolved reference: getMediaStoreUri
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:391:21 Unresolved reference: askToDeleteOriginals
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:397:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:405:28 Unresolved reference: getPathFromUri
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:433:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:495:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:531:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:547:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:558:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:564:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:575:26 Unresolved reference: exportSelectedFiles
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:583:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:593:53 Unresolved reference: doExport
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:598:5 Modifier 'private' is not applicable to 'local function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:626:17 Suspend function 'withContext' should be called only from a coroutine or another suspend function
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:627:60 Unresolved reference: index
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:627:73 Unresolved reference: filesToExport
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:630:31 Suspend function 'exportFileToDevice' should be called only from a coroutine or another suspend function
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:630:50 Unresolved reference: file
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:631:30 Unresolved reference: successCount
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:631:30 Variable expected
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:634:43 Function declaration must have a name
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:637:21 Unresolved reference: successCount
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:638:59 Unresolved reference: successCount
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:642:17 Unresolved reference: exitSelectionMode
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:649:34 Unresolved reference: encryptionManager
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:673:27 Unresolved reference: contentResolver
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:675:21 Unresolved reference: contentResolver
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:675:66 Unresolved reference: it
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:678:21 Unresolved reference: contentResolver
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:692:55 Overload resolution ambiguity: 
+public open fun write(p0: ByteArray!): Unit defined in java.io.FileOutputStream
+public open fun write(p0: Int): Unit defined in java.io.FileOutputStream
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:693:17 Unresolved reference: sendBroadcast
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:705:24 Unresolved reference: adapter
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:706:36 'this' is not defined in this context
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:711:26 Overload resolution ambiguity: 
+public inline fun <T> Iterable<TypeVariable(T)>.forEach(action: (TypeVariable(T)) -> Unit): Unit defined in kotlin.collections
+public inline fun <K, V> Map<out TypeVariable(K), TypeVariable(V)>.forEach(action: (Map.Entry<TypeVariable(K), TypeVariable(V)>) -> Unit): Unit defined in kotlin.collections
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:711:36 Cannot infer a type for this parameter. Please specify it explicitly.
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:712:21 'when' expression must be exhaustive, add necessary 'else' branch
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:714:29 Unresolved reference: encryptionManager
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:715:29 Unresolved reference: repository
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:719:29 Unresolved reference: repository
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:724:32 'this' is not defined in this context
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:725:17 Unresolved reference: exitSelectionMode
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:726:17 Unresolved reference: loadFiles
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:732:5 Modifier 'override' is not applicable to 'top level function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:733:9 No supertypes are accessible in this context
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:734:9 Unresolved reference: lastPauseTime
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:737:5 Modifier 'override' is not applicable to 'top level function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:738:9 No supertypes are accessible in this context
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:740:59 Unresolved reference: lastPauseTime
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:741:13 Unresolved reference: lastPauseTime
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:741:51 Unresolved reference: LOCK_TIMEOUT
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:742:13 Unresolved reference: startActivity
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:742:34 'this' is not defined in this context
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:745:13 Unresolved reference: finish
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:749:9 Unresolved reference: loadFiles
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:752:5 Modifier 'override' is not applicable to 'top level function'
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:753:13 Unresolved reference: isSelectionMode
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:754:13 Unresolved reference: exitSelectionMode
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/MainActivity.kt:756:13 Unresolved reference: moveTaskToBack
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/NoteEditorActivity.kt:84:20 Unresolved reference: saveNote
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/SetupFakePinActivity.kt:89:21 Type mismatch: inferred type is String? but Boolean was expected
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/ShareReceiverActivity.kt:109:13 Type mismatch: inferred type is String? but Boolean was expected
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/adapters/NoteAdapter.kt:22:43 Unresolved reference: holder
+e: file:///C:/Users/Tushal/Desktop/APP/Vexor/app/src/main/java/com/vexor/vault/ui/adapters/VaultFileAdapter.kt:15:12 Unresolved reference: bumptech
+
+> Task :app:compileDebugKotlin FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:compileDebugKotlin'.
+> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
+   > Compilation error. See log for more details
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 13s
+31 actionable tasks: 2 executed, 29 up-to-date

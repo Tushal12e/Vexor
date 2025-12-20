@@ -161,7 +161,7 @@ class AuthActivity : BaseActivity() {
             callback = object : BiometricHelper.BiometricCallback {
                 override fun onSuccess() {
                     prefs.resetFailedAttempts()
-                    openVault(isFakeVault = false)
+                    openVault("main")
                 }
                 
                 override fun onError(errorCode: Int, errorMessage: String) {
@@ -306,9 +306,10 @@ class AuthActivity : BaseActivity() {
         )
     }
     
-    private fun openVault(isFakeVault: Boolean) {
+    private fun openVault(vaultId: String) {
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("fake_vault", isFakeVault)
+        intent.putExtra("vault_id", vaultId) // Pass ID directly
+        intent.putExtra("fake_vault", vaultId == "fake") // Legacy support
         startActivity(intent)
         finish()
     }

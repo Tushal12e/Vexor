@@ -104,10 +104,11 @@ class ShareReceiverActivity : BaseActivity() {
     }
     
     private fun verifyAndImport() {
-        val isFakeVault = prefs.fakeVaultEnabled && prefs.isFakePin(enteredPin)
+        val vaultId = prefs.verifyPin(enteredPin)
         
-        if (prefs.verifyPin(enteredPin) || isFakeVault) {
-            importFiles(isFakeVault)
+        if (vaultId != null) {
+            val isFake = (vaultId == "fake")
+            importFiles(isFake)
         } else {
             Toast.makeText(this, "Wrong PIN", Toast.LENGTH_SHORT).show()
             enteredPin = ""

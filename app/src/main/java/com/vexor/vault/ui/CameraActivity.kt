@@ -18,6 +18,10 @@ import com.vexor.vault.security.FileEncryptionManager
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CameraActivity : BaseActivity() {
 
@@ -81,17 +85,20 @@ class CameraActivity : BaseActivity() {
     }
     
     private fun encryptAndSave(uri: Uri) {
-        val vaultFile = encryptionManager.encryptFile(uri, false) // Always main vault
-        if (vaultFile != null) {
-            repository.addFile(vaultFile)
-            Toast.makeText(this, "✅ Saved to Vault", Toast.LENGTH_SHORT).show()
-            
-            // Delete temp file
-            try {
-                File(uri.path!!).delete()
-            } catch (e: Exception) {}
-        } else {
-            Toast.makeText(this, "Encryption failed", Toast.LENGTH_SHORT).show()
+        lifecycleScope.launch(Dispatchers.IO) {
+            val vaultFile = encryptionManager.encryptFile(uri, false) // Always main vault
+            withContext(Dispatchers.Main) {
+                if (vaultFile != null) {
+                    repository.addFile(vaultFile)
+                    Toast.makeText(this@CameraActivity, "✅ Saved to Vault", Toast.LENGTH_SHORT).show()
+                    
+                    try {
+                        File(uri.path!!).delete()
+                    } catch (e: Exception) {}
+                } else {
+                    Toast.makeText(this@CameraActivity, "Encryption failed", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
     

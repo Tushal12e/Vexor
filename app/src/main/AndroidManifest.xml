@@ -171,8 +171,6 @@
         <activity
             android:name=".ui.CameraActivity"
             android:exported="false"
-            android:name=".ui.CameraActivity"
-            android:exported="false"
             android:theme="@style/Theme.Vexor.Fullscreen"
             android:screenOrientation="portrait" />
             

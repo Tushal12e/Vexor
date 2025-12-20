@@ -19,12 +19,7 @@ class NoteAdapter(
         return NoteViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: holder, position: Int) {
-        holder.bind(getItem(position))
-    }
-    
-    // Fix: onBindViewHolder signature was slightly off in previous thought, specifically 'holder' type.
-    // Correcting it below in the inner class usage.
+
     
     inner class NoteViewHolder(private val binding: ItemNoteBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(note: Note) {

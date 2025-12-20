@@ -85,7 +85,7 @@ class ChangePinActivity : BaseActivity() {
     private fun handlePinComplete() {
         when (step) {
             1 -> {
-                if (prefs.verifyPin(enteredPin)) {
+                if (prefs.verifyPin(enteredPin) == "main") {
                     step = 2
                     enteredPin = ""
                     updatePinDots()

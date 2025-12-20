@@ -71,10 +71,9 @@ class VaultRepository(private val context: Context) {
     }
     
     fun removeFile(file: VaultFile) {
-        val files = getAllFiles().toMutableList()
-        files.removeAll { it.id == file.id }
-        cachedFiles = files.toMutableList()
-        saveFiles(files)
+        if (cachedFiles == null) cachedFiles = loadFiles().toMutableList()
+        cachedFiles!!.removeAll { it.id == file.id }
+        saveFiles(cachedFiles!!)
     }
     
     fun getFileCount(isFakeVault: Boolean = false): Int {
@@ -111,10 +110,10 @@ class VaultRepository(private val context: Context) {
     }
     
     fun clearAllFiles(isFakeVault: Boolean = false) {
-        val files = getAllFiles().toMutableList()
-        files.removeAll { it.isFakeVault == isFakeVault }
-        cachedFiles = files.toMutableList()
-        saveFiles(files)
+        if (cachedFiles == null) cachedFiles = loadFiles().toMutableList()
+        val targetId = if (isFakeVault) "fake" else "main"
+        cachedFiles!!.removeAll { it.vaultId == targetId }
+        saveFiles(cachedFiles!!)
     }
     
     // ===== Folders =====

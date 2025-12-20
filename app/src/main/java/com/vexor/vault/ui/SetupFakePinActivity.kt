@@ -86,7 +86,7 @@ class SetupFakePinActivity : BaseActivity() {
         when (step) {
             1 -> {
                 // Check if same as main PIN
-                if (prefs.verifyPin(enteredPin)) {
+                if (prefs.verifyPin(enteredPin) == "main") {
                     vibrate()
                     Toast.makeText(this, "Cannot use main PIN as fake PIN", Toast.LENGTH_SHORT).show()
                     enteredPin = ""

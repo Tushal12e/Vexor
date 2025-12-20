@@ -164,6 +164,7 @@ class MainActivity : BaseActivity() {
             loadFiles()
             binding.swipeRefresh.isRefreshing = false
         }
+    }
     
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -261,10 +262,13 @@ class MainActivity : BaseActivity() {
             items.removeAll { it is VaultItem.FolderItem && !it.folder.name.contains(currentSearchQuery, ignoreCase = true) }
         }
         
-        adapter.submitList(items)
-        
-        binding.emptyState.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
-        binding.recyclerView.visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
+        if (items.isEmpty()) {
+            binding.tvEmpty.visibility = View.VISIBLE
+            binding.recyclerView.visibility = View.GONE
+        } else {
+            binding.tvEmpty.visibility = View.GONE
+            binding.recyclerView.visibility = View.VISIBLE
+        }
     }
     
     private fun onVaultItemClick(item: VaultItem) {
@@ -623,26 +627,7 @@ class MainActivity : BaseActivity() {
             }
         }
     }
-                withContext(Dispatchers.Main) {
-                    binding.tvProgress.text = "Restoring ${index + 1}/${filesToExport.size}..."
-                }
-                
-                val success = exportFileToDevice(file)
-                if (success) successCount++
-            }
-            
-            withContext(Dispatchers.Main) {
-                binding.progressBar.visibility = View.GONE
-                binding.tvProgress.visibility = View.GONE
-                if (successCount > 0) {
-                    Toast.makeText(this@MainActivity, "✅ $successCount files restored!", Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(this@MainActivity, "❌ Export failed", Toast.LENGTH_SHORT).show()
-                }
-                exitSelectionMode()
-            }
-        }
-    }
+
     
     private suspend fun exportFileToDevice(file: VaultFile): Boolean = withContext(Dispatchers.IO) {
         try {
@@ -694,6 +679,7 @@ class MainActivity : BaseActivity() {
                 return@withContext true
             }
             
+            false
             false
         } catch (e: Exception) {
             e.printStackTrace()
@@ -749,11 +735,10 @@ class MainActivity : BaseActivity() {
         loadFiles()
     }
     
-    override fun onBackPressed() {
-        if (isSelectionMode) {
-            exitSelectionMode()
-        } else {
-            moveTaskToBack(true)
+    // define callback in onCreate instead or use this:
+    /*
+moveTaskToBack(true)
         }
     }
+    */
 }

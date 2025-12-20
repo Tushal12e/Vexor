@@ -62,7 +62,7 @@ class VaultFileAdapter(
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             TYPE_FOLDER -> FolderViewHolder(inflater.inflate(R.layout.item_folder, parent, false))
-            else -> FileViewHolder(inflater.inflate(R.layout.item_file, parent, false))
+            else -> FileViewHolder(inflater.inflate(R.layout.item_vault_file, parent, false))
         }
     }
 
@@ -113,8 +113,8 @@ class VaultFileAdapter(
 
     inner class FileViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val ivThumbnail: ImageView = itemView.findViewById(R.id.ivThumbnail)
-        private val tvName: TextView = itemView.findViewById(R.id.tvName)
-        private val tvSize: TextView = itemView.findViewById(R.id.tvSize)
+        private val tvName: TextView = itemView.findViewById(R.id.tvFileName)
+        private val tvSize: TextView = itemView.findViewById(R.id.tvFileSize)
         private val selectionOverlay: View = itemView.findViewById(R.id.selectionOverlay)
 
         private var thumbnailJob: Job? = null
