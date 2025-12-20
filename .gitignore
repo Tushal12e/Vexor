@@ -1,22 +1,21 @@
 # Built files
 *.iml
-.gradle/
-build/
-local.properties
-
-# IDE
-.idea/
-*.iws
-*.ipr
-
-# OS
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
 .DS_Store
-Thumbs.db
-
-# Android
-*.apk
-*.aab
-*.dex
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+build_error_*.txt
+build_res_error*.txtx
 *.class
 
 # Gradle
