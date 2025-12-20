@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -12,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -30,10 +30,16 @@ public final class ActivityMainBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
+  public final LinearLayout breadcrumbContainer;
+
+  @NonNull
   public final ImageButton btnCancelSelection;
 
   @NonNull
   public final MaterialButton btnDeleteSelected;
+
+  @NonNull
+  public final ImageView btnFolderBack;
 
   @NonNull
   public final ImageButton btnSettings;
@@ -45,19 +51,22 @@ public final class ActivityMainBinding implements ViewBinding {
   public final ProgressBar progressBar;
 
   @NonNull
+  public final LinearLayout progressContainer;
+
+  @NonNull
   public final RecyclerView recyclerView;
 
   @NonNull
   public final MaterialCardView selectionToolbar;
 
   @NonNull
-  public final SwipeRefreshLayout swipeRefresh;
-
-  @NonNull
   public final TabLayout tabLayout;
 
   @NonNull
   public final MaterialToolbar toolbar;
+
+  @NonNull
+  public final TextView tvCurrentFolder;
 
   @NonNull
   public final LinearLayout tvEmpty;
@@ -72,24 +81,29 @@ public final class ActivityMainBinding implements ViewBinding {
   public final TextView tvSelectedCount;
 
   private ActivityMainBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull ImageButton btnCancelSelection, @NonNull MaterialButton btnDeleteSelected,
+      @NonNull LinearLayout breadcrumbContainer, @NonNull ImageButton btnCancelSelection,
+      @NonNull MaterialButton btnDeleteSelected, @NonNull ImageView btnFolderBack,
       @NonNull ImageButton btnSettings, @NonNull ExtendedFloatingActionButton fabAdd,
-      @NonNull ProgressBar progressBar, @NonNull RecyclerView recyclerView,
-      @NonNull MaterialCardView selectionToolbar, @NonNull SwipeRefreshLayout swipeRefresh,
-      @NonNull TabLayout tabLayout, @NonNull MaterialToolbar toolbar, @NonNull LinearLayout tvEmpty,
+      @NonNull ProgressBar progressBar, @NonNull LinearLayout progressContainer,
+      @NonNull RecyclerView recyclerView, @NonNull MaterialCardView selectionToolbar,
+      @NonNull TabLayout tabLayout, @NonNull MaterialToolbar toolbar,
+      @NonNull TextView tvCurrentFolder, @NonNull LinearLayout tvEmpty,
       @NonNull TextView tvFileCount, @NonNull TextView tvProgress,
       @NonNull TextView tvSelectedCount) {
     this.rootView = rootView;
+    this.breadcrumbContainer = breadcrumbContainer;
     this.btnCancelSelection = btnCancelSelection;
     this.btnDeleteSelected = btnDeleteSelected;
+    this.btnFolderBack = btnFolderBack;
     this.btnSettings = btnSettings;
     this.fabAdd = fabAdd;
     this.progressBar = progressBar;
+    this.progressContainer = progressContainer;
     this.recyclerView = recyclerView;
     this.selectionToolbar = selectionToolbar;
-    this.swipeRefresh = swipeRefresh;
     this.tabLayout = tabLayout;
     this.toolbar = toolbar;
+    this.tvCurrentFolder = tvCurrentFolder;
     this.tvEmpty = tvEmpty;
     this.tvFileCount = tvFileCount;
     this.tvProgress = tvProgress;
@@ -123,6 +137,12 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.breadcrumbContainer;
+      LinearLayout breadcrumbContainer = ViewBindings.findChildViewById(rootView, id);
+      if (breadcrumbContainer == null) {
+        break missingId;
+      }
+
       id = R.id.btnCancelSelection;
       ImageButton btnCancelSelection = ViewBindings.findChildViewById(rootView, id);
       if (btnCancelSelection == null) {
@@ -132,6 +152,12 @@ public final class ActivityMainBinding implements ViewBinding {
       id = R.id.btnDeleteSelected;
       MaterialButton btnDeleteSelected = ViewBindings.findChildViewById(rootView, id);
       if (btnDeleteSelected == null) {
+        break missingId;
+      }
+
+      id = R.id.btnFolderBack;
+      ImageView btnFolderBack = ViewBindings.findChildViewById(rootView, id);
+      if (btnFolderBack == null) {
         break missingId;
       }
 
@@ -153,6 +179,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.progressContainer;
+      LinearLayout progressContainer = ViewBindings.findChildViewById(rootView, id);
+      if (progressContainer == null) {
+        break missingId;
+      }
+
       id = R.id.recyclerView;
       RecyclerView recyclerView = ViewBindings.findChildViewById(rootView, id);
       if (recyclerView == null) {
@@ -165,12 +197,6 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.swipeRefresh;
-      SwipeRefreshLayout swipeRefresh = ViewBindings.findChildViewById(rootView, id);
-      if (swipeRefresh == null) {
-        break missingId;
-      }
-
       id = R.id.tabLayout;
       TabLayout tabLayout = ViewBindings.findChildViewById(rootView, id);
       if (tabLayout == null) {
@@ -180,6 +206,12 @@ public final class ActivityMainBinding implements ViewBinding {
       id = R.id.toolbar;
       MaterialToolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
+        break missingId;
+      }
+
+      id = R.id.tvCurrentFolder;
+      TextView tvCurrentFolder = ViewBindings.findChildViewById(rootView, id);
+      if (tvCurrentFolder == null) {
         break missingId;
       }
 
@@ -207,9 +239,10 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((CoordinatorLayout) rootView, btnCancelSelection,
-          btnDeleteSelected, btnSettings, fabAdd, progressBar, recyclerView, selectionToolbar,
-          swipeRefresh, tabLayout, toolbar, tvEmpty, tvFileCount, tvProgress, tvSelectedCount);
+      return new ActivityMainBinding((CoordinatorLayout) rootView, breadcrumbContainer,
+          btnCancelSelection, btnDeleteSelected, btnFolderBack, btnSettings, fabAdd, progressBar,
+          progressContainer, recyclerView, selectionToolbar, tabLayout, toolbar, tvCurrentFolder,
+          tvEmpty, tvFileCount, tvProgress, tvSelectedCount);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -1407,6 +1407,7 @@ color background_material_dark
 color background_material_light
 color background_secondary
 color biometric_error_color
+color black
 color bright_foreground_disabled_material_dark
 color bright_foreground_disabled_material_light
 color bright_foreground_inverse_material_dark
@@ -2142,8 +2143,10 @@ color mtrl_textinput_hovered_box_stroke_color
 color notification_action_color_filter
 color notification_icon_bg_color
 color notification_material_background_media_default_color
+color on_background
 color on_primary
 color on_secondary
+color on_surface
 color outline
 color pin_button
 color pin_button_pressed
@@ -2153,13 +2156,13 @@ color primary
 color primary_dark
 color primary_dark_material_dark
 color primary_dark_material_light
-color primary_light
 color primary_material_dark
 color primary_material_light
 color primary_text_default_material_dark
 color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
+color primary_variant
 color ripple_color
 color ripple_material_dark
 color ripple_material_light
@@ -2169,6 +2172,7 @@ color secondary_text_default_material_dark
 color secondary_text_default_material_light
 color secondary_text_disabled_material_dark
 color secondary_text_disabled_material_light
+color secondary_variant
 color status_error
 color status_info
 color status_success
@@ -2186,6 +2190,7 @@ color text_primary
 color text_secondary
 color tooltip_background_dark
 color tooltip_background_light
+color white
 dimen abc_action_bar_content_inset_material
 dimen abc_action_bar_content_inset_with_nav
 dimen abc_action_bar_default_height_material
@@ -3194,6 +3199,7 @@ drawable exo_styled_controls_subtitle_on
 drawable exo_styled_controls_vr
 drawable fingerprint_dialog_error
 drawable fingerprint_dialog_fp_icon
+drawable gradient_header
 drawable ic_add
 drawable ic_arrow_back_black_24
 drawable ic_audio
@@ -3236,6 +3242,7 @@ drawable ic_photo
 drawable ic_play
 drawable ic_search
 drawable ic_search_black_24
+drawable ic_secure
 drawable ic_settings
 drawable ic_shield
 drawable ic_sort
@@ -3424,6 +3431,7 @@ id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id breadcrumbContainer
 id btn0
 id btn1
 id btn2
@@ -3452,6 +3460,7 @@ id btnDiv
 id btnDot
 id btnEnableBiometric
 id btnEq
+id btnFolderBack
 id btnIntruderLogs
 id btnManageVaults
 id btnMul
@@ -3466,7 +3475,7 @@ id cache_measures
 id callMeasure
 id cancel_action
 id cancel_button
-id cardView
+id cardIcon
 id carryVelocity
 id center
 id centerCrop
@@ -3476,7 +3485,6 @@ id center_vertical
 id chain
 id chain2
 id chains
-id checkSelected
 id checkbox
 id checked
 id chronometer
@@ -3669,8 +3677,7 @@ id item_touch_helper_previous_elevation
 id ivIcon
 id ivIntruderPhoto
 id ivLogo
-id ivPlayIcon
-id ivThumbnail
+id ivSelected
 id jumpToEnd
 id jumpToStart
 id labeled
@@ -3804,6 +3811,7 @@ id position
 id postLayout
 id pressed
 id progressBar
+id progressContainer
 id progress_circular
 id progress_horizontal
 id radio
@@ -3887,7 +3895,6 @@ id submenuarrow
 id submit_area
 id supportScrollUp
 id surface_view
-id swipeRefresh
 id switchBiometric
 id switchFakeVault
 id switchIntruder
@@ -3942,6 +3949,7 @@ id transition_transform
 id triangle
 id tvAppName
 id tvAttempts
+id tvCurrentFolder
 id tvDate
 id tvDisplay
 id tvEmpty

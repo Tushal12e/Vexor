@@ -110,10 +110,9 @@
     </com.google.android.material.card.MaterialCardView>
 
     <!-- Content -->
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <!-- File Count -->
@@ -123,6 +122,10 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="16dp"
             android:paddingVertical="8dp"
+            android:text="0 files"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp" />
+
         <!-- Folder Breadcrumbs / Back -->
         <LinearLayout
             android:id="@+id/breadcrumbContainer"

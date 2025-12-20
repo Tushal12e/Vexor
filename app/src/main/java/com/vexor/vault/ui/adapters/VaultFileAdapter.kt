@@ -112,15 +112,17 @@ class VaultFileAdapter(
     }
 
     inner class FileViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val ivThumbnail: ImageView = itemView.findViewById(R.id.ivThumbnail)
+        private val ivIcon: ImageView = itemView.findViewById(R.id.ivIcon)
         private val tvName: TextView = itemView.findViewById(R.id.tvFileName)
         private val tvSize: TextView = itemView.findViewById(R.id.tvFileSize)
-        private val selectionOverlay: View = itemView.findViewById(R.id.selectionOverlay)
+        private val ivSelected: ImageView = itemView.findViewById(R.id.ivSelected)
+        private val cardIcon: View = itemView.findViewById(R.id.cardIcon)
 
         private var thumbnailJob: Job? = null
 
         private fun showFileTypeIcon(fileType: FileType) {
-            ivThumbnail.setImageResource(when(fileType) {
+            ivIcon.scaleType = ImageView.ScaleType.CENTER_INSIDE // Icon mode
+            ivIcon.setImageResource(when(fileType) {
                 FileType.AUDIO -> R.drawable.ic_audio
                 FileType.DOCUMENT -> R.drawable.ic_file
                 FileType.PHOTO -> R.drawable.ic_image
@@ -136,14 +138,15 @@ class VaultFileAdapter(
 
             // Load thumbnail
             thumbnailJob?.cancel()
-            ivThumbnail.setImageDrawable(null)
+            ivIcon.setImageDrawable(null)
             
             if (file.thumbnailPath != null && (file.fileType == FileType.PHOTO || file.fileType == FileType.VIDEO)) {
-                // accessing outer class property
+                // Video/Photo thumbnail
+                ivIcon.scaleType = ImageView.ScaleType.CENTER_CROP // Thumbnail mode
                 thumbnailJob = (itemView.context as? LifecycleOwner)?.lifecycleScope?.launch {
                     val bitmap = encryptionManager.decryptThumbnail(file.thumbnailPath)
                      if (bitmap != null) {
-                        ivThumbnail.setImageBitmap(bitmap)
+                        ivIcon.setImageBitmap(bitmap)
                     } else {
                         showFileTypeIcon(file.fileType)
                     }
@@ -154,9 +157,11 @@ class VaultFileAdapter(
 
             // Selection
             if (selectedItems.contains(item)) {
-                selectionOverlay.visibility = View.VISIBLE
+                ivSelected.visibility = View.VISIBLE
+                cardIcon.alpha = 0.5f // Dim icon when selected
             } else {
-                selectionOverlay.visibility = View.GONE
+                ivSelected.visibility = View.GONE
+                cardIcon.alpha = 1.0f
             }
 
             itemView.setOnClickListener {

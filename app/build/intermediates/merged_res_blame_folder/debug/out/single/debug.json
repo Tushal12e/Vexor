@@ -32,6 +32,10 @@
         "source": "com.vexor.vault.app-main-54:/layout/activity_note_list.xml"
     },
     {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_gradient_header.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/gradient_header.xml"
+    },
+    {
         "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_camera_capture.xml.flat",
         "source": "com.vexor.vault.app-main-54:/drawable/ic_camera_capture.xml"
     },
@@ -42,6 +46,10 @@
     {
         "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_photo_viewer.xml.flat",
         "source": "com.vexor.vault.app-main-54:/layout/activity_photo_viewer.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_secure.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_secure.xml"
     },
     {
         "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_lock.xml.flat",

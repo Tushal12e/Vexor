@@ -160,10 +160,7 @@ class MainActivity : BaseActivity() {
         binding.btnCancelSelection.setOnClickListener { exitSelectionMode() }
         binding.btnDeleteSelected.setOnClickListener { showSelectionOptions() }
         
-        binding.swipeRefresh.setOnRefreshListener {
-            loadFiles()
-            binding.swipeRefresh.isRefreshing = false
-        }
+
     }
     
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

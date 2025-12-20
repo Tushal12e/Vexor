@@ -4,11 +4,11 @@ package com.vexor.vault.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.google.android.material.card.MaterialCardView;
@@ -22,16 +22,13 @@ public final class ItemVaultFileBinding implements ViewBinding {
   private final MaterialCardView rootView;
 
   @NonNull
-  public final MaterialCardView cardView;
+  public final CardView cardIcon;
 
   @NonNull
-  public final CheckBox checkSelected;
+  public final ImageView ivIcon;
 
   @NonNull
-  public final ImageView ivPlayIcon;
-
-  @NonNull
-  public final ImageView ivThumbnail;
+  public final ImageView ivSelected;
 
   @NonNull
   public final TextView tvFileName;
@@ -39,15 +36,13 @@ public final class ItemVaultFileBinding implements ViewBinding {
   @NonNull
   public final TextView tvFileSize;
 
-  private ItemVaultFileBinding(@NonNull MaterialCardView rootView,
-      @NonNull MaterialCardView cardView, @NonNull CheckBox checkSelected,
-      @NonNull ImageView ivPlayIcon, @NonNull ImageView ivThumbnail, @NonNull TextView tvFileName,
+  private ItemVaultFileBinding(@NonNull MaterialCardView rootView, @NonNull CardView cardIcon,
+      @NonNull ImageView ivIcon, @NonNull ImageView ivSelected, @NonNull TextView tvFileName,
       @NonNull TextView tvFileSize) {
     this.rootView = rootView;
-    this.cardView = cardView;
-    this.checkSelected = checkSelected;
-    this.ivPlayIcon = ivPlayIcon;
-    this.ivThumbnail = ivThumbnail;
+    this.cardIcon = cardIcon;
+    this.ivIcon = ivIcon;
+    this.ivSelected = ivSelected;
     this.tvFileName = tvFileName;
     this.tvFileSize = tvFileSize;
   }
@@ -79,23 +74,21 @@ public final class ItemVaultFileBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      MaterialCardView cardView = (MaterialCardView) rootView;
-
-      id = R.id.checkSelected;
-      CheckBox checkSelected = ViewBindings.findChildViewById(rootView, id);
-      if (checkSelected == null) {
+      id = R.id.cardIcon;
+      CardView cardIcon = ViewBindings.findChildViewById(rootView, id);
+      if (cardIcon == null) {
         break missingId;
       }
 
-      id = R.id.ivPlayIcon;
-      ImageView ivPlayIcon = ViewBindings.findChildViewById(rootView, id);
-      if (ivPlayIcon == null) {
+      id = R.id.ivIcon;
+      ImageView ivIcon = ViewBindings.findChildViewById(rootView, id);
+      if (ivIcon == null) {
         break missingId;
       }
 
-      id = R.id.ivThumbnail;
-      ImageView ivThumbnail = ViewBindings.findChildViewById(rootView, id);
-      if (ivThumbnail == null) {
+      id = R.id.ivSelected;
+      ImageView ivSelected = ViewBindings.findChildViewById(rootView, id);
+      if (ivSelected == null) {
         break missingId;
       }
 
@@ -111,8 +104,8 @@ public final class ItemVaultFileBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ItemVaultFileBinding((MaterialCardView) rootView, cardView, checkSelected,
-          ivPlayIcon, ivThumbnail, tvFileName, tvFileSize);
+      return new ItemVaultFileBinding((MaterialCardView) rootView, cardIcon, ivIcon, ivSelected,
+          tvFileName, tvFileSize);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -4,6 +4,7 @@ anim item_animation_fall_down
 anim layout_animation_fall_down
 color background
 color background_secondary
+color black
 color card_background
 color card_border
 color file_audio
@@ -15,8 +16,10 @@ color gradient_end
 color gradient_start
 color lock_secure
 color lock_warning
+color on_background
 color on_primary
 color on_secondary
+color on_surface
 color outline
 color pin_button
 color pin_button_pressed
@@ -24,10 +27,11 @@ color pin_dot_empty
 color pin_dot_filled
 color primary
 color primary_dark
-color primary_light
+color primary_variant
 color ripple_color
 color secondary
 color secondary_dark
+color secondary_variant
 color status_error
 color status_info
 color status_success
@@ -37,7 +41,9 @@ color surface_elevated
 color text_hint
 color text_primary
 color text_secondary
+color white
 drawable bg_pin_button
+drawable gradient_header
 drawable ic_add
 drawable ic_audio
 drawable ic_back
@@ -62,6 +68,7 @@ drawable ic_note
 drawable ic_photo
 drawable ic_play
 drawable ic_search
+drawable ic_secure
 drawable ic_settings
 drawable ic_shield
 drawable ic_sort
@@ -75,6 +82,7 @@ id action_save
 id action_search
 id action_sort
 id biometricContainer
+id breadcrumbContainer
 id btn0
 id btn1
 id btn2
@@ -103,6 +111,7 @@ id btnDiv
 id btnDot
 id btnEnableBiometric
 id btnEq
+id btnFolderBack
 id btnIntruderLogs
 id btnManageVaults
 id btnMul
@@ -112,8 +121,7 @@ id btnSkipBiometric
 id btnSub
 id btnSwitch
 id btnTheme
-id cardView
-id checkSelected
+id cardIcon
 id dot1
 id dot2
 id dot3
@@ -125,18 +133,17 @@ id imageView
 id ivIcon
 id ivIntruderPhoto
 id ivLogo
-id ivPlayIcon
-id ivThumbnail
+id ivSelected
 id pinContainer
 id playerView
 id progressBar
+id progressContainer
 id recyclerView
 id selectionOverlay
 id selectionToolbar
 id sort_date
 id sort_name
 id sort_size
-id swipeRefresh
 id switchBiometric
 id switchFakeVault
 id switchIntruder
@@ -144,6 +151,7 @@ id tabLayout
 id toolbar
 id tvAppName
 id tvAttempts
+id tvCurrentFolder
 id tvDate
 id tvDisplay
 id tvEmpty
