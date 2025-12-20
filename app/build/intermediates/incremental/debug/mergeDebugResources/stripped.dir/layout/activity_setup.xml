@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/create_pin"
+        android:textSize="24sp"
+        android:textColor="@color/text_primary"
+        android:fontFamily="sans-serif-medium" />
+
+    <!-- PIN Container -->
+    <LinearLayout
+        android:id="@+id/pinContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- PIN Dots -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:orientation="horizontal">
+
+            <View android:id="@+id/dot1" android:layout_width="16dp" android:layout_height="16dp"
+                android:layout_margin="8dp" android:background="@drawable/pin_dot_empty" />
+            <View android:id="@+id/dot2" android:layout_width="16dp" android:layout_height="16dp"
+                android:layout_margin="8dp" android:background="@drawable/pin_dot_empty" />
+            <View android:id="@+id/dot3" android:layout_width="16dp" android:layout_height="16dp"
+                android:layout_margin="8dp" android:background="@drawable/pin_dot_empty" />
+            <View android:id="@+id/dot4" android:layout_width="16dp" android:layout_height="16dp"
+                android:layout_margin="8dp" android:background="@drawable/pin_dot_empty" />
+
+        </LinearLayout>
+
+        <!-- Number Pad -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <Button android:id="@+id/btn1" style="@style/PinButton" android:layout_margin="8dp" />
+                <Button android:id="@+id/btn2" style="@style/PinButton" android:layout_margin="8dp" />
+                <Button android:id="@+id/btn3" style="@style/PinButton" android:layout_margin="8dp" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <Button android:id="@+id/btn4" style="@style/PinButton" android:layout_margin="8dp" />
+                <Button android:id="@+id/btn5" style="@style/PinButton" android:layout_margin="8dp" />
+                <Button android:id="@+id/btn6" style="@style/PinButton" android:layout_margin="8dp" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <Button android:id="@+id/btn7" style="@style/PinButton" android:layout_margin="8dp" />
+                <Button android:id="@+id/btn8" style="@style/PinButton" android:layout_margin="8dp" />
+                <Button android:id="@+id/btn9" style="@style/PinButton" android:layout_margin="8dp" />
+            </LinearLayout>
+
+            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+                <View android:layout_width="72dp" android:layout_height="72dp" android:layout_margin="8dp" />
+                <Button android:id="@+id/btn0" style="@style/PinButton" android:layout_margin="8dp" />
+                <ImageButton android:id="@+id/btnDelete" android:layout_width="72dp" android:layout_height="72dp"
+                    android:layout_margin="8dp" android:background="@drawable/bg_pin_button"
+                    android:src="@drawable/ic_backspace" app:tint="@color/text_secondary" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Biometric Container -->
+    <LinearLayout
+        android:id="@+id/biometricContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/ic_fingerprint"
+            app:tint="@color/primary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnEnableBiometric"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="Enable Fingerprint"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/primary"
+            app:cornerRadius="28dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSkipBiometric"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:text="Skip"
+            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:textColor="@color/text_secondary" />
+
+    </LinearLayout>
+
+</LinearLayout>

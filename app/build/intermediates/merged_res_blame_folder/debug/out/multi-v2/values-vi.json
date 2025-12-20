@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.vexor.vault.app-mergeDebugResources-50:/values-vi/values-vi.xml",
+            "outputFile": "com.vexor.vault.app-mergeDebugResources-51:/values-vi/values-vi.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Tushal\\.gradle\\caches\\transforms-3\\e75b5071789f5baf57b3f20bc1a48613\\transformed\\media3-exoplayer-1.2.0\\res\\values-vi\\values-vi.xml",

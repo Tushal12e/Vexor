@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.vexor.vault.app-mergeDebugResources-50:/values-de/values-de.xml",
+            "outputFile": "com.vexor.vault.app-mergeDebugResources-51:/values-de/values-de.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Tushal\\.gradle\\caches\\transforms-3\\0689a9fd0de0e6fef5d369e599568f09\\transformed\\core-1.12.0\\res\\values-de\\values-de.xml",

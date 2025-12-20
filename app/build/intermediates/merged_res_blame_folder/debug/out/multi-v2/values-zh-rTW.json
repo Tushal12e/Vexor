@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.vexor.vault.app-mergeDebugResources-50:/values-zh-rTW/values-zh-rTW.xml",
+            "outputFile": "com.vexor.vault.app-mergeDebugResources-51:/values-zh-rTW/values-zh-rTW.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Tushal\\.gradle\\caches\\transforms-3\\e308b6e6d17158c8079fa92ee7b91963\\transformed\\material-1.11.0\\res\\values-zh-rTW\\values-zh-rTW.xml",

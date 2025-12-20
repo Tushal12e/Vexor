@@ -662,7 +662,6 @@ attr imagePanX
 attr imagePanY
 attr imageRotate
 attr imageZoom
-attr implementationMode
 attr indeterminateAnimationType
 attr indeterminateProgressStyle
 attr indicatorColor
@@ -1035,7 +1034,6 @@ attr round
 attr roundPercent
 attr saturation
 attr scaleFromTextSize
-attr scaleType
 attr scrimAnimationDuration
 attr scrimBackground
 attr scrimVisibleHeightTrigger
@@ -3443,9 +3441,7 @@ id btn7
 id btn8
 id btn9
 id btnAC
-id btnAdd
 id btnBack
-id btnC
 id btnCancel
 id btnCancelSelection
 id btnCapture
@@ -3453,33 +3449,27 @@ id btnChangePin
 id btnClearLogs
 id btnClearVault
 id btnClose
-id btnDel
 id btnDelete
 id btnDeleteSelected
-id btnDiv
 id btnDivide
 id btnDot
 id btnEnableBiometric
-id btnEq
 id btnEquals
 id btnFolderBack
 id btnGrantPermissions
 id btnIntruderLogs
 id btnManageVaults
 id btnMinus
-id btnMul
 id btnMultiply
 id btnPercent
 id btnPlus
 id btnSettings
 id btnSkipBiometric
-id btnSub
 id btnSwitch
 id btnTheme
 id buttonPanel
 id cache_measures
 id callMeasure
-id cameraPreview
 id cancel_action
 id cancel_button
 id cardIcon
@@ -3503,7 +3493,6 @@ id clockwise
 id closest
 id coil_request_manager
 id collapseActionView
-id compatible
 id compress
 id confirm_button
 id constraint
@@ -3625,9 +3614,6 @@ id expanded_menu
 id fabAdd
 id fade
 id fill
-id fillCenter
-id fillEnd
-id fillStart
 id fill_horizontal
 id fill_vertical
 id filled
@@ -3810,7 +3796,6 @@ id path
 id pathRelative
 id peekHeight
 id percent
-id performance
 id pin
 id pinContainer
 id playerView
@@ -3959,7 +3944,6 @@ id tvAppName
 id tvAttempts
 id tvCurrentFolder
 id tvDate
-id tvDisplay
 id tvEmpty
 id tvFileCount
 id tvFileName
@@ -4116,7 +4100,6 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
-layout activity_auth
 layout activity_calculator
 layout activity_camera
 layout activity_change_pin
@@ -5809,7 +5792,6 @@ styleable PlayerControlView ad_marker_color ad_marker_width animation_enabled ba
 styleable PlayerView ad_marker_color ad_marker_width animation_enabled artwork_display_mode auto_show bar_gravity bar_height buffered_color controller_layout_id default_artwork hide_during_ads hide_on_touch keep_content_on_player_reset played_ad_marker_color played_color player_layout_id repeat_toggle_modes resize_mode scrubber_color scrubber_disabled_size scrubber_dragged_size scrubber_drawable scrubber_enabled_size show_buffering show_shuffle_button show_subtitle_button show_timeout show_vr_button shutter_background_color surface_type time_bar_min_update_interval touch_target_height unplayed_color use_artwork use_controller
 styleable PopupWindow android_popupBackground android_popupAnimationStyle overlapAnchor
 styleable PopupWindowBackgroundState state_above_anchor
-styleable PreviewView implementationMode scaleType
 styleable PropertySet android_visibility android_alpha layout_constraintTag motionProgress visibilityMode
 styleable RadialViewGroup materialCircleRadius
 styleable RangeSlider minSeparation values

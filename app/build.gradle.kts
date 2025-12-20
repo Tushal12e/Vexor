@@ -13,6 +13,8 @@ android {
         targetSdk = 34
         versionCode = 220
         versionName = "2.2.0"
+        multiDexEnabled = true
+        setProperty("archivesBaseName", "Vexor-v2.2.0")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -41,6 +43,7 @@ android {
 
 dependencies {
     // Core
+    implementation("androidx.multidex:multidex:2.0.1")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
@@ -81,7 +84,8 @@ dependencies {
     implementation("androidx.camera:camera-core:1.3.1")
     implementation("androidx.camera:camera-camera2:1.3.1")
     implementation("androidx.camera:camera-lifecycle:1.3.1")
-    implementation("androidx.camera:camera-view:1.3.1")
+    // implementation("androidx.camera:camera-view:1.3.1") // Removed as problematic
+    implementation("androidx.activity:activity-ktx:1.8.2")
     
     // Gson
     implementation("com.google.code.gson:gson:2.10.1")

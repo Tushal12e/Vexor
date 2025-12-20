@@ -51,12 +51,7 @@
             android:theme="@style/Theme.Vexor.Splash"
             android:screenOrientation="portrait" />
 
-        <!-- Auth Screen -->
-        <activity
-            android:name=".ui.AuthActivity"
-            android:exported="false"
-            android:theme="@style/Theme.Vexor.Splash"
-            android:screenOrientation="portrait" />
+        <!-- Auth Screen Removed (Merged into Calculator) -->
 
         <!-- Permissions Activity -->
         <activity

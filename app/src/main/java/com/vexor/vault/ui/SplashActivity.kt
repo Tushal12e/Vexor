@@ -34,7 +34,7 @@ class SplashActivity : BaseActivity() {
         // Navigate after delay
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = if (prefs.isFirstSetupComplete) {
-                Intent(this, AuthActivity::class.java)
+                Intent(this, CalculatorActivity::class.java)
             } else {
                 Intent(this, SetupActivity::class.java)
             }

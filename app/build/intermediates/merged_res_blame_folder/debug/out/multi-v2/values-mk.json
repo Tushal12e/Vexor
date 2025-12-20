@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.vexor.vault.app-mergeDebugResources-50:/values-mk/values-mk.xml",
+            "outputFile": "com.vexor.vault.app-mergeDebugResources-51:/values-mk/values-mk.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Tushal\\.gradle\\caches\\transforms-3\\57d34647962dfce3c8e4f7677bf8cd17\\transformed\\biometric-1.1.0\\res\\values-mk\\values-mk.xml",

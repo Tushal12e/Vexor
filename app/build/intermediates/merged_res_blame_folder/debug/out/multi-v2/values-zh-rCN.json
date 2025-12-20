@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.vexor.vault.app-mergeDebugResources-50:/values-zh-rCN/values-zh-rCN.xml",
+            "outputFile": "com.vexor.vault.app-mergeDebugResources-51:/values-zh-rCN/values-zh-rCN.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Tushal\\.gradle\\caches\\transforms-3\\a6a8c7b41a65c72c07aff083dbf25ba0\\transformed\\media3-ui-1.2.0\\res\\values-zh-rCN\\values-zh-rCN.xml",

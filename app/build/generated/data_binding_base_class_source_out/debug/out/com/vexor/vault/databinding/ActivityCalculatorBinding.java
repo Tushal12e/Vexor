@@ -51,41 +51,45 @@ public final class ActivityCalculatorBinding implements ViewBinding {
   public final Button btn9;
 
   @NonNull
-  public final Button btnAdd;
+  public final Button btnAC;
 
   @NonNull
-  public final Button btnC;
+  public final Button btnDelete;
 
   @NonNull
-  public final Button btnDel;
-
-  @NonNull
-  public final Button btnDiv;
+  public final Button btnDivide;
 
   @NonNull
   public final Button btnDot;
 
   @NonNull
-  public final Button btnEq;
+  public final Button btnEquals;
 
   @NonNull
-  public final Button btnMul;
+  public final Button btnMinus;
+
+  @NonNull
+  public final Button btnMultiply;
 
   @NonNull
   public final Button btnPercent;
 
   @NonNull
-  public final Button btnSub;
+  public final Button btnPlus;
 
   @NonNull
-  public final TextView tvDisplay;
+  public final TextView displayScreen;
+
+  @NonNull
+  public final TextView tvStatus;
 
   private ActivityCalculatorBinding(@NonNull LinearLayout rootView, @NonNull Button btn0,
       @NonNull Button btn1, @NonNull Button btn2, @NonNull Button btn3, @NonNull Button btn4,
       @NonNull Button btn5, @NonNull Button btn6, @NonNull Button btn7, @NonNull Button btn8,
-      @NonNull Button btn9, @NonNull Button btnAdd, @NonNull Button btnC, @NonNull Button btnDel,
-      @NonNull Button btnDiv, @NonNull Button btnDot, @NonNull Button btnEq, @NonNull Button btnMul,
-      @NonNull Button btnPercent, @NonNull Button btnSub, @NonNull TextView tvDisplay) {
+      @NonNull Button btn9, @NonNull Button btnAC, @NonNull Button btnDelete,
+      @NonNull Button btnDivide, @NonNull Button btnDot, @NonNull Button btnEquals,
+      @NonNull Button btnMinus, @NonNull Button btnMultiply, @NonNull Button btnPercent,
+      @NonNull Button btnPlus, @NonNull TextView displayScreen, @NonNull TextView tvStatus) {
     this.rootView = rootView;
     this.btn0 = btn0;
     this.btn1 = btn1;
@@ -97,16 +101,17 @@ public final class ActivityCalculatorBinding implements ViewBinding {
     this.btn7 = btn7;
     this.btn8 = btn8;
     this.btn9 = btn9;
-    this.btnAdd = btnAdd;
-    this.btnC = btnC;
-    this.btnDel = btnDel;
-    this.btnDiv = btnDiv;
+    this.btnAC = btnAC;
+    this.btnDelete = btnDelete;
+    this.btnDivide = btnDivide;
     this.btnDot = btnDot;
-    this.btnEq = btnEq;
-    this.btnMul = btnMul;
+    this.btnEquals = btnEquals;
+    this.btnMinus = btnMinus;
+    this.btnMultiply = btnMultiply;
     this.btnPercent = btnPercent;
-    this.btnSub = btnSub;
-    this.tvDisplay = tvDisplay;
+    this.btnPlus = btnPlus;
+    this.displayScreen = displayScreen;
+    this.tvStatus = tvStatus;
   }
 
   @Override
@@ -196,27 +201,21 @@ public final class ActivityCalculatorBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btnAdd;
-      Button btnAdd = ViewBindings.findChildViewById(rootView, id);
-      if (btnAdd == null) {
+      id = R.id.btnAC;
+      Button btnAC = ViewBindings.findChildViewById(rootView, id);
+      if (btnAC == null) {
         break missingId;
       }
 
-      id = R.id.btnC;
-      Button btnC = ViewBindings.findChildViewById(rootView, id);
-      if (btnC == null) {
+      id = R.id.btnDelete;
+      Button btnDelete = ViewBindings.findChildViewById(rootView, id);
+      if (btnDelete == null) {
         break missingId;
       }
 
-      id = R.id.btnDel;
-      Button btnDel = ViewBindings.findChildViewById(rootView, id);
-      if (btnDel == null) {
-        break missingId;
-      }
-
-      id = R.id.btnDiv;
-      Button btnDiv = ViewBindings.findChildViewById(rootView, id);
-      if (btnDiv == null) {
+      id = R.id.btnDivide;
+      Button btnDivide = ViewBindings.findChildViewById(rootView, id);
+      if (btnDivide == null) {
         break missingId;
       }
 
@@ -226,15 +225,21 @@ public final class ActivityCalculatorBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btnEq;
-      Button btnEq = ViewBindings.findChildViewById(rootView, id);
-      if (btnEq == null) {
+      id = R.id.btnEquals;
+      Button btnEquals = ViewBindings.findChildViewById(rootView, id);
+      if (btnEquals == null) {
         break missingId;
       }
 
-      id = R.id.btnMul;
-      Button btnMul = ViewBindings.findChildViewById(rootView, id);
-      if (btnMul == null) {
+      id = R.id.btnMinus;
+      Button btnMinus = ViewBindings.findChildViewById(rootView, id);
+      if (btnMinus == null) {
+        break missingId;
+      }
+
+      id = R.id.btnMultiply;
+      Button btnMultiply = ViewBindings.findChildViewById(rootView, id);
+      if (btnMultiply == null) {
         break missingId;
       }
 
@@ -244,21 +249,27 @@ public final class ActivityCalculatorBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btnSub;
-      Button btnSub = ViewBindings.findChildViewById(rootView, id);
-      if (btnSub == null) {
+      id = R.id.btnPlus;
+      Button btnPlus = ViewBindings.findChildViewById(rootView, id);
+      if (btnPlus == null) {
         break missingId;
       }
 
-      id = R.id.tvDisplay;
-      TextView tvDisplay = ViewBindings.findChildViewById(rootView, id);
-      if (tvDisplay == null) {
+      id = R.id.display_screen;
+      TextView displayScreen = ViewBindings.findChildViewById(rootView, id);
+      if (displayScreen == null) {
+        break missingId;
+      }
+
+      id = R.id.tvStatus;
+      TextView tvStatus = ViewBindings.findChildViewById(rootView, id);
+      if (tvStatus == null) {
         break missingId;
       }
 
       return new ActivityCalculatorBinding((LinearLayout) rootView, btn0, btn1, btn2, btn3, btn4,
-          btn5, btn6, btn7, btn8, btn9, btnAdd, btnC, btnDel, btnDiv, btnDot, btnEq, btnMul,
-          btnPercent, btnSub, tvDisplay);
+          btn5, btn6, btn7, btn8, btn9, btnAC, btnDelete, btnDivide, btnDot, btnEquals, btnMinus,
+          btnMultiply, btnPercent, btnPlus, displayScreen, tvStatus);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -369,25 +369,14 @@ class MainActivity : BaseActivity() {
                     binding.tvProgress.text = "Encrypting $count/${uris.size}..."
                 }
                 
-                try {
-                    val vaultFile = encryptionManager.encryptFile(uri, isFakeVault)
-                    if (vaultFile != null) {
-                        repository.addFile(vaultFile)
-                        
-                        // Try to get MediaStore URI for this file
-                        val mediaUri = getMediaStoreUri(uri, vaultFile.mimeType)
-                        if (mediaUri != null) {
-                            mediaStoreUris.add(mediaUri)
-                        }
-                    } else {
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(this@MainActivity, "Failed to encrypt file", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                    withContext(Dispatchers.Main) {
-                        Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                val vaultFile = encryptionManager.encryptFile(uri, isFakeVault)
+                if (vaultFile != null) {
+                    repository.addFile(vaultFile)
+                    
+                    // Try to get MediaStore URI for this file
+                    val mediaUri = getMediaStoreUri(uri, vaultFile.mimeType)
+                    if (mediaUri != null) {
+                        mediaStoreUris.add(mediaUri)
                     }
                 }
             }
@@ -733,8 +722,9 @@ class MainActivity : BaseActivity() {
         
         val timeSincePause = System.currentTimeMillis() - lastPauseTime
         if (lastPauseTime > 0 && timeSincePause > LOCK_TIMEOUT) {
-            startActivity(Intent(this, AuthActivity::class.java).apply {
-                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            // Lock the vault - go back to Calculator (Launcher)
+            startActivity(Intent(this, CalculatorActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
             })
             finish()
             return

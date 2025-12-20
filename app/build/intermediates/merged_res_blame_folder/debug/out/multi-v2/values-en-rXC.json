@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.vexor.vault.app-mergeDebugResources-50:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "com.vexor.vault.app-mergeDebugResources-51:/values-en-rXC/values-en-rXC.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Tushal\\.gradle\\caches\\transforms-3\\57d34647962dfce3c8e4f7677bf8cd17\\transformed\\biometric-1.1.0\\res\\values-en-rXC\\values-en-rXC.xml",

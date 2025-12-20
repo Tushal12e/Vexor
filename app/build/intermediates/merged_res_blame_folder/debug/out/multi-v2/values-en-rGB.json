@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.vexor.vault.app-mergeDebugResources-50:/values-en-rGB/values-en-rGB.xml",
+            "outputFile": "com.vexor.vault.app-mergeDebugResources-51:/values-en-rGB/values-en-rGB.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Tushal\\.gradle\\caches\\transforms-3\\a6a8c7b41a65c72c07aff083dbf25ba0\\transformed\\media3-ui-1.2.0\\res\\values-en-rGB\\values-en-rGB.xml",
