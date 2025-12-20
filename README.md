@@ -12,11 +12,7 @@
   <a href="https://github.com/Tushal12e/Vexor/releases/tag/v4.1.0">
     <img src="https://img.shields.io/badge/Version-4.1.0-blue.svg" alt="Version"/>
   </a>
-  <a href="https://github.com/Tushal12e/Vexor/releases">
-    <img src="https://img.shields.io/github/downloads/Tushal12e/Vexor/total.svg" alt="Downloads"/>
-  </a>
   <img src="https://img.shields.io/badge/Android-8.0%2B-green.svg" alt="Android"/>
-  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License"/>
 </p>
 
 ---
@@ -60,7 +56,7 @@ Part of the **Tushal12e App Series**.
 ### 🛡️ Advanced Security
 - **Multi-Vault System**:
   - **Main Vault**: Your real private data
-  - **Fake Vault**: A decoy vault with a separate PIN to show snoops (stores dummy files)
+  - **Fake Vault**: A decoy vault with a separate PIN to show snoops
 - **Biometric Unlock**: Fingerprint support for quick access (optional)
 - **AES-256 Encryption**: Military-grade encryption for all your files
 - **No Cloud Upload**: All data stays on your device
@@ -84,124 +80,22 @@ Part of the **Tushal12e App Series**.
 
 ---
 
-## 🏗️ Project Structure
-
-```
-Vexor/
-├── app/
-│   ├── src/main/
-│   │   ├── java/com/vexor/vault/
-│   │   │   ├── data/           # Data layer (Repository, Models)
-│   │   │   ├── security/       # Encryption & Security managers
-│   │   │   └── ui/             # Activities & UI components
-│   │   ├── res/                # Resources (layouts, drawables, etc.)
-│   │   └── AndroidManifest.xml
-│   └── build.gradle.kts
-├── gradle/
-└── build.gradle.kts
-```
-
-### Key Components
-
-| Component | Description |
-|-----------|-------------|
-| `CalculatorActivity` | Main launcher - functional calculator with vault access |
-| `MainActivity` | Vault file browser and management |
-| `FileEncryptionManager` | AES-256 file encryption/decryption |
-| `IntruderManager` | Captures intruder photos on failed attempts |
-| `VaultRepository` | Data management for vault files |
-| `CameraActivity` | Secure in-app camera |
-
----
-
-## 🔧 Build Instructions
-
-### Prerequisites
-- Android Studio Hedgehog (2023.1.1) or newer
-- JDK 17
-- Android SDK 34
-
-### Build Steps
-
-```bash
-# Clone the repository
-git clone https://github.com/Tushal12e/Vexor.git
-cd Vexor
-
-# Build debug APK
-./gradlew assembleDebug
-
-# Build release APK
-./gradlew assembleRelease
-```
-
-The APK will be generated at:
-- Debug: `app/build/outputs/apk/debug/`
-- Release: `app/build/outputs/apk/release/`
-
----
-
-## 📱 Screenshots
-
-| Calculator | Vault | Settings |
-|:----------:|:-----:|:--------:|
-| Fully functional calculator disguise | Secure file browser | Customize security options |
-
----
-
-## 🔒 Security & Privacy
+##  Security & Privacy
 
 - **Local Only**: No data is ever uploaded to any server
 - **AES-256 Encryption**: Industry-standard encryption for all files
 - **No Permissions Abuse**: Only requests necessary permissions
-- **Open Source**: Full transparency - review the code yourself
 
 ---
 
-## 📜 Complete App Series
-
-Check out other apps in the Tushal12e series:
-
-| App | Description |
-|-----|-------------|
-| **NetGuardPro** | Advanced Network Analysis & Security |
-| **AppXray** | Deep App Analysis & Permission Manager |
-| **Flownet** | Secure Offline Mesh Messenger |
-| **RatnaLedger** | Professional Diamond Inventory Management |
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
----
-
-## 📞 Contact
+##  Contact
 
 **Developer**: Tushal12e
 
 - GitHub: [@Tushal12e](https://github.com/Tushal12e)
-- Repository: [Vexor](https://github.com/Tushal12e/Vexor)
 
 ---
 
 <p align="center">
   <strong>Made with ❤️ by Tushal12e</strong>
-</p>
-
-<p align="center">
-  ⭐ Star this repository if you find it useful! ⭐
 </p>
