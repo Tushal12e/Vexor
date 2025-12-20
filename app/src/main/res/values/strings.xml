@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Calculator</string>
+    <string name="app_name">Vexor</string>
     <string name="app_tagline">Your Private Vault</string>
     
     <!-- Auth -->

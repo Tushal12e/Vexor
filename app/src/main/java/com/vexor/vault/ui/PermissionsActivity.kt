@@ -98,19 +98,20 @@ class PermissionsActivity : BaseActivity() {
     }
 
     private fun hasAllPermissions(): Boolean {
-        // Standard checks
-        val standardGranted = requiredPermissions.all {
-            ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
-        }
+        // 1. Camera
+        val cameraGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
         
-        // Storage Manager check (Android 11+)
-        val storageManagerGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            Environment.isExternalStorageManager()
+        // 2. Storage
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            if (Environment.isExternalStorageManager()) {
+                return cameraGranted
+            }
+            return false
         } else {
-            true
+            val read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+            val write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+            return cameraGranted && read && write
         }
-
-        return standardGranted && storageManagerGranted
     }
 
     private fun proceed() {

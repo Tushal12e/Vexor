@@ -82,35 +82,23 @@ class CalculatorActivity : BaseActivity() {
     }
     
     private fun hasPermissions(): Boolean {
-        val required = mutableListOf<String>().apply {
-            add(Manifest.permission.CAMERA)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                add(Manifest.permission.READ_MEDIA_IMAGES)
-                add(Manifest.permission.READ_MEDIA_VIDEO)
-                add(Manifest.permission.READ_MEDIA_AUDIO)
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                // Android 11 (API 30) - 12 (API 32): Use Manage Storage, but maybe READ is needed for some scopes? 
-                // Mostly just MANAGE is enough for everything.
-                // Keeping READ just in case for non-all-files access scenarios, but WRITE is useless.
-                add(Manifest.permission.READ_EXTERNAL_STORAGE)
-            } else {
-                // Android 10 and below
-                add(Manifest.permission.READ_EXTERNAL_STORAGE)
-                add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        // 1. Camera is always required
+        val cameraGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+        
+        // 2. Storage
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // Android 11+: Use MANAGE_EXTERNAL_STORAGE
+            if (Environment.isExternalStorageManager()) {
+                return cameraGranted
             }
-        }
-
-        val standardGranted = required.all {
-            ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
-        }
-
-        val storageManagerGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            Environment.isExternalStorageManager()
+            // If not managed, check if we mistakenly have READ/WRITE? (Unlikely for this app type)
+            return false
         } else {
-            true
+            // Android 10-: Use READ/WRITE
+            val read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+            val write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+            return cameraGranted && read && write
         }
-
-        return standardGranted && storageManagerGranted
     }
     
     private fun startCamera() {
