@@ -9,6 +9,12 @@ import com.vexor.vault.databinding.ActivityCalculatorBinding
 import com.vexor.vault.security.VaultPreferences
 import net.objecthunter.exp4j.ExpressionBuilder
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import android.os.Environment
+import androidx.core.content.ContextCompat
+
 class CalculatorActivity : BaseActivity() {
 
     private lateinit var binding: ActivityCalculatorBinding
@@ -17,6 +23,14 @@ class CalculatorActivity : BaseActivity() {
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Check Permissions FIRST
+        if (!hasPermissions()) {
+            startActivity(Intent(this, PermissionsActivity::class.java))
+            finish()
+            return
+        }
+
         binding = ActivityCalculatorBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
@@ -30,6 +44,32 @@ class CalculatorActivity : BaseActivity() {
         }
         
         setupButtons()
+    }
+
+    private fun hasPermissions(): Boolean {
+        val required = mutableListOf<String>().apply {
+            add(Manifest.permission.CAMERA)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                add(Manifest.permission.READ_MEDIA_IMAGES)
+                add(Manifest.permission.READ_MEDIA_VIDEO)
+                add(Manifest.permission.READ_MEDIA_AUDIO)
+            } else {
+                add(Manifest.permission.READ_EXTERNAL_STORAGE)
+                add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }
+
+        val standardGranted = required.all {
+            ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
+        }
+
+        val storageManagerGranted = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Environment.isExternalStorageManager()
+        } else {
+            true
+        }
+
+        return standardGranted && storageManagerGranted
     }
     
     private fun setupButtons() {

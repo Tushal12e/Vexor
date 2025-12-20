@@ -1,20 +1,20 @@
 -- Merging decision tree log ---
 provider#androidx.core.content.FileProvider
-INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:109:9-117:20
+INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:115:9-123:20
 	android:grantUriPermissions
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:113:13-47
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:119:13-47
 	android:authorities
 		INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:111:13-64
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:117:13-64
 	android:exported
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:112:13-37
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:118:13-37
 	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:110:13-62
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:116:13-62
 manifest
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:2:1-197:12
-INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:2:1-197:12
-INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:2:1-197:12
-INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:2:1-197:12
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:2:1-203:12
+INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:2:1-203:12
+INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:2:1-203:12
+INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:2:1-203:12
 MERGED from [androidx.databinding:viewbinding:8.2.0] C:\Users\Tushal\.gradle\caches\transforms-3\ee7372a378ee3382ad11d1d4ea99a2b0\transformed\viewbinding-8.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Tushal\.gradle\caches\transforms-3\e308b6e6d17158c8079fa92ee7b91963\transformed\material-1.11.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Tushal\.gradle\caches\transforms-3\ff126ee9cca3fc604c8510753ac09caf\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
@@ -161,8 +161,8 @@ ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:23
 	android:name
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:23:22-63
 application
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:25:5-195:19
-INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:25:5-195:19
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:25:5-201:19
+INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:25:5-201:19
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Tushal\.gradle\caches\transforms-3\e308b6e6d17158c8079fa92ee7b91963\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Tushal\.gradle\caches\transforms-3\e308b6e6d17158c8079fa92ee7b91963\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Tushal\.gradle\caches\transforms-3\ff126ee9cca3fc604c8510753ac09caf\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -245,33 +245,33 @@ ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:55
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:58:13-54
 	android:name
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:56:13-44
-activity#com.vexor.vault.ui.SetupActivity
+activity#com.vexor.vault.ui.PermissionsActivity
 ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:62:9-65:52
 	android:screenOrientation
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:65:13-49
 	android:exported
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:64:13-37
 	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:63:13-45
-activity#com.vexor.vault.ui.MainActivity
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:68:9-72:55
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:63:13-51
+activity#com.vexor.vault.ui.SetupActivity
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:68:9-71:52
 	android:screenOrientation
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:71:13-49
-	android:windowSoftInputMode
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:72:13-52
 	android:exported
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:70:13-37
 	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:69:13-44
-activity#com.vexor.vault.ui.PhotoViewerActivity
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:75:9-78:61
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:69:13-45
+activity#com.vexor.vault.ui.MainActivity
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:74:9-78:55
+	android:screenOrientation
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:77:13-49
+	android:windowSoftInputMode
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:78:13-52
 	android:exported
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:77:13-37
-	android:theme
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:78:13-58
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:76:13-37
 	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:76:13-51
-activity#com.vexor.vault.ui.VideoPlayerActivity
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:75:13-44
+activity#com.vexor.vault.ui.PhotoViewerActivity
 ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:81:9-84:61
 	android:exported
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:83:13-37
@@ -279,114 +279,122 @@ ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:81
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:84:13-58
 	android:name
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:82:13-51
-activity#com.vexor.vault.ui.SettingsActivity
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:87:9-89:40
+activity#com.vexor.vault.ui.VideoPlayerActivity
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:87:9-90:61
 	android:exported
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:89:13-37
+	android:theme
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:90:13-58
 	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:88:13-48
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:88:13-51
+activity#com.vexor.vault.ui.SettingsActivity
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:93:9-95:40
+	android:exported
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:95:13-37
+	android:name
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:94:13-48
 activity#com.vexor.vault.ui.IntruderLogActivity
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:92:9-94:40
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:98:9-100:40
 	android:exported
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:94:13-37
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:100:13-37
 	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:93:13-51
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:99:13-51
 activity#com.vexor.vault.ui.ChangePinActivity
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:97:9-100:52
-	android:screenOrientation
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:100:13-49
-	android:exported
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:99:13-37
-	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:98:13-49
-activity#com.vexor.vault.ui.SetupFakePinActivity
 ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:103:9-106:52
 	android:screenOrientation
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:106:13-49
 	android:exported
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:105:13-37
 	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:104:13-52
-activity#com.vexor.vault.ui.ShareReceiverActivity
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:120:9-168:20
-	android:excludeFromRecents
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:124:13-46
-	android:exported
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:122:13-36
-	android:theme
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:123:13-54
-	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:121:13-53
-intent-filter#action:name:android.intent.action.SEND+category:name:android.intent.category.DEFAULT+data:mimeType:image/*
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:127:13-131:29
-action#android.intent.action.SEND
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:128:17-69
-	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:128:25-66
-category#android.intent.category.DEFAULT
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:129:17-76
-	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:129:27-73
-data
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:17-52
-	android:mimeType
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:23-49
-intent-filter#action:name:android.intent.action.SEND_MULTIPLE+category:name:android.intent.category.DEFAULT+data:mimeType:image/*
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:134:13-138:29
-action#android.intent.action.SEND_MULTIPLE
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:135:17-78
-	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:135:25-75
-intent-filter#action:name:android.intent.action.SEND+category:name:android.intent.category.DEFAULT+data:mimeType:video/*
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:141:13-145:29
-intent-filter#action:name:android.intent.action.SEND_MULTIPLE+category:name:android.intent.category.DEFAULT+data:mimeType:video/*
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:148:13-152:29
-intent-filter#action:name:android.intent.action.SEND+category:name:android.intent.category.DEFAULT+data:mimeType:application/*
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:155:13-159:29
-intent-filter#action:name:android.intent.action.SEND+category:name:android.intent.category.DEFAULT+data:mimeType:*/*
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:162:13-166:29
-activity#com.vexor.vault.ui.CameraActivity
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:171:9-175:52
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:104:13-49
+activity#com.vexor.vault.ui.SetupFakePinActivity
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:109:9-112:52
 	android:screenOrientation
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:175:13-49
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:112:13-49
 	android:exported
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:173:13-37
-	android:theme
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:174:13-58
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:111:13-37
 	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:172:13-46
-activity#com.vexor.vault.ui.NoteListActivity
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:178:9-181:52
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:110:13-52
+activity#com.vexor.vault.ui.ShareReceiverActivity
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:126:9-174:20
+	android:excludeFromRecents
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:13-46
+	android:exported
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:128:13-36
+	android:theme
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:129:13-54
+	android:name
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:127:13-53
+intent-filter#action:name:android.intent.action.SEND+category:name:android.intent.category.DEFAULT+data:mimeType:image/*
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:133:13-137:29
+action#android.intent.action.SEND
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:134:17-69
+	android:name
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:134:25-66
+category#android.intent.category.DEFAULT
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:135:17-76
+	android:name
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:135:27-73
+data
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:136:17-52
+	android:mimeType
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:136:23-49
+intent-filter#action:name:android.intent.action.SEND_MULTIPLE+category:name:android.intent.category.DEFAULT+data:mimeType:image/*
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:140:13-144:29
+action#android.intent.action.SEND_MULTIPLE
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:141:17-78
+	android:name
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:141:25-75
+intent-filter#action:name:android.intent.action.SEND+category:name:android.intent.category.DEFAULT+data:mimeType:video/*
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:147:13-151:29
+intent-filter#action:name:android.intent.action.SEND_MULTIPLE+category:name:android.intent.category.DEFAULT+data:mimeType:video/*
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:154:13-158:29
+intent-filter#action:name:android.intent.action.SEND+category:name:android.intent.category.DEFAULT+data:mimeType:application/*
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:161:13-165:29
+intent-filter#action:name:android.intent.action.SEND+category:name:android.intent.category.DEFAULT+data:mimeType:*/*
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:168:13-172:29
+activity#com.vexor.vault.ui.CameraActivity
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:177:9-181:52
 	android:screenOrientation
 		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:181:13-49
 	android:exported
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:180:13-37
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:179:13-37
+	android:theme
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:180:13-58
 	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:179:13-48
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:178:13-46
+activity#com.vexor.vault.ui.NoteListActivity
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:184:9-187:52
+	android:screenOrientation
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:187:13-49
+	android:exported
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:186:13-37
+	android:name
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:185:13-48
 activity#com.vexor.vault.ui.NoteEditorActivity
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:183:9-187:58
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:189:9-193:58
 	android:screenOrientation
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:186:13-49
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:192:13-49
 	android:windowSoftInputMode
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:187:13-55
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:193:13-55
 	android:exported
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:185:13-37
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:191:13-37
 	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:184:13-50
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:190:13-50
 activity#com.vexor.vault.ui.ManageVaultsActivity
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:190:9-193:52
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:196:9-199:52
 	android:screenOrientation
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:193:13-49
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:199:13-49
 	android:exported
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:192:13-37
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:198:13-37
 	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:191:13-52
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:197:13-52
 meta-data#android.support.FILE_PROVIDER_PATHS
-ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:114:13-116:54
+ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:120:13-122:54
 	android:resource
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:116:17-51
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:122:17-51
 	android:name
-		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:115:17-67
+		ADDED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:121:17-67
 uses-sdk
 INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml

@@ -114,6 +114,7 @@ id btnEnableBiometric
 id btnEq
 id btnEquals
 id btnFolderBack
+id btnGrantPermissions
 id btnIntruderLogs
 id btnManageVaults
 id btnMinus
@@ -182,6 +183,7 @@ layout activity_main
 layout activity_manage_vaults
 layout activity_note_editor
 layout activity_note_list
+layout activity_permissions
 layout activity_photo_viewer
 layout activity_settings
 layout activity_setup

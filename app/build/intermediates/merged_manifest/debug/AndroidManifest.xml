@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vexor.vault"
-    android:versionCode="200"
-    android:versionName="2.0.0" >
+    android:versionCode="210"
+    android:versionName="2.1.0" >
 
     <uses-sdk
         android:minSdkVersion="26"
@@ -82,6 +82,12 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Vexor.Splash" />
+
+        <!-- Permissions Activity -->
+        <activity
+            android:name="com.vexor.vault.ui.PermissionsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <!-- Setup Activity (first time) -->
         <activity

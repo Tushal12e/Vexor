@@ -58,6 +58,12 @@
             android:theme="@style/Theme.Vexor.Splash"
             android:screenOrientation="portrait" />
 
+        <!-- Permissions Activity -->
+        <activity
+            android:name=".ui.PermissionsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
         <!-- Setup Activity (first time) -->
         <activity
             android:name=".ui.SetupActivity"
