@@ -1,0 +1,20 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "com.vexor.vault",
+  "variantName": "release",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "attributes": [],
+      "versionCode": 410,
+      "versionName": "4.1.0",
+      "outputFile": "Vexor-v4.1.0-release.apk"
+    }
+  ],
+  "elementType": "File"
+}

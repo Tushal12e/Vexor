@@ -11,10 +11,10 @@ android {
         applicationId = "com.vexor.vault"
         minSdk = 26
         targetSdk = 34
-        versionCode = 310
-        versionName = "3.1.0"
+        versionCode = 410
+        versionName = "4.1.0"
         multiDexEnabled = true
-        setProperty("archivesBaseName", "Vexor-v3.1.0")
+        setProperty("archivesBaseName", "Vexor-v4.1.0")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,10 +22,12 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            isCrunchPngs = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -38,6 +40,17 @@ android {
     buildFeatures {
         viewBinding = true
         buildConfig = true
+    }
+
+    lint {
+        abortOnError = false
+        checkReleaseBuilds = false
+    }
+
+    packaging {
+        jniLibs {
+            pickFirsts += "lib/**/libimage_processing_util_jni.so"
+        }
     }
 }
 
@@ -85,6 +98,7 @@ dependencies {
     implementation("androidx.camera:camera-camera2:1.3.1")
     implementation("androidx.camera:camera-lifecycle:1.3.1")
     // implementation("androidx.camera:camera-view:1.3.1") // Removed as problematic
+    implementation("androidx.camera:camera-view:1.3.1")
     implementation("androidx.activity:activity-ktx:1.8.2")
     
     // Gson

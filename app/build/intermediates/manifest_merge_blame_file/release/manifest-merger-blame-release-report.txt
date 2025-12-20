@@ -1,0 +1,489 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.vexor.vault"
+4    android:versionCode="410"
+5    android:versionName="4.1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+9        android:targetSdkVersion="34" />
+10
+11    <!-- Storage Permissions -->
+12    <uses-permission
+12-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:6:5-107
+13        android:name="android.permission.READ_EXTERNAL_STORAGE"
+13-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:6:22-77
+14        android:maxSdkVersion="32" />
+14-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:6:78-104
+15    <uses-permission
+15-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:7:5-108
+16        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+16-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:7:22-78
+17        android:maxSdkVersion="29" />
+17-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:7:79-105
+18    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+18-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:8:5-76
+18-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:8:22-73
+19    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+19-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:9:5-75
+19-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:9:22-72
+20    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+20-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:10:5-75
+20-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:10:22-72
+21    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+21-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:11:5-111
+21-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:11:22-79
+22
+23    <!-- Camera for intruder detection -->
+24    <uses-permission android:name="android.permission.CAMERA" />
+24-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:14:5-65
+24-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:14:22-62
+25
+26    <uses-feature
+26-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:15:5-85
+27        android:name="android.hardware.camera"
+27-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:15:19-57
+28        android:required="false" />
+28-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:15:58-82
+29    <uses-feature
+29-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:16:5-95
+30        android:name="android.hardware.camera.autofocus"
+30-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:16:19-67
+31        android:required="false" />
+31-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:16:68-92
+32
+33    <!-- Biometric -->
+34    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+34-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:19:5-72
+34-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:19:22-69
+35    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+35-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:20:5-74
+35-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:20:22-71
+36
+37    <!-- Vibration -->
+38    <uses-permission android:name="android.permission.VIBRATE" />
+38-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:23:5-66
+38-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:23:22-63
+39    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+39-->[androidx.media3:media3-exoplayer:1.2.0] C:\Users\Tushal\.gradle\caches\transforms-3\e75b5071789f5baf57b3f20bc1a48613\transformed\media3-exoplayer-1.2.0\AndroidManifest.xml:22:5-79
+39-->[androidx.media3:media3-exoplayer:1.2.0] C:\Users\Tushal\.gradle\caches\transforms-3\e75b5071789f5baf57b3f20bc1a48613\transformed\media3-exoplayer-1.2.0\AndroidManifest.xml:22:22-76
+40
+41    <permission
+41-->[androidx.core:core:1.12.0] C:\Users\Tushal\.gradle\caches\transforms-3\0689a9fd0de0e6fef5d369e599568f09\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+42        android:name="com.vexor.vault.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+42-->[androidx.core:core:1.12.0] C:\Users\Tushal\.gradle\caches\transforms-3\0689a9fd0de0e6fef5d369e599568f09\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+43        android:protectionLevel="signature" />
+43-->[androidx.core:core:1.12.0] C:\Users\Tushal\.gradle\caches\transforms-3\0689a9fd0de0e6fef5d369e599568f09\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+44
+45    <uses-permission android:name="com.vexor.vault.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+45-->[androidx.core:core:1.12.0] C:\Users\Tushal\.gradle\caches\transforms-3\0689a9fd0de0e6fef5d369e599568f09\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+45-->[androidx.core:core:1.12.0] C:\Users\Tushal\.gradle\caches\transforms-3\0689a9fd0de0e6fef5d369e599568f09\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+46
+47    <application
+47-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:25:5-196:19
+48        android:allowBackup="false"
+48-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:26:9-36
+49        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+49-->[androidx.core:core:1.12.0] C:\Users\Tushal\.gradle\caches\transforms-3\0689a9fd0de0e6fef5d369e599568f09\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+50        android:extractNativeLibs="false"
+51        android:icon="@mipmap/ic_launcher"
+51-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:27:9-43
+52        android:label="@string/app_name"
+52-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:28:9-41
+53        android:requestLegacyExternalStorage="true"
+53-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:32:9-52
+54        android:roundIcon="@mipmap/ic_launcher_round"
+54-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:29:9-54
+55        android:supportsRtl="true"
+55-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:30:9-35
+56        android:theme="@style/Theme.Vexor" >
+56-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:31:9-43
+57
+58        <!-- Calculator Disguise (Launcher) -->
+59        <activity
+59-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:36:9-45:20
+60            android:name="com.vexor.vault.ui.CalculatorActivity"
+60-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:37:13-50
+61            android:exported="true"
+61-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:38:13-36
+62            android:screenOrientation="portrait"
+62-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:40:13-49
+63            android:theme="@style/Theme.Vexor.Fullscreen" >
+63-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:39:13-58
+64            <intent-filter>
+64-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:41:13-44:29
+65                <action android:name="android.intent.action.MAIN" />
+65-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:42:17-69
+65-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:42:25-66
+66
+67                <category android:name="android.intent.category.LAUNCHER" />
+67-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:43:17-77
+67-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:43:27-74
+68            </intent-filter>
+69        </activity>
+70
+71        <!-- Splash Screen (Internal) -->
+72        <activity
+72-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:48:9-52:52
+73            android:name="com.vexor.vault.ui.SplashActivity"
+73-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:49:13-46
+74            android:exported="false"
+74-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:50:13-37
+75            android:screenOrientation="portrait"
+75-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:52:13-49
+76            android:theme="@style/Theme.Vexor.Splash" />
+76-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:51:13-54
+77
+78        <!-- Auth Screen Removed (Merged into Calculator) -->
+79
+80
+81        <!-- Permissions Activity -->
+82        <activity
+82-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:57:9-60:52
+83            android:name="com.vexor.vault.ui.PermissionsActivity"
+83-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:58:13-51
+84            android:exported="false"
+84-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:59:13-37
+85            android:screenOrientation="portrait" />
+85-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:60:13-49
+86
+87        <!-- Setup Activity (first time) -->
+88        <activity
+88-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:63:9-66:52
+89            android:name="com.vexor.vault.ui.SetupActivity"
+89-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:64:13-45
+90            android:exported="false"
+90-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:65:13-37
+91            android:screenOrientation="portrait" />
+91-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:66:13-49
+92
+93        <!-- Main Vault Activity -->
+94        <activity
+94-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:69:9-73:55
+95            android:name="com.vexor.vault.ui.MainActivity"
+95-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:70:13-44
+96            android:exported="false"
+96-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:71:13-37
+97            android:screenOrientation="portrait"
+97-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:72:13-49
+98            android:windowSoftInputMode="adjustPan" />
+98-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:73:13-52
+99
+100        <!-- Photo Viewer -->
+101        <activity
+101-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:76:9-79:61
+102            android:name="com.vexor.vault.ui.PhotoViewerActivity"
+102-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:77:13-51
+103            android:exported="false"
+103-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:78:13-37
+104            android:theme="@style/Theme.Vexor.Fullscreen" />
+104-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:79:13-58
+105
+106        <!-- Video Player -->
+107        <activity
+107-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:82:9-85:61
+108            android:name="com.vexor.vault.ui.VideoPlayerActivity"
+108-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:83:13-51
+109            android:exported="false"
+109-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:84:13-37
+110            android:theme="@style/Theme.Vexor.Fullscreen" />
+110-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:85:13-58
+111
+112        <!-- Settings -->
+113        <activity
+113-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:88:9-90:40
+114            android:name="com.vexor.vault.ui.SettingsActivity"
+114-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:89:13-48
+115            android:exported="false" />
+115-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:90:13-37
+116
+117        <!-- Intruder Logs -->
+118        <activity
+118-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:93:9-95:40
+119            android:name="com.vexor.vault.ui.IntruderLogActivity"
+119-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:94:13-51
+120            android:exported="false" />
+120-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:95:13-37
+121
+122        <!-- Change PIN -->
+123        <activity
+123-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:98:9-101:52
+124            android:name="com.vexor.vault.ui.ChangePinActivity"
+124-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:99:13-49
+125            android:exported="false"
+125-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:100:13-37
+126            android:screenOrientation="portrait" />
+126-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:101:13-49
+127
+128        <!-- Setup Fake PIN -->
+129        <activity
+129-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:104:9-107:52
+130            android:name="com.vexor.vault.ui.SetupFakePinActivity"
+130-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:105:13-52
+131            android:exported="false"
+131-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:106:13-37
+132            android:screenOrientation="portrait" />
+132-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:107:13-49
+133
+134        <!-- File Provider for sharing -->
+135        <provider
+136            android:name="androidx.core.content.FileProvider"
+136-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:111:13-62
+137            android:authorities="com.vexor.vault.fileprovider"
+137-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:112:13-64
+138            android:exported="false"
+138-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:113:13-37
+139            android:grantUriPermissions="true" >
+139-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:114:13-47
+140            <meta-data
+140-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:115:13-117:54
+141                android:name="android.support.FILE_PROVIDER_PATHS"
+141-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:116:17-67
+142                android:resource="@xml/file_paths" />
+142-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:117:17-51
+143        </provider>
+144
+145        <!-- Share Receiver - Accept files from other apps -->
+146        <activity
+146-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:121:9-169:20
+147            android:name="com.vexor.vault.ui.ShareReceiverActivity"
+147-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:122:13-53
+148            android:excludeFromRecents="true"
+148-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:125:13-46
+149            android:exported="true"
+149-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:123:13-36
+150            android:theme="@style/Theme.Vexor.Dialog" >
+150-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:124:13-54
+151
+152            <!-- Receive single image -->
+153            <intent-filter>
+153-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:128:13-132:29
+154                <action android:name="android.intent.action.SEND" />
+154-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:129:17-69
+154-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:129:25-66
+155
+156                <category android:name="android.intent.category.DEFAULT" />
+156-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:17-76
+156-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:27-73
+157
+158                <data android:mimeType="image/*" />
+158-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:131:17-52
+158-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:131:23-49
+159            </intent-filter>
+160
+161            <!-- Receive multiple images -->
+162            <intent-filter>
+162-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:135:13-139:29
+163                <action android:name="android.intent.action.SEND_MULTIPLE" />
+163-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:136:17-78
+163-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:136:25-75
+164
+165                <category android:name="android.intent.category.DEFAULT" />
+165-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:17-76
+165-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:27-73
+166
+167                <data android:mimeType="image/*" />
+167-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:131:17-52
+167-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:131:23-49
+168            </intent-filter>
+169
+170            <!-- Receive single video -->
+171            <intent-filter>
+171-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:142:13-146:29
+172                <action android:name="android.intent.action.SEND" />
+172-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:129:17-69
+172-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:129:25-66
+173
+174                <category android:name="android.intent.category.DEFAULT" />
+174-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:17-76
+174-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:27-73
+175
+176                <data android:mimeType="video/*" />
+176-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:131:17-52
+176-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:131:23-49
+177            </intent-filter>
+178
+179            <!-- Receive multiple videos -->
+180            <intent-filter>
+180-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:149:13-153:29
+181                <action android:name="android.intent.action.SEND_MULTIPLE" />
+181-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:136:17-78
+181-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:136:25-75
+182
+183                <category android:name="android.intent.category.DEFAULT" />
+183-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:17-76
+183-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:27-73
+184
+185                <data android:mimeType="video/*" />
+185-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:131:17-52
+185-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:131:23-49
+186            </intent-filter>
+187
+188            <!-- Receive documents -->
+189            <intent-filter>
+189-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:156:13-160:29
+190                <action android:name="android.intent.action.SEND" />
+190-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:129:17-69
+190-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:129:25-66
+191
+192                <category android:name="android.intent.category.DEFAULT" />
+192-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:17-76
+192-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:27-73
+193
+194                <data android:mimeType="application/*" />
+194-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:131:17-52
+194-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:131:23-49
+195            </intent-filter>
+196
+197            <!-- Receive any file -->
+198            <intent-filter>
+198-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:163:13-167:29
+199                <action android:name="android.intent.action.SEND" />
+199-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:129:17-69
+199-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:129:25-66
+200
+201                <category android:name="android.intent.category.DEFAULT" />
+201-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:17-76
+201-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:130:27-73
+202
+203                <data android:mimeType="*/*" />
+203-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:131:17-52
+203-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:131:23-49
+204            </intent-filter>
+205        </activity>
+206
+207        <!-- Secure Camera -->
+208        <activity
+208-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:172:9-176:52
+209            android:name="com.vexor.vault.ui.CameraActivity"
+209-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:173:13-46
+210            android:exported="false"
+210-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:174:13-37
+211            android:screenOrientation="portrait"
+211-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:176:13-49
+212            android:theme="@style/Theme.Vexor.Fullscreen" />
+212-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:175:13-58
+213
+214        <!-- Note Locker -->
+215        <activity
+215-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:179:9-182:52
+216            android:name="com.vexor.vault.ui.NoteListActivity"
+216-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:180:13-48
+217            android:exported="false"
+217-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:181:13-37
+218            android:screenOrientation="portrait" />
+218-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:182:13-49
+219        <activity
+219-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:184:9-188:58
+220            android:name="com.vexor.vault.ui.NoteEditorActivity"
+220-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:185:13-50
+221            android:exported="false"
+221-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:186:13-37
+222            android:screenOrientation="portrait"
+222-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:187:13-49
+223            android:windowSoftInputMode="adjustResize" />
+223-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:188:13-55
+224
+225        <!-- Manage Vaults -->
+226        <activity
+226-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:191:9-194:52
+227            android:name="com.vexor.vault.ui.ManageVaultsActivity"
+227-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:192:13-52
+228            android:exported="false"
+228-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:193:13-37
+229            android:screenOrientation="portrait" />
+229-->C:\Users\Tushal\Desktop\APP\Vexor\app\src\main\AndroidManifest.xml:194:13-49
+230
+231        <service
+231-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\fb070df8d5725024895184ad87598e4e\transformed\camera-camera2-1.3.1\AndroidManifest.xml:24:9-33:19
+232            android:name="androidx.camera.core.impl.MetadataHolderService"
+232-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\fb070df8d5725024895184ad87598e4e\transformed\camera-camera2-1.3.1\AndroidManifest.xml:25:13-75
+233            android:enabled="false"
+233-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\fb070df8d5725024895184ad87598e4e\transformed\camera-camera2-1.3.1\AndroidManifest.xml:26:13-36
+234            android:exported="false" >
+234-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\fb070df8d5725024895184ad87598e4e\transformed\camera-camera2-1.3.1\AndroidManifest.xml:27:13-37
+235            <meta-data
+235-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\fb070df8d5725024895184ad87598e4e\transformed\camera-camera2-1.3.1\AndroidManifest.xml:30:13-32:89
+236                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+236-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\fb070df8d5725024895184ad87598e4e\transformed\camera-camera2-1.3.1\AndroidManifest.xml:31:17-103
+237                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+237-->[androidx.camera:camera-camera2:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\fb070df8d5725024895184ad87598e4e\transformed\camera-camera2-1.3.1\AndroidManifest.xml:32:17-86
+238        </service>
+239
+240        <provider
+240-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Tushal\.gradle\caches\transforms-3\c6681b4e418b9f33bb2163defe599d48\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+241            android:name="androidx.startup.InitializationProvider"
+241-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Tushal\.gradle\caches\transforms-3\c6681b4e418b9f33bb2163defe599d48\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+242            android:authorities="com.vexor.vault.androidx-startup"
+242-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Tushal\.gradle\caches\transforms-3\c6681b4e418b9f33bb2163defe599d48\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+243            android:exported="false" >
+243-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Tushal\.gradle\caches\transforms-3\c6681b4e418b9f33bb2163defe599d48\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+244            <meta-data
+244-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Tushal\.gradle\caches\transforms-3\c6681b4e418b9f33bb2163defe599d48\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+245                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+245-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Tushal\.gradle\caches\transforms-3\c6681b4e418b9f33bb2163defe599d48\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+246                android:value="androidx.startup" />
+246-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Tushal\.gradle\caches\transforms-3\c6681b4e418b9f33bb2163defe599d48\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+247            <meta-data
+247-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Tushal\.gradle\caches\transforms-3\285f085280118d755ce82ea703c4f012\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+248                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+248-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Tushal\.gradle\caches\transforms-3\285f085280118d755ce82ea703c4f012\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+249                android:value="androidx.startup" />
+249-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Tushal\.gradle\caches\transforms-3\285f085280118d755ce82ea703c4f012\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+250            <meta-data
+250-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+251                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+251-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+252                android:value="androidx.startup" />
+252-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+253        </provider>
+254
+255        <service
+255-->[androidx.room:room-runtime:2.6.1] C:\Users\Tushal\.gradle\caches\transforms-3\888877568181c0f6eb4ce892d57068b3\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+256            android:name="androidx.room.MultiInstanceInvalidationService"
+256-->[androidx.room:room-runtime:2.6.1] C:\Users\Tushal\.gradle\caches\transforms-3\888877568181c0f6eb4ce892d57068b3\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+257            android:directBootAware="true"
+257-->[androidx.room:room-runtime:2.6.1] C:\Users\Tushal\.gradle\caches\transforms-3\888877568181c0f6eb4ce892d57068b3\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+258            android:exported="false" />
+258-->[androidx.room:room-runtime:2.6.1] C:\Users\Tushal\.gradle\caches\transforms-3\888877568181c0f6eb4ce892d57068b3\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+259
+260        <receiver
+260-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+261            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+261-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+262            android:directBootAware="false"
+262-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+263            android:enabled="true"
+263-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+264            android:exported="true"
+264-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+265            android:permission="android.permission.DUMP" >
+265-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+266            <intent-filter>
+266-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+267                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+267-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+267-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+268            </intent-filter>
+269            <intent-filter>
+269-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+270                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+270-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+270-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+271            </intent-filter>
+272            <intent-filter>
+272-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+273                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+273-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+273-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+274            </intent-filter>
+275            <intent-filter>
+275-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+276                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+276-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+276-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Tushal\.gradle\caches\transforms-3\add9d43d9169ede12cf03341f0f55eff\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+277            </intent-filter>
+278        </receiver>
+279    </application>
+280
+281</manifest>
