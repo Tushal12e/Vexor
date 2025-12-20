@@ -3479,6 +3479,7 @@ id btnTheme
 id buttonPanel
 id cache_measures
 id callMeasure
+id cameraPreview
 id cancel_action
 id cancel_button
 id cardIcon
@@ -3539,6 +3540,7 @@ id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
 id disjoint
+id display_screen
 id dot1
 id dot2
 id dot3

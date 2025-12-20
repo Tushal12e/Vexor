@@ -99,12 +99,16 @@ class AuthActivity : BaseActivity() {
             try {
                 val cameraProvider = cameraProviderFuture.get()
                 val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+                
+                val preview = androidx.camera.core.Preview.Builder().build()
+                preview.setSurfaceProvider(binding.cameraPreview.surfaceProvider)
+                
                 imageCapture = ImageCapture.Builder()
                     .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                     .build()
                 
                 cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(this, cameraSelector, imageCapture)
+                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

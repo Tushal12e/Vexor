@@ -369,14 +369,25 @@ class MainActivity : BaseActivity() {
                     binding.tvProgress.text = "Encrypting $count/${uris.size}..."
                 }
                 
-                val vaultFile = encryptionManager.encryptFile(uri, isFakeVault)
-                if (vaultFile != null) {
-                    repository.addFile(vaultFile)
-                    
-                    // Try to get MediaStore URI for this file
-                    val mediaUri = getMediaStoreUri(uri, vaultFile.mimeType)
-                    if (mediaUri != null) {
-                        mediaStoreUris.add(mediaUri)
+                try {
+                    val vaultFile = encryptionManager.encryptFile(uri, isFakeVault)
+                    if (vaultFile != null) {
+                        repository.addFile(vaultFile)
+                        
+                        // Try to get MediaStore URI for this file
+                        val mediaUri = getMediaStoreUri(uri, vaultFile.mimeType)
+                        if (mediaUri != null) {
+                            mediaStoreUris.add(mediaUri)
+                        }
+                    } else {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(this@MainActivity, "Failed to encrypt file", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@MainActivity, "Error: ${e.message}", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

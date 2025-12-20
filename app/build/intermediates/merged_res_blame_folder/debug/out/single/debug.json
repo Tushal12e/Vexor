@@ -8,12 +8,12 @@
         "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\layout\\item_vault_file.xml"
     },
     {
-        "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\drawable_ic_camera.xml.flat",
-        "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\drawable\\ic_camera.xml"
-    },
-    {
         "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\drawable_ic_image.xml.flat",
         "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\drawable\\ic_image.xml"
+    },
+    {
+        "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\drawable_ic_camera.xml.flat",
+        "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\drawable\\ic_camera.xml"
     },
     {
         "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\drawable_ic_lock.xml.flat",
@@ -36,20 +36,20 @@
         "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\drawable\\ic_launcher_foreground.xml"
     },
     {
-        "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\drawable_ic_fingerprint.xml.flat",
-        "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\drawable\\ic_fingerprint.xml"
-    },
-    {
         "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\drawable_ic_delete.xml.flat",
-        "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\drawable\\ic_delete.xml"
+        "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\drawable_ic_fingerprint.xml.flat",
+        "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\drawable\\ic_fingerprint.xml"
     },
     {
         "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\layout_item_vault.xml.flat",
         "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\layout\\item_vault.xml"
+    },
+    {
+        "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\drawable_ic_delete.xml.flat",
+        "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\drawable\\ic_delete.xml"
     },
     {
         "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\drawable_gradient_header.xml.flat",
@@ -112,10 +112,6 @@
         "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\anim\\layout_animation_fall_down.xml"
     },
     {
-        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_permissions.xml.flat",
-        "source": "com.vexor.vault.app-main-54:/layout/activity_permissions.xml"
-    },
-    {
         "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\drawable_ic_shield.xml.flat",
         "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\drawable\\ic_shield.xml"
     },
@@ -126,6 +122,10 @@
     {
         "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\drawable_ic_back.xml.flat",
         "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\drawable\\ic_back.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_auth.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_auth.xml"
     },
     {
         "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\mipmap-xhdpi_ic_launcher_round.png.flat",
@@ -158,6 +158,10 @@
     {
         "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\layout_activity_manage_vaults.xml.flat",
         "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\layout\\activity_manage_vaults.xml"
+    },
+    {
+        "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\layout_activity_permissions.xml.flat",
+        "source": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-main-54:\\layout\\activity_permissions.xml"
     },
     {
         "merged": "C:\\Users\\Tushal\\.gradle\\daemon\\8.2\\com.vexor.vault.app-merged_res-52:\\drawable_ic_audio.xml.flat",

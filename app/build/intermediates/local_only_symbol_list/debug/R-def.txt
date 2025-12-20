@@ -127,7 +127,9 @@ id btnSkipBiometric
 id btnSub
 id btnSwitch
 id btnTheme
+id cameraPreview
 id cardIcon
+id display_screen
 id dot1
 id dot2
 id dot3

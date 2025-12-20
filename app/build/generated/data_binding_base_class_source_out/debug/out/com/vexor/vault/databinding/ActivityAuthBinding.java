@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.camera.view.PreviewView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.vexor.vault.R;
@@ -78,7 +79,10 @@ public final class ActivityAuthBinding implements ViewBinding {
   public final Button btnPlus;
 
   @NonNull
-  public final TextView tvDisplay;
+  public final PreviewView cameraPreview;
+
+  @NonNull
+  public final TextView displayScreen;
 
   @NonNull
   public final TextView tvStatus;
@@ -89,7 +93,8 @@ public final class ActivityAuthBinding implements ViewBinding {
       @NonNull Button btn9, @NonNull Button btnAC, @NonNull Button btnDelete,
       @NonNull Button btnDivide, @NonNull Button btnDot, @NonNull Button btnEquals,
       @NonNull Button btnMinus, @NonNull Button btnMultiply, @NonNull Button btnPercent,
-      @NonNull Button btnPlus, @NonNull TextView tvDisplay, @NonNull TextView tvStatus) {
+      @NonNull Button btnPlus, @NonNull PreviewView cameraPreview, @NonNull TextView displayScreen,
+      @NonNull TextView tvStatus) {
     this.rootView = rootView;
     this.btn0 = btn0;
     this.btn1 = btn1;
@@ -110,7 +115,8 @@ public final class ActivityAuthBinding implements ViewBinding {
     this.btnMultiply = btnMultiply;
     this.btnPercent = btnPercent;
     this.btnPlus = btnPlus;
-    this.tvDisplay = tvDisplay;
+    this.cameraPreview = cameraPreview;
+    this.displayScreen = displayScreen;
     this.tvStatus = tvStatus;
   }
 
@@ -255,9 +261,15 @@ public final class ActivityAuthBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.tvDisplay;
-      TextView tvDisplay = ViewBindings.findChildViewById(rootView, id);
-      if (tvDisplay == null) {
+      id = R.id.cameraPreview;
+      PreviewView cameraPreview = ViewBindings.findChildViewById(rootView, id);
+      if (cameraPreview == null) {
+        break missingId;
+      }
+
+      id = R.id.display_screen;
+      TextView displayScreen = ViewBindings.findChildViewById(rootView, id);
+      if (displayScreen == null) {
         break missingId;
       }
 
@@ -269,7 +281,7 @@ public final class ActivityAuthBinding implements ViewBinding {
 
       return new ActivityAuthBinding((LinearLayout) rootView, btn0, btn1, btn2, btn3, btn4, btn5,
           btn6, btn7, btn8, btn9, btnAC, btnDelete, btnDivide, btnDot, btnEquals, btnMinus,
-          btnMultiply, btnPercent, btnPlus, tvDisplay, tvStatus);
+          btnMultiply, btnPercent, btnPlus, cameraPreview, displayScreen, tvStatus);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

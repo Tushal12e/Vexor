@@ -8,9 +8,16 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <!-- Hidden PreviewView for CameraX -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/cameraPreview"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:visibility="invisible" />
+
     <!-- Display Screen -->
     <TextView
-        android:id="@+id/tvDisplay"
+        android:id="@+id/display_screen"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
