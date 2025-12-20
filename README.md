@@ -29,9 +29,9 @@ Part of the Tushal12e App Series.
 
 ## 📥 Download
 
-### [👉 Download Vexor v1.0.0 (APK)](https://github.com/Tushal12e/Vexor/releases/tag/v1.0.0-debug)
+### [👉 Download Vexor v1.8.0 (APK)](https://github.com/Tushal12e/Vexor/releases/tag/v1.8.0)
 
-**Version**: v1.0.0  
+**Version**: v1.8.0  
 **Size**: ~18 MB  
 **Android**: 8.0+
 
