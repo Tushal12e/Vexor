@@ -10,19 +10,38 @@ import com.google.gson.reflect.TypeToken
 import java.security.MessageDigest
 import java.util.UUID
 
-class VaultPreferences(context: Context) {
+class VaultPreferences(private val context: Context) {
     
     private val masterKey = MasterKey.Builder(context)
         .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
         .build()
     
-    private val prefs: SharedPreferences = EncryptedSharedPreferences.create(
-        context,
-        "vexor_secure_prefs",
-        masterKey,
-        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-    )
+    private val prefs: SharedPreferences by lazy {
+        try {
+            createEncryptedPrefs()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // If failed, clear and retry once
+            context.getSharedPreferences("vexor_secure_prefs", Context.MODE_PRIVATE).edit().clear().apply()
+            try {
+                createEncryptedPrefs()
+            } catch (e2: Exception) {
+                // Fallback to standard prefs if crypto is permanently broken on this device
+                // This is not ideal for security but prevents crash.
+                context.getSharedPreferences("vexor_secure_prefs_fallback", Context.MODE_PRIVATE)
+            }
+        }
+    }
+
+    private fun createEncryptedPrefs(): SharedPreferences {
+        return EncryptedSharedPreferences.create(
+            context,
+            "vexor_secure_prefs",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
     
     companion object {
         private const val KEY_PIN_HASH = "pin_hash"

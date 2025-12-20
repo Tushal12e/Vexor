@@ -88,7 +88,13 @@ class CalculatorActivity : BaseActivity() {
                 add(Manifest.permission.READ_MEDIA_IMAGES)
                 add(Manifest.permission.READ_MEDIA_VIDEO)
                 add(Manifest.permission.READ_MEDIA_AUDIO)
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                // Android 11 (API 30) - 12 (API 32): Use Manage Storage, but maybe READ is needed for some scopes? 
+                // Mostly just MANAGE is enough for everything.
+                // Keeping READ just in case for non-all-files access scenarios, but WRITE is useless.
+                add(Manifest.permission.READ_EXTERNAL_STORAGE)
             } else {
+                // Android 10 and below
                 add(Manifest.permission.READ_EXTERNAL_STORAGE)
                 add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }

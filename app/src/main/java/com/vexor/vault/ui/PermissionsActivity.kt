@@ -23,6 +23,8 @@ class PermissionsActivity : BaseActivity() {
             add(Manifest.permission.READ_MEDIA_IMAGES)
             add(Manifest.permission.READ_MEDIA_VIDEO)
             add(Manifest.permission.READ_MEDIA_AUDIO)
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+             add(Manifest.permission.READ_EXTERNAL_STORAGE)
         } else {
             add(Manifest.permission.READ_EXTERNAL_STORAGE)
             add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
