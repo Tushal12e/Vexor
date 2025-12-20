@@ -11,17 +11,17 @@ android {
         applicationId = "com.vexor.vault"
         minSdk = 26
         targetSdk = 34
-        versionCode = 220
-        versionName = "2.2.0"
+        versionCode = 310
+        versionName = "3.1.0"
         multiDexEnabled = true
-        setProperty("archivesBaseName", "Vexor-v2.2.0")
+        setProperty("archivesBaseName", "Vexor-v3.1.0")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

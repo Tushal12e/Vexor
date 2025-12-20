@@ -32,10 +32,8 @@ Part of the Tushal12e App Series.
 ---
 
 ## 📥 Download
-
-### [👉 Download Vexor v2.2.0 (APK)](https://github.com/Tushal12e/Vexor/releases/tag/v2.2.0)
-
-**Version**: v2.2.0 (Calculator Edition)  
+**[Download Vexor v3.1.0 APK](https://github.com/Tushal12e/Vexor/releases/download/v3.1.0/Vexor-v3.1.0-debug.apk)**
+*(Latest Release: v3.1.0 - Calculator Disguise, Critical Fixes)*  
 **Size**: ~18 MB  
 **Android**: 8.0+
 
