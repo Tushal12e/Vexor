@@ -259,6 +259,9 @@ class MainActivity : BaseActivity() {
             items.removeAll { it is VaultItem.FolderItem && !it.folder.name.contains(currentSearchQuery, ignoreCase = true) }
         }
         
+        // CRITICAL: Submit the list to the adapter so UI updates!
+        adapter.submitList(items.toList())
+        
         if (items.isEmpty()) {
             binding.tvEmpty.visibility = View.VISIBLE
             binding.recyclerView.visibility = View.GONE
