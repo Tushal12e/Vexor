@@ -41,3 +41,7 @@ keystore.properties
 build_error_*.txt
 build_log*.txt
 *.log
+
+# Temporary files
+new_icon.png
+app/build/
