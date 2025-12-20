@@ -25,18 +25,20 @@ import com.vexor.vault.data.IntruderLog
 import com.vexor.vault.data.VaultRepository
 import com.vexor.vault.databinding.ActivityAuthBinding
 import com.vexor.vault.security.BiometricHelper
+import com.vexor.vault.security.BreakInNotificationHelper
 import com.vexor.vault.security.VaultPreferences
 import java.io.File
 import java.io.FileOutputStream
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class AuthActivity : AppCompatActivity() {
+class AuthActivity : BaseActivity() {
     
     private lateinit var binding: ActivityAuthBinding
     private lateinit var prefs: VaultPreferences
     private lateinit var biometricHelper: BiometricHelper
     private lateinit var repository: VaultRepository
+    private lateinit var breakInNotificationHelper: BreakInNotificationHelper
     
     private var enteredPin = ""
     private var isFakeVaultMode = false
@@ -54,6 +56,7 @@ class AuthActivity : AppCompatActivity() {
         prefs = VaultPreferences(this)
         biometricHelper = BiometricHelper(this)
         repository = VaultRepository(this)
+        breakInNotificationHelper = BreakInNotificationHelper(this)
         cameraExecutor = Executors.newSingleThreadExecutor()
         
         // Check if first time setup
@@ -210,27 +213,27 @@ class AuthActivity : AppCompatActivity() {
     }
     
     private fun verifyPin() {
-        when {
-            prefs.verifyPin(enteredPin) -> {
-                // Correct main PIN
-                prefs.resetFailedAttempts()
-                openVault(isFakeVault = false)
+        // Check if PIN matches any vault
+        val vaultId = prefs.verifyPin(enteredPin)
+        
+        if (vaultId != null) {
+             // Correct PIN
+            prefs.resetFailedAttempts()
+            openVault(vaultId)
+        } else {
+            // Wrong PIN
+            prefs.recordFailedAttempt()
+            vibrate()
+            showError()
+            
+            // Break-in notification
+            if (prefs.intruderDetectionEnabled && prefs.failedAttempts >= 3) {
+                breakInNotificationHelper.showBreakInNotification(prefs.failedAttempts)
             }
-            prefs.fakeVaultEnabled && prefs.isFakePin(enteredPin) -> {
-                // Correct fake vault PIN
-                prefs.resetFailedAttempts()
-                openVault(isFakeVault = true)
-            }
-            else -> {
-                // Wrong PIN
-                prefs.recordFailedAttempt()
-                vibrate()
-                showError()
-                
-                // Capture intruder photo
-                if (prefs.intruderDetectionEnabled) {
-                    captureIntruder()
-                }
+
+            // Capture intruder photo
+            if (prefs.intruderDetectionEnabled) {
+                captureIntruder()
             }
         }
     }

@@ -10,7 +10,7 @@ import com.vexor.vault.databinding.ActivityPhotoViewerBinding
 import com.vexor.vault.security.FileEncryptionManager
 import kotlinx.coroutines.launch
 
-class PhotoViewerActivity : AppCompatActivity() {
+class PhotoViewerActivity : BaseActivity() {
     
     private lateinit var binding: ActivityPhotoViewerBinding
     private lateinit var encryptionManager: FileEncryptionManager

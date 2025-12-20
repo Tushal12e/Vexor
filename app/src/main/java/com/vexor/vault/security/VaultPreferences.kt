@@ -2,9 +2,13 @@ package com.vexor.vault.security
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Base64
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.security.MessageDigest
+import java.util.UUID
 
 class VaultPreferences(context: Context) {
     
@@ -46,11 +50,6 @@ class VaultPreferences(context: Context) {
         pinHash = hashPin(pin)
     }
     
-    fun verifyPin(pin: String): Boolean {
-        val storedHash = pinHash ?: return false
-        return hashPin(pin) == storedHash
-    }
-    
     // Fake Vault PIN
     var fakePinHash: String?
         get() = prefs.getString(KEY_FAKE_PIN_HASH, null)
@@ -60,9 +59,60 @@ class VaultPreferences(context: Context) {
         fakePinHash = hashPin(pin)
     }
     
+    // Multiple Vaults - Map PIN Hash to Vault ID
+    // Stored as "pin_hash_MAP_vault_id" implies we check all keys? No, too slow.
+    // Store a Set<String> of "vault_id:pin_hash" ?
+    // Or just check specific keys for Main and Fake (legacy) + others?
+    
+    // For now, let's keep Main and Fake as special, and allow adding custom ones.
+    // Custom vaults stored in Json String "custom_vaults" -> List<VaultConfig>
+    
+    data class VaultConfig(val id: String, val pinHash: String, val name: String)
+    
+    fun getCustomVaults(): List<VaultConfig> {
+        val json = prefs.getString("custom_vaults", "[]") ?: "[]"
+        val type = object : TypeToken<List<VaultConfig>>() {}.type
+        return Gson().fromJson(json, type) ?: emptyList()
+    }
+    
+    fun addCustomVault(name: String, pin: String) {
+        val vaults = getCustomVaults().toMutableList()
+        val id = UUID.randomUUID().toString()
+        vaults.add(VaultConfig(id, hashPin(pin), name))
+        
+        val json = Gson().toJson(vaults)
+        prefs.edit().putString("custom_vaults", json).apply()
+    }
+    
+    fun deleteCustomVault(id: String) {
+        val vaults = getCustomVaults().toMutableList()
+        vaults.removeAll { it.id == id }
+        val json = Gson().toJson(vaults)
+        prefs.edit().putString("custom_vaults", json).apply()
+    }
+    
+    fun verifyPin(pin: String): String? {
+        val hash = hashPin(pin)
+        // Check Main
+        if (hash == prefs.getString(KEY_PIN_HASH, "")) return "main"
+        // Check Fake
+        if (fakeVaultEnabled && hash == prefs.getString("fake_pin_hash", "")) return "fake"
+        
+        // Check custom vaults
+        val customVaults = getCustomVaults()
+        val match = customVaults.find { it.pinHash == hash }
+        if (match != null) return match.id
+        
+        return null
+    }
+    
+    // Legacy boolean check
+    fun verifyPinBoolean(pin: String): Boolean {
+        return verifyPin(pin) == "main"
+    }
+
     fun isFakePin(pin: String): Boolean {
-        val fakeHash = fakePinHash ?: return false
-        return hashPin(pin) == fakeHash
+        return verifyPin(pin) == "fake"
     }
     
     // Settings
@@ -100,17 +150,27 @@ class VaultPreferences(context: Context) {
         failedAttempts = 0
     }
     
+    fun getLockDuration(): Long {
+        return when {
+            failedAttempts >= 5 -> 30_000 // 30 seconds after 5+ attempts
+            failedAttempts == 4 -> 15_000 // 15 seconds after 4 attempts
+            failedAttempts == 3 -> 5_000  // 5 seconds after 3 attempts
+            else -> 0
+        }
+    }
+
     fun isLocked(): Boolean {
-        // Lock for 30 seconds after 5 failed attempts
-        if (failedAttempts >= 5) {
+        val duration = getLockDuration()
+        if (duration > 0) {
             val timeSinceLast = System.currentTimeMillis() - lastFailedTime
-            return timeSinceLast < 30_000
+            return timeSinceLast < duration
         }
         return false
     }
     
     fun getLockRemainingSeconds(): Int {
+        val duration = getLockDuration()
         val elapsed = System.currentTimeMillis() - lastFailedTime
-        return ((30_000 - elapsed) / 1000).toInt().coerceAtLeast(0)
+        return ((duration - elapsed) / 1000).toInt().coerceAtLeast(0)
     }
 }

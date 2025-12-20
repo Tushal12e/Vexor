@@ -12,7 +12,7 @@ import com.vexor.vault.databinding.ActivitySplashBinding
 import com.vexor.vault.security.VaultPreferences
 
 @SuppressLint("CustomSplashScreen")
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : BaseActivity() {
     
     private lateinit var binding: ActivitySplashBinding
     private lateinit var prefs: VaultPreferences

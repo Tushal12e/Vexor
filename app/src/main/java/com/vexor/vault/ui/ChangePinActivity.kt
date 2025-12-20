@@ -10,7 +10,7 @@ import com.vexor.vault.R
 import com.vexor.vault.databinding.ActivityChangePinBinding
 import com.vexor.vault.security.VaultPreferences
 
-class ChangePinActivity : AppCompatActivity() {
+class ChangePinActivity : BaseActivity() {
     
     private lateinit var binding: ActivityChangePinBinding
     private lateinit var prefs: VaultPreferences

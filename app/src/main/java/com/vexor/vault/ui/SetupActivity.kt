@@ -14,7 +14,7 @@ import com.vexor.vault.databinding.ActivitySetupBinding
 import com.vexor.vault.security.BiometricHelper
 import com.vexor.vault.security.VaultPreferences
 
-class SetupActivity : AppCompatActivity() {
+class SetupActivity : BaseActivity() {
     
     private lateinit var binding: ActivitySetupBinding
     private lateinit var prefs: VaultPreferences

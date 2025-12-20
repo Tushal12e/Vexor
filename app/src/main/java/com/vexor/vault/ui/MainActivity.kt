@@ -10,29 +10,37 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import com.vexor.vault.R
 import com.vexor.vault.data.FileType
 import com.vexor.vault.data.VaultFile
+import com.vexor.vault.data.VaultFolder
 import com.vexor.vault.data.VaultRepository
 import com.vexor.vault.databinding.ActivityMainBinding
 import com.vexor.vault.security.FileEncryptionManager
 import com.vexor.vault.security.VaultPreferences
 import com.vexor.vault.ui.adapters.VaultFileAdapter
+import com.vexor.vault.ui.adapters.VaultItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.FileOutputStream
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     
     private lateinit var binding: ActivityMainBinding
     private lateinit var repository: VaultRepository
@@ -41,11 +49,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: VaultFileAdapter
     
     private var isFakeVault = false
+    private var vaultId = "main" // Default to main
     private var currentFilter: FileType? = null
     private var isSelectionMode = false
-    private val selectedFiles = mutableSetOf<VaultFile>()
+    // private val selectedFiles = mutableSetOf<VaultFile>() // Redundant, use adapter.selectedItems
     private var lastPauseTime = 0L
     private var pendingDeleteUris = mutableListOf<Uri>()
+    
+    // Sort & Search
+    private enum class SortMode { DATE_DESC, NAME_ASC, SIZE_DESC }
+    private var currentSortMode = SortMode.DATE_DESC
+    private var currentSearchQuery = ""
     
     companion object {
         private const val LOCK_TIMEOUT = 30000L
@@ -77,18 +91,36 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         
+        // Multi-Vault initialization
         isFakeVault = intent.getBooleanExtra("fake_vault", false)
+        vaultId = intent.getStringExtra("vault_id") ?: if (isFakeVault) "fake" else "main"
         
         repository = VaultRepository(this)
         encryptionManager = FileEncryptionManager(this)
         prefs = VaultPreferences(this)
         
         setupUI()
+        
+        onBackPressedDispatcher.addCallback(this) {
+            if (isSelectionMode) {
+                adapter.clearSelection()
+            } else if (currentFolderId != null) {
+                navigateUp()
+            } else {
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+                isEnabled = true
+            }
+        }
+        
         loadFiles()
     }
     
     private fun setupUI() {
-        binding.toolbar.title = if (isFakeVault) "Vexor (Decoy)" else "Vexor"
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = if (isFakeVault) "Vexor (Decoy)" else "Vexor"
+        // ... (title logic moved to loadFiles or observe) ...
+        
         binding.btnSettings.setOnClickListener {
             if (!isFakeVault) {
                 startActivity(Intent(this, SettingsActivity::class.java))
@@ -114,8 +146,11 @@ class MainActivity : AppCompatActivity() {
         
         adapter = VaultFileAdapter(
             encryptionManager = encryptionManager,
-            onItemClick = { file -> openFile(file) },
-            onItemLongClick = { file -> toggleSelection(file) }
+            onItemClick = { item -> onVaultItemClick(item) },
+            onSelectionChanged = { count ->
+                isSelectionMode = count > 0
+                updateActionMode(count)
+            }
         )
         binding.recyclerView.layoutManager = GridLayoutManager(this, 3)
         binding.recyclerView.adapter = adapter
@@ -124,41 +159,198 @@ class MainActivity : AppCompatActivity() {
         
         binding.btnCancelSelection.setOnClickListener { exitSelectionMode() }
         binding.btnDeleteSelected.setOnClickListener { showSelectionOptions() }
+        
+        binding.swipeRefresh.setOnRefreshListener {
+            loadFiles()
+            binding.swipeRefresh.isRefreshing = false
+        }
+    
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView = searchItem.actionView as androidx.appcompat.widget.SearchView
+        
+        searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean = false
+            override fun onQueryTextChange(newText: String?): Boolean {
+                currentSearchQuery = newText ?: ""
+                loadFiles()
+                return true
+            }
+        })
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_search -> true
+            R.id.action_notes -> {
+                val intent = Intent(this, NoteListActivity::class.java)
+                intent.putExtra("vault_id", vaultId)
+                startActivity(intent)
+                true
+            }
+            R.id.sort_date -> {
+                currentSortMode = SortMode.DATE_DESC
+                loadFiles()
+                true
+            }
+            R.id.sort_name -> {
+                currentSortMode = SortMode.NAME_ASC
+                loadFiles()
+                true
+            }
+            R.id.sort_size -> {
+                currentSortMode = SortMode.SIZE_DESC
+                loadFiles()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
     
+    private var currentFolderId: String? = null
+    private val folderStack = java.util.Stack<String?>() // To handle back navigation efficiently
+
     private fun loadFiles() {
-        val files = if (currentFilter != null) {
-            repository.getFilesByType(currentFilter!!, isFakeVault)
+        if (currentFolderId == null) {
+            supportActionBar?.subtitle = null
         } else {
-            repository.getAllFiles(isFakeVault)
+            // Get folder name for subtitle
+            val folders = repository.getFolders(vaultId, null) // This is inefficient if deep, need getFolderById
+            // For now, let's just show "Folder" or keep track of name in stack.
+            // Simplified:
+            supportActionBar?.subtitle = "/..." // or current path logic
+        }
+
+        val items = mutableListOf<VaultItem>()
+        
+        // Load folders
+        val folders = repository.getFolders(vaultId, currentFolderId)
+        items.addAll(folders.map { VaultItem.FolderItem(it) })
+        
+        // Load files
+        val files = if (currentFilter != null) {
+            // Filter ignores folders usually, but here filtering by type inside a folder?
+            // Existing logic: getFilesByType ignores folders? 
+            repository.getFilesByType(currentFilter!!, vaultId).filter { it.folderId == currentFolderId }
+        } else {
+            // All files in current folder
+            repository.getFilesByFolder(vaultId, currentFolderId)
         }
         
-        adapter.submitList(files)
+        // Filter by search
+        val filteredFiles = if (currentSearchQuery.isNotEmpty()) {
+            files.filter { it.originalName.contains(currentSearchQuery, ignoreCase = true) }
+        } else {
+            files
+        }
         
-        binding.tvEmpty.visibility = if (files.isEmpty()) View.VISIBLE else View.GONE
-        binding.tvFileCount.text = "${files.size} files"
+        // Sort files
+        val sortedFiles = when (currentSortMode) {
+            SortMode.DATE_DESC -> filteredFiles.sortedByDescending { it.dateAdded }
+            SortMode.NAME_ASC -> filteredFiles.sortedBy { it.originalName }
+            SortMode.SIZE_DESC -> filteredFiles.sortedByDescending { it.size }
+        }
+        
+        items.addAll(sortedFiles.map { VaultItem.FileItem(it) })
+        
+        // Filter folders by search too?
+        if (currentSearchQuery.isNotEmpty()) {
+            items.removeAll { it is VaultItem.FolderItem && !it.folder.name.contains(currentSearchQuery, ignoreCase = true) }
+        }
+        
+        adapter.submitList(items)
+        
+        binding.emptyState.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
+        binding.recyclerView.visibility = if (items.isEmpty()) View.GONE else View.VISIBLE
+    }
+    
+    private fun onVaultItemClick(item: VaultItem) {
+        when (item) {
+            is VaultItem.FolderItem -> {
+                // Navigate into folder
+                enterFolder(item.folder)
+            }
+            is VaultItem.FileItem -> {
+                openFile(item.file)
+            }
+        }
+    }
+    
+    private fun enterFolder(folder: VaultFolder) {
+        folderStack.push(currentFolderId)
+        currentFolderId = folder.id
+        loadFiles()
+    }
+    
+    private fun navigateUp() {
+        if (folderStack.isNotEmpty()) {
+            currentFolderId = folderStack.pop()
+            loadFiles()
+        } else {
+            // If at root and back pressed, normal exit/background behavior happens via onBackPressedDispatcher?
+            // StartActivity(Home)? No.
+            // Just finish() handled by super?
+            finish()
+        }
     }
     
     private fun showAddOptions() {
         val options = arrayOf(
-            "📷 Photos", 
-            "🎬 Videos", 
-            "📄 Documents",
-            "📁 All Files"
+            "📁 Create Folder",
+            "📷 Take Photo (Secure Camera)",
+            "🖼️ Import Photos", 
+            "🎬 Import Videos", 
+            "📄 Import Documents",
+            "📁 Import All Files"
         )
         
         MaterialAlertDialogBuilder(this)
             .setTitle("Add Files to Vault")
             .setItems(options) { _, which ->
                 when (which) {
-                    0 -> pickFiles.launch(arrayOf("image/*"))
-                    1 -> pickFiles.launch(arrayOf("video/*"))
-                    2 -> pickFiles.launch(arrayOf("application/pdf", "application/*", "text/*"))
-                    3 -> pickFiles.launch(arrayOf("*/*"))
+                    0 -> showCreateFolderDialog()
+                    1 -> startActivity(Intent(this, CameraActivity::class.java))
+                    2 -> pickFiles.launch(arrayOf("image/*"))
+                    3 -> pickFiles.launch(arrayOf("video/*"))
+                    4 -> pickFiles.launch(arrayOf("application/pdf", "application/*", "text/*"))
+                    5 -> pickFiles.launch(arrayOf("*/*"))
                 }
             }
             .setNegativeButton("Cancel", null)
             .show()
+    }
+    
+    private fun showCreateFolderDialog() {
+        val input = EditText(this)
+        input.hint = "Folder Name"
+        
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle("New Folder")
+            .setView(input.apply { setPadding(50, 20, 50, 20) })
+            .setPositiveButton("Create") { _, _ ->
+                val name = input.text.toString().trim()
+                if (name.isNotEmpty()) {
+                    createFolder(name)
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+            
+        dialog.show()
+    }
+    
+    private fun createFolder(name: String) {
+        val folder = VaultFolder(
+            name = name,
+            vaultId = vaultId,
+            parentFolderId = currentFolderId
+        )
+        repository.addFolder(folder)
+        loadFiles()
+        Toast.makeText(this, "Folder created", Toast.LENGTH_SHORT).show()
     }
     
     private fun importFiles(uris: List<Uri>) {
@@ -337,10 +529,7 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun openFile(file: VaultFile) {
-        if (isSelectionMode) {
-            toggleSelection(file)
-            return
-        }
+        // Selection handling is done in adapter
         
         when (file.fileType) {
             FileType.PHOTO -> {
@@ -355,41 +544,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
     
-    private fun toggleSelection(file: VaultFile) {
-        if (!isSelectionMode) {
-            isSelectionMode = true
+    private fun updateActionMode(count: Int) {
+        if (count > 0) {
             binding.selectionToolbar.visibility = View.VISIBLE
-        }
-        
-        if (selectedFiles.contains(file)) {
-            selectedFiles.remove(file)
+            binding.tvSelectedCount.text = "$count selected"
+            isSelectionMode = true
         } else {
-            selectedFiles.add(file)
-        }
-        
-        adapter.setSelectedFiles(selectedFiles)
-        binding.tvSelectedCount.text = "${selectedFiles.size} selected"
-        
-        if (selectedFiles.isEmpty()) {
-            exitSelectionMode()
+            binding.selectionToolbar.visibility = View.GONE
+            isSelectionMode = false
         }
     }
     
     private fun exitSelectionMode() {
-        isSelectionMode = false
-        selectedFiles.clear()
-        adapter.setSelectedFiles(emptySet())
+        adapter.clearSelection()
         binding.selectionToolbar.visibility = View.GONE
+        isSelectionMode = false
     }
     
     private fun showSelectionOptions() {
+        val selectedCount = adapter.selectedItems.size
         val options = arrayOf(
             "📂 Restore to Device (Decrypt & Save)",
             "🗑️ Delete from Vault"
         )
         
         MaterialAlertDialogBuilder(this)
-            .setTitle("${selectedFiles.size} file(s) selected")
+            .setTitle("$selectedCount item(s) selected")
             .setItems(options) { _, which ->
                 when (which) {
                     0 -> exportSelectedFiles()
@@ -401,23 +581,48 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun exportSelectedFiles() {
+        val filesToExport = adapter.selectedItems.filterIsInstance<VaultItem.FileItem>().map { it.file }
+        if (filesToExport.isEmpty()) {
+            Toast.makeText(this, "No files selected to export", Toast.LENGTH_SHORT).show()
+            return
+        }
+    
         MaterialAlertDialogBuilder(this)
             .setTitle("Restore to Device?")
-            .setMessage("Files will be decrypted and saved to your gallery/downloads folder.")
-            .setPositiveButton("Restore") { _, _ -> doExport() }
+            .setMessage("Selected files will be decrypted and saved to your gallery/downloads folder.")
+            .setPositiveButton("Restore") { _, _ -> doExport(filesToExport) }
             .setNegativeButton("Cancel", null)
             .show()
     }
     
-    private fun doExport() {
+    private fun doExport(filesToExport: List<VaultFile>) {
         binding.progressBar.visibility = View.VISIBLE
         binding.tvProgress.visibility = View.VISIBLE
         
         lifecycleScope.launch {
             var successCount = 0
-            val filesToExport = selectedFiles.toList()
             
             for ((index, file) in filesToExport.withIndex()) {
+                withContext(Dispatchers.Main) {
+                    binding.tvProgress.text = "Restoring ${index + 1}/${filesToExport.size}..."
+                }
+                
+                val success = exportFileToDevice(file)
+                if (success) successCount++
+            }
+            
+            withContext(Dispatchers.Main) {
+                binding.progressBar.visibility = View.GONE
+                binding.tvProgress.visibility = View.GONE
+                if (successCount > 0) {
+                    Toast.makeText(this@MainActivity, "✅ $successCount files restored!", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this@MainActivity, "❌ Export failed", Toast.LENGTH_SHORT).show()
+                }
+                exitSelectionMode()
+            }
+        }
+    }
                 withContext(Dispatchers.Main) {
                     binding.tvProgress.text = "Restoring ${index + 1}/${filesToExport.size}..."
                 }
@@ -497,15 +702,26 @@ class MainActivity : AppCompatActivity() {
     }
     
     private fun deleteSelectedFiles() {
+        val selected = adapter.selectedItems.toList()
         MaterialAlertDialogBuilder(this)
-            .setTitle("Delete ${selectedFiles.size} file(s)?")
-            .setMessage("These files will be permanently deleted from the vault.")
+            .setTitle("Delete ${selected.size} item(s)?")
+            .setMessage("Selected items will be permanently deleted from the vault.")
             .setPositiveButton("Delete") { _, _ ->
-                selectedFiles.forEach { file ->
-                    encryptionManager.deleteFile(file)
-                    repository.removeFile(file)
+                var count = 0
+                selected.forEach { item ->
+                    when (item) {
+                        is VaultItem.FileItem -> {
+                            encryptionManager.deleteFile(item.file)
+                            repository.removeFile(item.file)
+                            count ++
+                        }
+                        is VaultItem.FolderItem -> {
+                            repository.removeFolder(item.folder)
+                            count++
+                        }
+                    }
                 }
-                Toast.makeText(this, "🗑️ ${selectedFiles.size} files deleted!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "🗑️ $count items deleted!", Toast.LENGTH_SHORT).show()
                 exitSelectionMode()
                 loadFiles()
             }

@@ -12,7 +12,9 @@ data class VaultFile(
     val encryptedPath: String,
     val thumbnailPath: String? = null,
     val dateAdded: Long = System.currentTimeMillis(),
-    val isFakeVault: Boolean = false
+    val isFakeVault: Boolean = false,
+    val vaultId: String = if (isFakeVault) "fake" else "main",
+    val folderId: String? = null
 ) : Serializable {
     
     fun getFormattedSize(): String {
@@ -28,6 +30,14 @@ data class VaultFile(
         return originalName.substringAfterLast('.', "")
     }
 }
+
+data class VaultFolder(
+    val id: String = java.util.UUID.randomUUID().toString(),
+    val name: String,
+    val dateCreated: Long = System.currentTimeMillis(),
+    val vaultId: String = "main",
+    val parentFolderId: String? = null
+) : Serializable
 
 enum class FileType(val displayName: String, val icon: String) {
     PHOTO("Photo", "🖼️"),

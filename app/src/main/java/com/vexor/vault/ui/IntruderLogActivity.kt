@@ -17,7 +17,7 @@ import com.vexor.vault.databinding.ActivityIntruderLogBinding
 import com.vexor.vault.ui.adapters.IntruderLogAdapter
 import java.io.File
 
-class IntruderLogActivity : AppCompatActivity() {
+class IntruderLogActivity : BaseActivity() {
     
     private lateinit var binding: ActivityIntruderLogBinding
     private lateinit var repository: VaultRepository

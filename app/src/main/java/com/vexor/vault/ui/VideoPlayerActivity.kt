@@ -11,7 +11,7 @@ import com.vexor.vault.databinding.ActivityVideoPlayerBinding
 import com.vexor.vault.security.FileEncryptionManager
 import kotlinx.coroutines.launch
 
-class VideoPlayerActivity : AppCompatActivity() {
+class VideoPlayerActivity : BaseActivity() {
     
     private lateinit var binding: ActivityVideoPlayerBinding
     private lateinit var encryptionManager: FileEncryptionManager

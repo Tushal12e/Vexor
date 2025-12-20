@@ -12,7 +12,7 @@ import com.vexor.vault.security.BiometricHelper
 import com.vexor.vault.security.FileEncryptionManager
 import com.vexor.vault.security.VaultPreferences
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivity : BaseActivity() {
     
     private lateinit var binding: ActivitySettingsBinding
     private lateinit var prefs: VaultPreferences
@@ -71,6 +71,10 @@ class SettingsActivity : AppCompatActivity() {
             startActivity(Intent(this, ChangePinActivity::class.java))
         }
         
+        binding.btnManageVaults.setOnClickListener {
+            startActivity(Intent(this, ManageVaultsActivity::class.java))
+        }
+        
         // Intruder logs
         binding.btnIntruderLogs.setOnClickListener {
             startActivity(Intent(this, IntruderLogActivity::class.java))
@@ -79,6 +83,11 @@ class SettingsActivity : AppCompatActivity() {
         // Clear vault
         binding.btnClearVault.setOnClickListener {
             showClearVaultConfirmation()
+        }
+        
+        // Theme Selection
+        binding.btnTheme.setOnClickListener {
+            showThemeSelection()
         }
         
         // Version
@@ -116,6 +125,29 @@ class SettingsActivity : AppCompatActivity() {
                 Toast.makeText(this, "Vault cleared", Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton(getString(R.string.cancel), null)
+            .show()
+    }
+    
+    private fun showThemeSelection() {
+        val themes = arrayOf("System Default", "Light", "Dark")
+        val currentMode = ThemeManager.getThemeMode(this)
+        val selectedIndex = when (currentMode) {
+            ThemeManager.THEME_LIGHT -> 1
+            ThemeManager.THEME_DARK -> 2
+            else -> 0
+        }
+        
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Choose Theme")
+            .setSingleChoiceItems(themes, selectedIndex) { dialog, which ->
+                val mode = when (which) {
+                    1 -> ThemeManager.THEME_LIGHT
+                    2 -> ThemeManager.THEME_DARK
+                    else -> ThemeManager.THEME_SYSTEM
+                }
+                ThemeManager.setTheme(this, mode)
+                dialog.dismiss()
+            }
             .show()
     }
 }
