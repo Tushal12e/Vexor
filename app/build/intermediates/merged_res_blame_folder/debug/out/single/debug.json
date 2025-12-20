@@ -1,0 +1,278 @@
+[
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/anim_layout_animation_fall_down.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/anim/layout_animation_fall_down.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_shield.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_shield.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_switch_camera.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_switch_camera.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.vexor.vault.app-main-54:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_search.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_search.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_pin_dot_filled.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/pin_dot_filled.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_add.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_add.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_note_list.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_note_list.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_camera_capture.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_camera_capture.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_bg_pin_button.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/bg_pin_button.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_photo_viewer.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_photo_viewer.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_lock.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_lock.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_change_pin.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_change_pin.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.vexor.vault.app-main-54:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_camera.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_camera.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/menu_menu_main.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/menu/menu_main.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_intruder_log.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_intruder_log.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_note.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_note.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_settings.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_item_folder.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/item_folder.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_dialog_intruder_photo.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/dialog_intruder_photo.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_image.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_image.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_folder.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_folder.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_file.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_file.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_item_intruder_log.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/item_intruder_log.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.vexor.vault.app-main-54:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_delete.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_delete.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_logo.png.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_logo.png"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_share_receiver.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_share_receiver.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_auth.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_auth.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_history.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_history.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_document.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_document.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_splash.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_play.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_play.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_photo.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_photo.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_video.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_video.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_fingerprint.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_fingerprint.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_mask.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_mask.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_note_editor.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_note_editor.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_close.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_close.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_item_note.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/item_note.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.vexor.vault.app-main-54:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_calculator.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_calculator.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_sort.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_sort.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.vexor.vault.app-main-54:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.vexor.vault.app-main-54:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_check.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_check.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_pin_dot_empty.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/pin_dot_empty.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/anim_item_animation_fall_down.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/anim/item_animation_fall_down.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_settings.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_item_vault_file.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/item_vault_file.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_item_vault.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/item_vault.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.vexor.vault.app-main-54:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_warning.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_warning.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/xml_file_paths.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/menu_menu_note_editor.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/menu/menu_note_editor.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_manage_vaults.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_manage_vaults.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_setup.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_setup.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_main.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_back.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_back.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_backspace.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_backspace.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.vexor.vault.app-main-54:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_video_player.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_video_player.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/layout_activity_camera.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/layout/activity_camera.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/drawable_ic_audio.xml.flat",
+        "source": "com.vexor.vault.app-main-54:/drawable/ic_audio.xml"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.vexor.vault.app-main-54:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.vexor.vault.app-merged_res-52:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.vexor.vault.app-main-54:/mipmap-hdpi/ic_launcher.png"
+    }
+]
