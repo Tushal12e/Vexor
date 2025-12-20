@@ -34,3 +34,10 @@ keystore.properties
 # Sensitive
 *.jks
 *.keystore
+
+# Exclusions
+*.apk
+*.ap_
+build_error_*.txt
+build_log*.txt
+*.log
