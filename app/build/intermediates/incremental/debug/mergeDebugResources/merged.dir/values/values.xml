@@ -2275,7 +2275,7 @@
     <string name="all_files">All Files</string>
     <string name="androidx_startup" translatable="false">androidx.startup</string>
     <string name="app_disguise">App Disguise</string>
-    <string name="app_name">Vexor</string>
+    <string name="app_name">Calculator</string>
     <string name="app_tagline">Your Private Vault</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
     <string name="audio">Audio</string>

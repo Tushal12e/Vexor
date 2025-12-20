@@ -60,23 +60,21 @@ class FileEncryptionManager(private val context: Context) {
             val inputStream = contentResolver.openInputStream(uri)
                 ?: throw IOException("Cannot open input stream")
             
-            val fileBytes = inputStream.use { it.readBytes() }
-            val fileSize = fileBytes.size.toLong()
+            val fileSize = contentResolver.openFileDescriptor(uri, "r")?.statSize ?: 0L
             
-            callback?.onProgress(30)
+            callback?.onProgress(10)
             
-            // Encrypt
-            val encrypted = CryptoManager.encrypt(fileBytes)
-            
-            callback?.onProgress(70)
-            
-            // Write encrypted data
+            // Encrypt using Stream
             FileOutputStream(encryptedFile).use { fos ->
-                // Write IV length + IV + encrypted data
-                val ivBytes = encrypted.iv
-                fos.write(ivBytes.size)
-                fos.write(ivBytes)
-                fos.write(encrypted.cipherText)
+                // Write IV length? No, CryptoManager.encryptStream handles writing IV.
+                // But wait, my CryptoManager.encryptStream implementation writes IV directly.
+                // However, I previously wrote IV length byte. 
+                // Let's stick to CryptoManager's standard format now: IV (12 bytes) + Data.
+                // NOTE: I need to handle IV retrieval. encryptStream returns IV.
+                
+                inputStream.use { fis ->
+                    CryptoManager.encryptStream(fis, fos)
+                }
             }
             
             callback?.onProgress(90)
@@ -110,24 +108,19 @@ class FileEncryptionManager(private val context: Context) {
         }
     }
     
+    // Legacy decrypt for small files - might not be needed if we always use streams
     suspend fun decryptFile(vaultFile: VaultFile): ByteArray? = withContext(Dispatchers.IO) {
         try {
             val encryptedFile = File(vaultFile.encryptedPath)
             if (!encryptedFile.exists()) return@withContext null
             
+            // Assuming this is used for small things? Or we should deprecate it.
+            // Let's implement it using stream -> byte array for compatibility
+            val baos = ByteArrayOutputStream()
             FileInputStream(encryptedFile).use { fis ->
-                // Read IV
-                val ivLength = fis.read()
-                val iv = ByteArray(ivLength)
-                fis.read(iv)
-                
-                // Read encrypted data
-                val cipherText = fis.readBytes()
-                
-                // Decrypt
-                val encryptedData = CryptoManager.EncryptedData(cipherText, iv)
-                CryptoManager.decrypt(encryptedData)
+                CryptoManager.decryptStream(fis, baos)
             }
+            baos.toByteArray()
         } catch (e: Exception) {
             e.printStackTrace()
             null
@@ -136,12 +129,17 @@ class FileEncryptionManager(private val context: Context) {
     
     suspend fun decryptToTempFile(vaultFile: VaultFile): File? = withContext(Dispatchers.IO) {
         try {
-            val decrypted = decryptFile(vaultFile) ?: return@withContext null
+            val encryptedFile = File(vaultFile.encryptedPath)
+            if (!encryptedFile.exists()) return@withContext null
             
             val ext = vaultFile.getExtension()
             val tempFile = File(context.cacheDir, "temp_${System.currentTimeMillis()}.$ext")
             
-            FileOutputStream(tempFile).use { it.write(decrypted) }
+            FileInputStream(encryptedFile).use { fis ->
+                FileOutputStream(tempFile).use { fos ->
+                    CryptoManager.decryptStream(fis, fos)
+                }
+            }
             
             tempFile
         } catch (e: Exception) {

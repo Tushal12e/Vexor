@@ -1,147 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background"
-    android:gravity="center">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <!-- Logo -->
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginBottom="24dp"
-        android:src="@drawable/ic_shield"
-        app:tint="@color/primary" />
-
+    <!-- Display Screen -->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vexor"
-        android:textSize="32sp"
+        android:id="@+id/tvDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="bottom|end"
+        android:padding="16dp"
+        android:text="0"
         android:textColor="@color/text_primary"
-        android:fontFamily="sans-serif-medium" />
+        android:textSize="48sp"
+        android:ellipsize="start"
+        android:singleLine="true" />
 
     <TextView
         android:id="@+id/tvStatus"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/enter_pin"
-        android:textSize="14sp"
-        android:textColor="@color/text_secondary" />
+        android:gravity="center"
+        android:padding="8dp"
+        android:text=""
+        android:textColor="@color/status_error"
+        android:textSize="14sp" />
 
-    <!-- PIN Dots -->
-    <LinearLayout
-        android:id="@+id/pinContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        android:orientation="horizontal">
+    <!-- Calculator Grid -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:columnCount="4"
+        android:rowCount="5"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false"
+        android:useDefaultMargins="true">
 
-        <View
-            android:id="@+id/dot1"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/pin_dot_empty" />
+        <!-- Row 1: AC, Del, %, / -->
+        <Button style="@style/CalculatorButton.Action" android:text="AC" android:id="@+id/btnAC" />
+        <Button style="@style/CalculatorButton.Action" android:text="C" android:id="@+id/btnDelete" />
+        <Button style="@style/CalculatorButton.Action" android:text="%" android:id="@+id/btnPercent" />
+        <Button style="@style/CalculatorButton.Action" android:text="/" android:id="@+id/btnDivide" />
 
-        <View
-            android:id="@+id/dot2"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/pin_dot_empty" />
+        <!-- Row 2: 7, 8, 9, * -->
+        <Button style="@style/CalculatorButton" android:text="7" android:id="@+id/btn7" />
+        <Button style="@style/CalculatorButton" android:text="8" android:id="@+id/btn8" />
+        <Button style="@style/CalculatorButton" android:text="9" android:id="@+id/btn9" />
+        <Button style="@style/CalculatorButton.Action" android:text="x" android:id="@+id/btnMultiply" />
 
-        <View
-            android:id="@+id/dot3"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/pin_dot_empty" />
+        <!-- Row 3: 4, 5, 6, - -->
+        <Button style="@style/CalculatorButton" android:text="4" android:id="@+id/btn4" />
+        <Button style="@style/CalculatorButton" android:text="5" android:id="@+id/btn5" />
+        <Button style="@style/CalculatorButton" android:text="6" android:id="@+id/btn6" />
+        <Button style="@style/CalculatorButton.Action" android:text="-" android:id="@+id/btnMinus" />
 
-        <View
-            android:id="@+id/dot4"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/pin_dot_empty" />
+        <!-- Row 4: 1, 2, 3, + -->
+        <Button style="@style/CalculatorButton" android:text="1" android:id="@+id/btn1" />
+        <Button style="@style/CalculatorButton" android:text="2" android:id="@+id/btn2" />
+        <Button style="@style/CalculatorButton" android:text="3" android:id="@+id/btn3" />
+        <Button style="@style/CalculatorButton.Action" android:text="+" android:id="@+id/btnPlus" />
 
-    </LinearLayout>
+        <!-- Row 5: 0, ., = -->
+        <Button style="@style/CalculatorButton" android:text="0" android:id="@+id/btn0" 
+            android:layout_columnSpan="2" android:layout_gravity="fill_horizontal" />
+        <Button style="@style/CalculatorButton" android:text="." android:id="@+id/btnDot" />
+        <Button style="@style/CalculatorButton.Action" android:text="=" android:id="@+id/btnEquals"
+            android:backgroundTint="@color/primary" android:textColor="@color/on_primary" />
 
-    <!-- Number Pad -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!-- Row 1 -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button android:id="@+id/btn1" style="@style/PinButton" android:layout_margin="8dp" />
-            <Button android:id="@+id/btn2" style="@style/PinButton" android:layout_margin="8dp" />
-            <Button android:id="@+id/btn3" style="@style/PinButton" android:layout_margin="8dp" />
-
-        </LinearLayout>
-
-        <!-- Row 2 -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button android:id="@+id/btn4" style="@style/PinButton" android:layout_margin="8dp" />
-            <Button android:id="@+id/btn5" style="@style/PinButton" android:layout_margin="8dp" />
-            <Button android:id="@+id/btn6" style="@style/PinButton" android:layout_margin="8dp" />
-
-        </LinearLayout>
-
-        <!-- Row 3 -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button android:id="@+id/btn7" style="@style/PinButton" android:layout_margin="8dp" />
-            <Button android:id="@+id/btn8" style="@style/PinButton" android:layout_margin="8dp" />
-            <Button android:id="@+id/btn9" style="@style/PinButton" android:layout_margin="8dp" />
-
-        </LinearLayout>
-
-        <!-- Row 4 -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/btnBiometric"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_margin="8dp"
-                android:background="@drawable/bg_pin_button"
-                android:src="@drawable/ic_fingerprint"
-                app:tint="@color/primary" />
-
-            <Button android:id="@+id/btn0" style="@style/PinButton" android:layout_margin="8dp" />
-
-            <ImageButton
-                android:id="@+id/btnDelete"
-                android:layout_width="72dp"
-                android:layout_height="72dp"
-                android:layout_margin="8dp"
-                android:background="@drawable/bg_pin_button"
-                android:src="@drawable/ic_backspace"
-                app:tint="@color/text_secondary" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </GridLayout>
 
 </LinearLayout>

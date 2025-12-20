@@ -3,21 +3,19 @@ package com.vexor.vault.ui
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.vexor.vault.R
@@ -27,8 +25,8 @@ import com.vexor.vault.databinding.ActivityAuthBinding
 import com.vexor.vault.security.BiometricHelper
 import com.vexor.vault.security.BreakInNotificationHelper
 import com.vexor.vault.security.VaultPreferences
+import net.objecthunter.exp4j.ExpressionBuilder
 import java.io.File
-import java.io.FileOutputStream
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -40,9 +38,8 @@ class AuthActivity : BaseActivity() {
     private lateinit var repository: VaultRepository
     private lateinit var breakInNotificationHelper: BreakInNotificationHelper
     
-    private var enteredPin = ""
+    private var currentExpression = ""
     private var isFakeVaultMode = false
-    private val pinDots = mutableListOf<View>()
     
     // Camera for intruder detection
     private var imageCapture: ImageCapture? = null
@@ -71,8 +68,12 @@ class AuthActivity : BaseActivity() {
             checkCameraPermission()
         }
         
-        setupUI()
-        checkBiometric()
+        setupCalculatorUI()
+        
+        // Auto-show biometric if enabled
+        if (prefs.biometricEnabled) {
+              checkBiometric()
+        }
     }
     
     private fun checkCameraPermission() {
@@ -97,10 +98,7 @@ class AuthActivity : BaseActivity() {
         cameraProviderFuture.addListener({
             try {
                 val cameraProvider = cameraProviderFuture.get()
-                
-                // Use front camera for intruder selfie
                 val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
-                
                 imageCapture = ImageCapture.Builder()
                     .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                     .build()
@@ -113,35 +111,121 @@ class AuthActivity : BaseActivity() {
         }, ContextCompat.getMainExecutor(this))
     }
     
-    private fun setupUI() {
-        // PIN dots
-        pinDots.addAll(listOf(
-            binding.dot1, binding.dot2, binding.dot3, binding.dot4
-        ))
-        
-        // Number buttons
-        val buttons = listOf(
-            binding.btn1, binding.btn2, binding.btn3,
-            binding.btn4, binding.btn5, binding.btn6,
-            binding.btn7, binding.btn8, binding.btn9,
-            binding.btn0
+    private fun setupCalculatorUI() {
+        val numberButtons = listOf(
+            binding.btn0, binding.btn1, binding.btn2, binding.btn3,
+            binding.btn4, binding.btn5, binding.btn6, binding.btn7,
+            binding.btn8, binding.btn9
         )
         
-        buttons.forEachIndexed { index, button ->
-            val number = if (index == 9) "0" else (index + 1).toString()
-            button.text = number
-            button.setOnClickListener { onNumberClick(number) }
+        numberButtons.forEach { btn ->
+            btn.setOnClickListener { appendToDisplay(btn.text.toString()) }
         }
         
-        // Delete button
-        binding.btnDelete.setOnClickListener { onDeleteClick() }
+        binding.btnDot.setOnClickListener { appendToDisplay(".") }
         
-        // Biometric button
-        binding.btnBiometric.setOnClickListener { showBiometricPrompt() }
-        binding.btnBiometric.visibility = if (prefs.biometricEnabled && biometricHelper.isBiometricAvailable()) {
-            View.VISIBLE
-        } else {
-            View.GONE
+        // Operations
+        val opButtons = listOf(
+            binding.btnPlus, binding.btnMinus, binding.btnMultiply, binding.btnDivide
+        )
+        opButtons.forEach { btn ->
+            btn.setOnClickListener { appendToDisplay(btn.text.toString()) }
+        }
+        
+        binding.btnPercent.setOnClickListener { appendToDisplay("%") }
+        
+        // Clear
+        binding.btnAC.setOnClickListener { 
+            currentExpression = ""
+            updateDisplay("0")
+        }
+        
+        binding.btnDelete.setOnClickListener {
+            if (currentExpression.isNotEmpty()) {
+                currentExpression = currentExpression.dropLast(1)
+                updateDisplay(if (currentExpression.isEmpty()) "0" else currentExpression)
+            }
+        }
+        
+        // Equals - This is the Trigger
+        binding.btnEquals.setOnClickListener { onEqualsClick() }
+        
+        // Long press on title/logo to trigger Biometric? 
+        // Or long press on "."
+        binding.btnDot.setOnLongClickListener {
+             if (prefs.biometricEnabled) showBiometricPrompt()
+             true
+        }
+    }
+    
+    private fun appendToDisplay(str: String) {
+        if (currentExpression.length > 20) return // Limit length
+        currentExpression += str
+        updateDisplay(currentExpression)
+    }
+    
+    private fun updateDisplay(text: String) {
+        binding.tvDisplay.text = text
+    }
+    
+    private fun onEqualsClick() {
+        if (currentExpression.isEmpty()) return
+        
+        // 1. Check if expression MATCHES A VAULT PIN
+        val vaultId = prefs.verifyPin(currentExpression)
+        
+        if (vaultId != null) {
+            // Unlocking Vault
+            prefs.resetFailedAttempts()
+            openVault(vaultId)
+            return
+        }
+        
+        // 2. If not a PIN, Evaluate Math
+        try {
+            // Replace x with * for expression builder
+            val expressionStr = currentExpression.replace("x", "*")
+            val expression = ExpressionBuilder(expressionStr).build()
+            val result = expression.evaluate()
+            
+            // Format result (remove .0 if integer)
+            val longResult = result.toLong()
+            if (result == longResult.toDouble()) {
+                currentExpression = longResult.toString()
+            } else {
+                currentExpression = result.toString()
+            }
+            updateDisplay(currentExpression)
+            
+            // NOTE: If math fails or user enters weird pattern, we could count it as failed attempt?
+            // But standard calculator shouldn't penalize bad math.
+            // We ONLY capture intruder if they enter a specific length (4-6) AND it's numeric AND it fails?
+            // Let's rely on Explicit "Login Mode" for intruder? 
+            // Or just if they try to enter a PIN that is close?
+            // User requirement: "wrong pass capture pic".
+            // Implementation: If input length is 4-8 digits and numeric, and NOT a pin, capture!
+            
+            if (currentExpression.all { it.isDigit() } && currentExpression.length in 4..8) {
+                // Potential PIN attempt failed
+                handleFailedAttempt()
+            }
+            
+        } catch (e: Exception) {
+            binding.tvDisplay.text = "Error"
+            currentExpression = ""
+        }
+    }
+    
+    private fun handleFailedAttempt() {
+        prefs.recordFailedAttempt()
+        
+        // Only capture selfie if multiple attempts or specific setting?
+        if (prefs.intruderDetectionEnabled) {
+            captureIntruder()
+        }
+        
+        if (prefs.failedAttempts >= 3) {
+             breakInNotificationHelper.showBreakInNotification(prefs.failedAttempts)
         }
     }
     
@@ -155,9 +239,9 @@ class AuthActivity : BaseActivity() {
     
     private fun showBiometricPrompt() {
         biometricHelper.authenticate(
-            title = getString(R.string.biometric_prompt_title),
-            subtitle = getString(R.string.biometric_prompt_subtitle),
-            negativeButtonText = getString(R.string.biometric_prompt_negative),
+            title = "Unlock Vault",
+            subtitle = "Verify identity to access secured files",
+            negativeButtonText = "Cancel",
             callback = object : BiometricHelper.BiometricCallback {
                 override fun onSuccess() {
                     prefs.resetFailedAttempts()
@@ -178,91 +262,6 @@ class AuthActivity : BaseActivity() {
         )
     }
     
-    private fun onNumberClick(number: String) {
-        if (prefs.isLocked()) {
-            val remaining = prefs.getLockRemainingSeconds()
-            binding.tvStatus.text = "Locked. Try again in ${remaining}s"
-            binding.tvStatus.setTextColor(ContextCompat.getColor(this, R.color.status_error))
-            return
-        }
-        
-        if (enteredPin.length < 4) {
-            enteredPin += number
-            updatePinDots()
-            
-            if (enteredPin.length == 4) {
-                verifyPin()
-            }
-        }
-    }
-    
-    private fun onDeleteClick() {
-        if (enteredPin.isNotEmpty()) {
-            enteredPin = enteredPin.dropLast(1)
-            updatePinDots()
-        }
-    }
-    
-    private fun updatePinDots() {
-        pinDots.forEachIndexed { index, view ->
-            val filled = index < enteredPin.length
-            view.setBackgroundResource(
-                if (filled) R.drawable.pin_dot_filled else R.drawable.pin_dot_empty
-            )
-        }
-    }
-    
-    private fun verifyPin() {
-        // Check if PIN matches any vault
-        val vaultId = prefs.verifyPin(enteredPin)
-        
-        if (vaultId != null) {
-             // Correct PIN
-            prefs.resetFailedAttempts()
-            openVault(vaultId)
-        } else {
-            // Wrong PIN
-            prefs.recordFailedAttempt()
-            vibrate()
-            showError()
-            
-            // Break-in notification
-            if (prefs.intruderDetectionEnabled && prefs.failedAttempts >= 3) {
-                breakInNotificationHelper.showBreakInNotification(prefs.failedAttempts)
-            }
-
-            // Capture intruder photo
-            if (prefs.intruderDetectionEnabled) {
-                captureIntruder()
-            }
-        }
-    }
-    
-    private fun showError() {
-        binding.tvStatus.text = getString(R.string.wrong_pin)
-        binding.tvStatus.setTextColor(ContextCompat.getColor(this, R.color.status_error))
-        
-        // Shake animation
-        binding.pinContainer.animate()
-            .translationX(-20f).setDuration(50)
-            .withEndAction {
-                binding.pinContainer.animate()
-                    .translationX(20f).setDuration(50)
-                    .withEndAction {
-                        binding.pinContainer.animate()
-                            .translationX(0f).setDuration(50)
-                            .start()
-                    }.start()
-            }.start()
-        
-        Handler(Looper.getMainLooper()).postDelayed({
-            enteredPin = ""
-            updatePinDots()
-            binding.tvStatus.text = getString(R.string.enter_pin)
-            binding.tvStatus.setTextColor(ContextCompat.getColor(this, R.color.text_secondary))
-        }, 1000)
-    }
-    
     private fun vibrate() {
         val vibrator = getSystemService(VIBRATOR_SERVICE) as Vibrator
         vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
@@ -271,7 +270,6 @@ class AuthActivity : BaseActivity() {
     private fun captureIntruder() {
         val imageCapture = imageCapture ?: return
         
-        // Create file for intruder photo
         val intruderDir = File(filesDir, "intruders").apply { mkdirs() }
         val photoFile = File(intruderDir, "intruder_${System.currentTimeMillis()}.jpg")
         
@@ -282,7 +280,6 @@ class AuthActivity : BaseActivity() {
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    // Save intruder log with photo path
                     val log = IntruderLog(
                         id = System.currentTimeMillis(),
                         timestamp = System.currentTimeMillis(),
@@ -293,8 +290,7 @@ class AuthActivity : BaseActivity() {
                 }
                 
                 override fun onError(exception: ImageCaptureException) {
-                    // Still log the attempt even without photo
-                    val log = IntruderLog(
+                     val log = IntruderLog(
                         id = System.currentTimeMillis(),
                         timestamp = System.currentTimeMillis(),
                         photoPath = null,
@@ -308,8 +304,8 @@ class AuthActivity : BaseActivity() {
     
     private fun openVault(vaultId: String) {
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("vault_id", vaultId) // Pass ID directly
-        intent.putExtra("fake_vault", vaultId == "fake") // Legacy support
+        intent.putExtra("vault_id", vaultId)
+        intent.putExtra("fake_vault", vaultId == "fake")
         startActivity(intent)
         finish()
     }

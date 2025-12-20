@@ -57,6 +57,54 @@ object CryptoManager {
         )
     }
     
+    fun encryptStream(inputStream: java.io.InputStream, outputStream: java.io.OutputStream): ByteArray {
+        val cipher = Cipher.getInstance(AES_MODE)
+        cipher.init(Cipher.ENCRYPT_MODE, getOrCreateSecretKey())
+        
+        outputStream.write(cipher.iv)
+        
+        val buffer = ByteArray(8192)
+        var bytesRead: Int
+        while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+            val encrypted = cipher.update(buffer, 0, bytesRead)
+            if (encrypted != null) {
+                outputStream.write(encrypted)
+            }
+        }
+        
+        val finalBytes = cipher.doFinal()
+        if (finalBytes != null) {
+            outputStream.write(finalBytes)
+        }
+        
+        return cipher.iv
+    }
+    
+    fun decryptStream(inputStream: java.io.InputStream, outputStream: java.io.OutputStream) {
+        // Read IV first (12 bytes)
+        val iv = ByteArray(GCM_IV_LENGTH)
+        val ivRead = inputStream.read(iv)
+        if (ivRead != GCM_IV_LENGTH) throw IllegalArgumentException("Invalid IV length")
+        
+        val cipher = Cipher.getInstance(AES_MODE)
+        val spec = GCMParameterSpec(GCM_TAG_LENGTH, iv)
+        cipher.init(Cipher.DECRYPT_MODE, getOrCreateSecretKey(), spec)
+        
+        val buffer = ByteArray(8192)
+        var bytesRead: Int
+        while (inputStream.read(buffer).also { bytesRead = it } != -1) {
+            val decrypted = cipher.update(buffer, 0, bytesRead)
+            if (decrypted != null) {
+                outputStream.write(decrypted)
+            }
+        }
+        
+        val finalBytes = cipher.doFinal()
+        if (finalBytes != null) {
+            outputStream.write(finalBytes)
+        }
+    }
+
     fun decrypt(encryptedData: EncryptedData): ByteArray {
         val cipher = Cipher.getInstance(AES_MODE)
         val spec = GCMParameterSpec(GCM_TAG_LENGTH, encryptedData.iv)

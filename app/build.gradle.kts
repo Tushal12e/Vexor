@@ -11,8 +11,8 @@ android {
         applicationId = "com.vexor.vault"
         minSdk = 26
         targetSdk = 34
-        versionCode = 80
-        versionName = "1.8.0"
+        versionCode = 200
+        versionName = "2.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

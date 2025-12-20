@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -52,25 +51,34 @@ public final class ActivityAuthBinding implements ViewBinding {
   public final Button btn9;
 
   @NonNull
-  public final ImageButton btnBiometric;
+  public final Button btnAC;
 
   @NonNull
-  public final ImageButton btnDelete;
+  public final Button btnDelete;
 
   @NonNull
-  public final View dot1;
+  public final Button btnDivide;
 
   @NonNull
-  public final View dot2;
+  public final Button btnDot;
 
   @NonNull
-  public final View dot3;
+  public final Button btnEquals;
 
   @NonNull
-  public final View dot4;
+  public final Button btnMinus;
 
   @NonNull
-  public final LinearLayout pinContainer;
+  public final Button btnMultiply;
+
+  @NonNull
+  public final Button btnPercent;
+
+  @NonNull
+  public final Button btnPlus;
+
+  @NonNull
+  public final TextView tvDisplay;
 
   @NonNull
   public final TextView tvStatus;
@@ -78,9 +86,10 @@ public final class ActivityAuthBinding implements ViewBinding {
   private ActivityAuthBinding(@NonNull LinearLayout rootView, @NonNull Button btn0,
       @NonNull Button btn1, @NonNull Button btn2, @NonNull Button btn3, @NonNull Button btn4,
       @NonNull Button btn5, @NonNull Button btn6, @NonNull Button btn7, @NonNull Button btn8,
-      @NonNull Button btn9, @NonNull ImageButton btnBiometric, @NonNull ImageButton btnDelete,
-      @NonNull View dot1, @NonNull View dot2, @NonNull View dot3, @NonNull View dot4,
-      @NonNull LinearLayout pinContainer, @NonNull TextView tvStatus) {
+      @NonNull Button btn9, @NonNull Button btnAC, @NonNull Button btnDelete,
+      @NonNull Button btnDivide, @NonNull Button btnDot, @NonNull Button btnEquals,
+      @NonNull Button btnMinus, @NonNull Button btnMultiply, @NonNull Button btnPercent,
+      @NonNull Button btnPlus, @NonNull TextView tvDisplay, @NonNull TextView tvStatus) {
     this.rootView = rootView;
     this.btn0 = btn0;
     this.btn1 = btn1;
@@ -92,13 +101,16 @@ public final class ActivityAuthBinding implements ViewBinding {
     this.btn7 = btn7;
     this.btn8 = btn8;
     this.btn9 = btn9;
-    this.btnBiometric = btnBiometric;
+    this.btnAC = btnAC;
     this.btnDelete = btnDelete;
-    this.dot1 = dot1;
-    this.dot2 = dot2;
-    this.dot3 = dot3;
-    this.dot4 = dot4;
-    this.pinContainer = pinContainer;
+    this.btnDivide = btnDivide;
+    this.btnDot = btnDot;
+    this.btnEquals = btnEquals;
+    this.btnMinus = btnMinus;
+    this.btnMultiply = btnMultiply;
+    this.btnPercent = btnPercent;
+    this.btnPlus = btnPlus;
+    this.tvDisplay = tvDisplay;
     this.tvStatus = tvStatus;
   }
 
@@ -189,45 +201,63 @@ public final class ActivityAuthBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.btnBiometric;
-      ImageButton btnBiometric = ViewBindings.findChildViewById(rootView, id);
-      if (btnBiometric == null) {
+      id = R.id.btnAC;
+      Button btnAC = ViewBindings.findChildViewById(rootView, id);
+      if (btnAC == null) {
         break missingId;
       }
 
       id = R.id.btnDelete;
-      ImageButton btnDelete = ViewBindings.findChildViewById(rootView, id);
+      Button btnDelete = ViewBindings.findChildViewById(rootView, id);
       if (btnDelete == null) {
         break missingId;
       }
 
-      id = R.id.dot1;
-      View dot1 = ViewBindings.findChildViewById(rootView, id);
-      if (dot1 == null) {
+      id = R.id.btnDivide;
+      Button btnDivide = ViewBindings.findChildViewById(rootView, id);
+      if (btnDivide == null) {
         break missingId;
       }
 
-      id = R.id.dot2;
-      View dot2 = ViewBindings.findChildViewById(rootView, id);
-      if (dot2 == null) {
+      id = R.id.btnDot;
+      Button btnDot = ViewBindings.findChildViewById(rootView, id);
+      if (btnDot == null) {
         break missingId;
       }
 
-      id = R.id.dot3;
-      View dot3 = ViewBindings.findChildViewById(rootView, id);
-      if (dot3 == null) {
+      id = R.id.btnEquals;
+      Button btnEquals = ViewBindings.findChildViewById(rootView, id);
+      if (btnEquals == null) {
         break missingId;
       }
 
-      id = R.id.dot4;
-      View dot4 = ViewBindings.findChildViewById(rootView, id);
-      if (dot4 == null) {
+      id = R.id.btnMinus;
+      Button btnMinus = ViewBindings.findChildViewById(rootView, id);
+      if (btnMinus == null) {
         break missingId;
       }
 
-      id = R.id.pinContainer;
-      LinearLayout pinContainer = ViewBindings.findChildViewById(rootView, id);
-      if (pinContainer == null) {
+      id = R.id.btnMultiply;
+      Button btnMultiply = ViewBindings.findChildViewById(rootView, id);
+      if (btnMultiply == null) {
+        break missingId;
+      }
+
+      id = R.id.btnPercent;
+      Button btnPercent = ViewBindings.findChildViewById(rootView, id);
+      if (btnPercent == null) {
+        break missingId;
+      }
+
+      id = R.id.btnPlus;
+      Button btnPlus = ViewBindings.findChildViewById(rootView, id);
+      if (btnPlus == null) {
+        break missingId;
+      }
+
+      id = R.id.tvDisplay;
+      TextView tvDisplay = ViewBindings.findChildViewById(rootView, id);
+      if (tvDisplay == null) {
         break missingId;
       }
 
@@ -238,8 +268,8 @@ public final class ActivityAuthBinding implements ViewBinding {
       }
 
       return new ActivityAuthBinding((LinearLayout) rootView, btn0, btn1, btn2, btn3, btn4, btn5,
-          btn6, btn7, btn8, btn9, btnBiometric, btnDelete, dot1, dot2, dot3, dot4, pinContainer,
-          tvStatus);
+          btn6, btn7, btn8, btn9, btnAC, btnDelete, btnDivide, btnDot, btnEquals, btnMinus,
+          btnMultiply, btnPercent, btnPlus, tvDisplay, tvStatus);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

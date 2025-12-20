@@ -22,6 +22,13 @@ class CalculatorActivity : BaseActivity() {
         
         prefs = VaultPreferences(this)
         
+        // Check first time setup
+        if (!prefs.isFirstSetupComplete) {
+            startActivity(Intent(this, SetupActivity::class.java))
+            finish()
+            return
+        }
+        
         setupButtons()
     }
     
