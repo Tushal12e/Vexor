@@ -9,8 +9,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Tushal12e/Vexor/releases/tag/v4.1.0">
-    <img src="https://img.shields.io/badge/Version-4.1.0-blue.svg" alt="Version"/>
+  <a href="https://github.com/Tushal12e/Vexor/releases/tag/v4.5.0">
+    <img src="https://img.shields.io/badge/Version-4.5.0-blue.svg" alt="Version"/>
   </a>
   <img src="https://img.shields.io/badge/Android-8.0%2B-green.svg" alt="Android"/>
 </p>
@@ -24,11 +24,11 @@ Part of the **Tushal12e App Series**.
 
 ## 📥 Download
 
-**[⬇️ Download Vexor v4.1.0 APK](https://github.com/Tushal12e/Vexor/releases/download/v4.1.0/Vexor-v4.1.0.apk)**
+**[⬇️ Download Vexor v4.5.0 APK](https://github.com/Tushal12e/Vexor/releases/download/v4.5.0/Vexor-v4.5.0-debug.apk)**
 
 | Info | Details |
 |------|---------|
-| **Version** | 4.1.0 |
+| **Version** | 4.5.0 |
 | **Size** | ~18 MB |
 | **Min Android** | 8.0 (API 26) |
 | **Target SDK** | Android 14 (API 34) |
@@ -40,55 +40,69 @@ Part of the **Tushal12e App Series**.
 ### 🕵️ Calculator Disguise
 - **Fully Functional Math**: Appears and works exactly like a standard calculator
 - **Stealth Entry**: Enter PIN + `=` to access your hidden data
-- **Stealth Icon**: App shows as "Calculator" on your phone
+- **Stealth Icon**: App shows as "Vexor" on your phone
 
 ### 🎥 Secure Media & Files
-- **Private Gallery**: Hide photos and videos with AES-256 Encryption
-- **Video Support**: Smoothly encrypt and playback large HD videos
+- **Private Gallery**: Hide photos and videos with encryption
+- **Video Support**: Store and playback large HD videos
 - **Document Locker**: Secure PDF, Word, and Excel files
-- **Secure Camera**: Take photos directly into the vault
 
 ### 🚨 Intruder Detection
-- **Intruder Selfie**: Automatically captures a photo of anyone trying to break in
-- **Break-in Alerts**: Shows you the photo and time of the attempt upon successful login
-- **Intruder Log**: View history of all break-in attempts
+- **Intruder Selfie**: Automatically captures front camera photo after 3+ wrong PIN attempts
+- **Silent Capture**: Intruder won't know they've been photographed
+- **Photo Storage**: Photos saved to internal storage for review
 
 ### 🛡️ Advanced Security
 - **Multi-Vault System**:
   - **Main Vault**: Your real private data
   - **Fake Vault**: A decoy vault with a separate PIN to show snoops
-- **Biometric Unlock**: Fingerprint support for quick access (optional)
-- **AES-256 Encryption**: Military-grade encryption for all your files
-- **No Cloud Upload**: All data stays on your device
+- **Biometric Unlock**: Fingerprint support (long-press `.` button)
+- **Screenshot Blocking**: Prevents screenshots and screen recording
+- **Failed Attempt Tracking**: Counts and logs wrong PIN attempts
 
 ### 📝 Additional Features
 - **Secure Notes**: Encrypted note-taking within the vault
-- **Share to Vault**: Receive files from other apps directly into the vault
-- **Multiple Vaults**: Create and manage multiple separate vaults
-- **Dark Theme**: Eye-friendly dark mode interface
+- **Dark Theme**: Premium dark mode interface
 
 ---
 
 ## 🛠️ How to Use
 
-1. **Launch "Calculator"**: It looks just like a normal calculator
+1. **Launch "Vexor"**: It looks just like a normal calculator
 2. **First Setup**: Create a secure PIN (e.g., `1234`)
-3. **Daily Usage**:
+3. **Optional Setup**:
+   - **Fake Vault PIN**: Set a decoy PIN for nosy people
+   - **Biometric**: Enable fingerprint unlock
+4. **Daily Usage**:
    - **Calculate**: Type `2 + 2 =` → Shows `4`
    - **Unlock Vault**: Type `1234` then `=` → Opens Vault
-4. **Fake Vault** (optional): Set up a different PIN that opens a decoy vault
+   - **Fingerprint**: Long-press `.` button for biometric unlock
 
 ---
 
-##  Security & Privacy
+## 🔒 Security & Privacy
 
 - **Local Only**: No data is ever uploaded to any server
-- **AES-256 Encryption**: Industry-standard encryption for all files
-- **No Permissions Abuse**: Only requests necessary permissions
+- **Screenshot Proof**: App blocks screenshots and screen recording
+- **Intruder Photos**: Captures anyone trying to break in
 
 ---
 
-##  Contact
+## 📋 Changelog
+
+### v4.5.0 (Latest)
+- ✅ Intruder detection with front camera capture
+- ✅ Biometric unlock (fingerprint)
+- ✅ Fake vault support
+- ✅ Screenshot blocking
+- ✅ Complete app rewrite for stability
+
+### v4.1.0
+- Initial release with core vault features
+
+---
+
+## 📞 Contact
 
 **Developer**: Tushal12e
 
