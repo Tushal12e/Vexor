@@ -5,29 +5,39 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricManager
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.vexor.vault.R
 import com.vexor.vault.databinding.ActivitySetupBinding
 
 /**
- * Setup Activity - Simplified for stability
+ * Setup Activity with biometric and fake vault options
  */
 class SetupActivity : AppCompatActivity() {
     
     private lateinit var binding: ActivitySetupBinding
     
     private val prefs by lazy {
-        getSharedPreferences("vexor_simple_prefs", MODE_PRIVATE)
+        getSharedPreferences("vexor_prefs", MODE_PRIVATE)
     }
     
-    private var step = 1 // 1 = create PIN, 2 = confirm PIN
+    private var step = 1 // 1=create PIN, 2=confirm PIN, 3=fake PIN, 4=confirm fake PIN, 5=biometric
     private var firstPin = ""
+    private var fakePin = ""
     private var enteredPin = ""
     private val pinDots = mutableListOf<View>()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Screenshot blocking
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         
         try {
             binding = ActivitySetupBinding.inflate(layoutInflater)
@@ -59,16 +69,52 @@ class SetupActivity : AppCompatActivity() {
         
         binding.btnDelete.setOnClickListener { onDeleteClick() }
         
-        // Hide biometric options for now
-        binding.biometricContainer.visibility = View.GONE
+        binding.btnEnableBiometric.setOnClickListener {
+            prefs.edit().putBoolean("biometric_enabled", true).apply()
+            finishSetup()
+        }
+        
+        binding.btnSkipBiometric.setOnClickListener {
+            prefs.edit().putBoolean("biometric_enabled", false).apply()
+            finishSetup()
+        }
         
         updateUI()
     }
     
     private fun updateUI() {
         when (step) {
-            1 -> binding.tvTitle.text = "Create PIN"
-            2 -> binding.tvTitle.text = "Confirm PIN"
+            1 -> {
+                binding.tvTitle.text = "Create Main PIN"
+                binding.pinContainer.visibility = View.VISIBLE
+                binding.biometricContainer.visibility = View.GONE
+            }
+            2 -> {
+                binding.tvTitle.text = "Confirm Main PIN"
+                binding.pinContainer.visibility = View.VISIBLE
+                binding.biometricContainer.visibility = View.GONE
+            }
+            3 -> {
+                binding.tvTitle.text = "Create Fake PIN"
+                binding.pinContainer.visibility = View.VISIBLE
+                binding.biometricContainer.visibility = View.GONE
+            }
+            4 -> {
+                binding.tvTitle.text = "Confirm Fake PIN"
+                binding.pinContainer.visibility = View.VISIBLE
+                binding.biometricContainer.visibility = View.GONE
+            }
+            5 -> {
+                binding.tvTitle.text = "Enable Fingerprint?"
+                binding.pinContainer.visibility = View.GONE
+                
+                val biometricManager = BiometricManager.from(this)
+                if (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) == BiometricManager.BIOMETRIC_SUCCESS) {
+                    binding.biometricContainer.visibility = View.VISIBLE
+                } else {
+                    finishSetup()
+                }
+            }
         }
     }
     
@@ -110,15 +156,9 @@ class SetupActivity : AppCompatActivity() {
             }
             2 -> {
                 if (enteredPin == firstPin) {
-                    // Save PIN
-                    prefs.edit()
-                        .putString("pin", enteredPin)
-                        .putBoolean("setup_complete", true)
-                        .apply()
-                    
-                    Toast.makeText(this, "Setup Complete!", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    prefs.edit().putString("pin", enteredPin).apply()
+                    enteredPin = ""
+                    askFakeVaultSetup()
                 } else {
                     vibrate()
                     Toast.makeText(this, "PINs don't match", Toast.LENGTH_SHORT).show()
@@ -129,7 +169,60 @@ class SetupActivity : AppCompatActivity() {
                     updateUI()
                 }
             }
+            3 -> {
+                if (enteredPin == firstPin) {
+                    vibrate()
+                    Toast.makeText(this, "Fake PIN must be different", Toast.LENGTH_SHORT).show()
+                    enteredPin = ""
+                    updatePinDots()
+                } else {
+                    fakePin = enteredPin
+                    enteredPin = ""
+                    step = 4
+                    updatePinDots()
+                    updateUI()
+                }
+            }
+            4 -> {
+                if (enteredPin == fakePin) {
+                    prefs.edit().putString("fake_pin", enteredPin).apply()
+                    enteredPin = ""
+                    step = 5
+                    updateUI()
+                } else {
+                    vibrate()
+                    Toast.makeText(this, "Fake PINs don't match", Toast.LENGTH_SHORT).show()
+                    enteredPin = ""
+                    step = 3
+                    fakePin = ""
+                    updatePinDots()
+                    updateUI()
+                }
+            }
         }
+    }
+    
+    private fun askFakeVaultSetup() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Setup Fake Vault?")
+            .setMessage("A fake vault shows decoy files when forced to unlock. Use a different PIN.")
+            .setPositiveButton("Yes") { _, _ ->
+                step = 3
+                updateUI()
+            }
+            .setNegativeButton("Skip") { _, _ ->
+                step = 5
+                updateUI()
+            }
+            .setCancelable(false)
+            .show()
+    }
+    
+    private fun finishSetup() {
+        prefs.edit().putBoolean("setup_complete", true).apply()
+        Toast.makeText(this, "Setup Complete!", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
     
     private fun vibrate() {

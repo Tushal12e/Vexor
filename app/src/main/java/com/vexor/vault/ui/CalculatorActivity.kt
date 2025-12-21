@@ -10,31 +10,37 @@ import android.os.Handler
 import android.os.Looper
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
-import com.vexor.vault.R
 import com.vexor.vault.databinding.ActivityCalculatorBinding
 import net.objecthunter.exp4j.ExpressionBuilder
 
 /**
- * Main Calculator Activity - Simplified for stability
+ * Main Calculator Activity with all features
  */
 class CalculatorActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCalculatorBinding
     private var currentExpression = ""
     
-    // Simple prefs for PIN (no encryption for stability)
     private val prefs by lazy {
-        getSharedPreferences("vexor_simple_prefs", MODE_PRIVATE)
+        getSharedPreferences("vexor_prefs", MODE_PRIVATE)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
+        // Screenshot blocking
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
+        
         try {
-            // Check Permissions first
             if (!hasPermissions()) {
                 startActivity(Intent(this, PermissionsActivity::class.java))
                 finish()
@@ -44,7 +50,6 @@ class CalculatorActivity : AppCompatActivity() {
             binding = ActivityCalculatorBinding.inflate(layoutInflater)
             setContentView(binding.root)
             
-            // Check if first setup needed
             if (!prefs.getBoolean("setup_complete", false)) {
                 startActivity(Intent(this, SetupActivity::class.java))
                 finish()
@@ -52,6 +57,13 @@ class CalculatorActivity : AppCompatActivity() {
             }
             
             setupCalculatorUI()
+            
+            // Auto-show biometric if enabled
+            if (prefs.getBoolean("biometric_enabled", false)) {
+                Handler(Looper.getMainLooper()).postDelayed({
+                    showBiometricPrompt()
+                }, 300)
+            }
             
         } catch (e: Exception) {
             e.printStackTrace()
@@ -83,6 +95,14 @@ class CalculatorActivity : AppCompatActivity() {
         }
         
         binding.btnDot.setOnClickListener { appendToDisplay(".") }
+        
+        // Long press on dot -> biometric
+        binding.btnDot.setOnLongClickListener {
+            if (prefs.getBoolean("biometric_enabled", false)) {
+                showBiometricPrompt()
+            }
+            true
+        }
         
         val opButtons = listOf(
             binding.btnPlus, binding.btnMinus, binding.btnMultiply, binding.btnDivide
@@ -121,10 +141,17 @@ class CalculatorActivity : AppCompatActivity() {
     private fun onEqualsClick() {
         if (currentExpression.isEmpty()) return
         
-        // Check PIN
-        val savedPin = prefs.getString("pin", null)
-        if (savedPin != null && currentExpression == savedPin) {
-            openVault()
+        // Check main PIN
+        val mainPin = prefs.getString("pin", null)
+        if (mainPin != null && currentExpression == mainPin) {
+            openVault(isFake = false)
+            return
+        }
+        
+        // Check fake PIN
+        val fakePin = prefs.getString("fake_pin", null)
+        if (fakePin != null && currentExpression == fakePin) {
+            openVault(isFake = true)
             return
         }
         
@@ -142,10 +169,57 @@ class CalculatorActivity : AppCompatActivity() {
             }
             updateDisplay(currentExpression)
             
+            // Record failed attempt if looks like PIN (4-8 digits)
+            if (currentExpression.all { it.isDigit() } && currentExpression.length in 4..8) {
+                recordFailedAttempt()
+            }
+            
         } catch (e: Exception) {
             binding.displayScreen.text = "Error"
             currentExpression = ""
         }
+    }
+    
+    private fun recordFailedAttempt() {
+        val attempts = prefs.getInt("failed_attempts", 0) + 1
+        prefs.edit().putInt("failed_attempts", attempts).apply()
+        
+        if (attempts >= 3) {
+            vibrate()
+            // Could add intruder photo capture here
+        }
+    }
+    
+    private fun showBiometricPrompt() {
+        val biometricManager = BiometricManager.from(this)
+        if (biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) != BiometricManager.BIOMETRIC_SUCCESS) {
+            return
+        }
+        
+        val executor = ContextCompat.getMainExecutor(this)
+        
+        val biometricPrompt = BiometricPrompt(this, executor,
+            object : BiometricPrompt.AuthenticationCallback() {
+                override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                    super.onAuthenticationSucceeded(result)
+                    prefs.edit().putInt("failed_attempts", 0).apply()
+                    openVault(isFake = false)
+                }
+                
+                override fun onAuthenticationFailed() {
+                    super.onAuthenticationFailed()
+                    vibrate()
+                }
+            })
+        
+        val promptInfo = BiometricPrompt.PromptInfo.Builder()
+            .setTitle("Unlock Vexor")
+            .setSubtitle("Use your fingerprint")
+            .setNegativeButtonText("Cancel")
+            .setAllowedAuthenticators(BiometricManager.Authenticators.BIOMETRIC_STRONG)
+            .build()
+        
+        biometricPrompt.authenticate(promptInfo)
     }
     
     private fun vibrate() {
@@ -153,8 +227,10 @@ class CalculatorActivity : AppCompatActivity() {
         vibrator.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE))
     }
     
-    private fun openVault() {
+    private fun openVault(isFake: Boolean) {
+        prefs.edit().putInt("failed_attempts", 0).apply()
         val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("fake_vault", isFake)
         startActivity(intent)
         finish()
     }

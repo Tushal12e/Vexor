@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.Settings
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,7 @@ import androidx.core.content.ContextCompat
 import com.vexor.vault.databinding.ActivityPermissionsBinding
 
 /**
- * Permissions Activity - Simplified for stability
+ * Permissions Activity with screenshot blocking
  */
 class PermissionsActivity : AppCompatActivity() {
 
@@ -23,7 +24,7 @@ class PermissionsActivity : AppCompatActivity() {
 
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
-    ) { permissions ->
+    ) { _ ->
         checkAllPermissions()
     }
 
@@ -35,6 +36,12 @@ class PermissionsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Screenshot blocking
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         
         try {
             binding = ActivityPermissionsBinding.inflate(layoutInflater)
@@ -57,7 +64,6 @@ class PermissionsActivity : AppCompatActivity() {
     }
 
     private fun requestPermissions() {
-        // Get list of required permissions based on Android version
         val requiredPermissions = mutableListOf(Manifest.permission.CAMERA)
         
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -75,7 +81,6 @@ class PermissionsActivity : AppCompatActivity() {
         if (missingPermissions.isNotEmpty()) {
             permissionLauncher.launch(missingPermissions.toTypedArray())
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
-            // Request MANAGE_EXTERNAL_STORAGE
             try {
                 val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
                 intent.data = Uri.parse("package:$packageName")
