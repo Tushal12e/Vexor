@@ -45,6 +45,16 @@ class CalculatorActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         
+        try {
+            initializeActivity()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // Show error and don't crash
+            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+    
+    private fun initializeActivity() {
         // 1. Check Permissions
         if (!hasPermissions()) {
             startActivity(Intent(this, PermissionsActivity::class.java))
