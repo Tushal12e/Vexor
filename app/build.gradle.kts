@@ -11,10 +11,10 @@ android {
         applicationId = "com.vexor.vault"
         minSdk = 26
         targetSdk = 34
-        versionCode = 424
-        versionName = "4.2.4"
+        versionCode = 430
+        versionName = "4.3.0"
         multiDexEnabled = true
-        setProperty("archivesBaseName", "Vexor-v4.2.4")
+        setProperty("archivesBaseName", "Vexor-v4.3.0")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

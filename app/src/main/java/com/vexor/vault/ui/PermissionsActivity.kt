@@ -10,26 +10,16 @@ import android.os.Environment
 import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.vexor.vault.databinding.ActivityPermissionsBinding
 
-class PermissionsActivity : BaseActivity() {
+/**
+ * Permissions Activity - Simplified for stability
+ */
+class PermissionsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPermissionsBinding
-
-    private val requiredPermissions = mutableListOf<String>().apply {
-        add(Manifest.permission.CAMERA)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            add(Manifest.permission.READ_MEDIA_IMAGES)
-            add(Manifest.permission.READ_MEDIA_VIDEO)
-            add(Manifest.permission.READ_MEDIA_AUDIO)
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-             add(Manifest.permission.READ_EXTERNAL_STORAGE)
-        } else {
-            add(Manifest.permission.READ_EXTERNAL_STORAGE)
-            add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        }
-    }
 
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -37,7 +27,6 @@ class PermissionsActivity : BaseActivity() {
         checkAllPermissions()
     }
 
-    // Special launcher for MANAGE_EXTERNAL_STORAGE (Android 11+)
     private val manageStorageLauncher = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -46,11 +35,17 @@ class PermissionsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityPermissionsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        binding.btnGrantPermissions.setOnClickListener {
-            requestPermissions()
+        
+        try {
+            binding = ActivityPermissionsBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+            
+            binding.btnGrantPermissions.setOnClickListener {
+                requestPermissions()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "Error: ${e.message}", Toast.LENGTH_LONG).show()
         }
     }
     
@@ -62,29 +57,34 @@ class PermissionsActivity : BaseActivity() {
     }
 
     private fun requestPermissions() {
-        // 1. Check Standard Permissions
+        // Get list of required permissions based on Android version
+        val requiredPermissions = mutableListOf(Manifest.permission.CAMERA)
+        
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            requiredPermissions.add(Manifest.permission.READ_MEDIA_IMAGES)
+            requiredPermissions.add(Manifest.permission.READ_MEDIA_VIDEO)
+        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+            requiredPermissions.add(Manifest.permission.READ_EXTERNAL_STORAGE)
+            requiredPermissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+        
         val missingPermissions = requiredPermissions.filter {
             ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
         }
 
         if (missingPermissions.isNotEmpty()) {
             permissionLauncher.launch(missingPermissions.toTypedArray())
-        } else {
-            // 2. Check Manage Storage (Android 11+)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                if (!Environment.isExternalStorageManager()) {
-                    try {
-                        val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
-                        intent.data = Uri.parse("package:$packageName")
-                        manageStorageLauncher.launch(intent)
-                    } catch (e: Exception) {
-                        val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
-                        manageStorageLauncher.launch(intent)
-                    }
-                    return
-                }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
+            // Request MANAGE_EXTERNAL_STORAGE
+            try {
+                val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                intent.data = Uri.parse("package:$packageName")
+                manageStorageLauncher.launch(intent)
+            } catch (e: Exception) {
+                val intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+                manageStorageLauncher.launch(intent)
             }
-            // All good
+        } else {
             proceed()
         }
     }
@@ -98,19 +98,14 @@ class PermissionsActivity : BaseActivity() {
     }
 
     private fun hasAllPermissions(): Boolean {
-        // 1. Camera
         val cameraGranted = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
         
-        // 2. Storage
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            if (Environment.isExternalStorageManager()) {
-                return cameraGranted
-            }
-            return false
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            cameraGranted && Environment.isExternalStorageManager()
         } else {
             val read = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
             val write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-            return cameraGranted && read && write
+            cameraGranted && read && write
         }
     }
 
