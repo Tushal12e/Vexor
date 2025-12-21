@@ -11,36 +11,43 @@ import java.security.MessageDigest
 import java.util.UUID
 
 class VaultPreferences(private val context: Context) {
-    
-    private val masterKey = MasterKey.Builder(context)
-        .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
-        .build()
-    
     private val prefs: SharedPreferences by lazy {
         try {
-            createEncryptedPrefs()
+            // Try encrypted prefs
+            val masterKey = MasterKey.Builder(context)
+                .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                .build()
+            
+            EncryptedSharedPreferences.create(
+                context,
+                "vexor_secure_prefs",
+                masterKey,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
         } catch (e: Exception) {
             e.printStackTrace()
-            // If failed, clear and retry once
-            context.getSharedPreferences("vexor_secure_prefs", Context.MODE_PRIVATE).edit().clear().apply()
+            // Clear corrupted data and retry
             try {
-                createEncryptedPrefs()
+                context.getSharedPreferences("vexor_secure_prefs", Context.MODE_PRIVATE).edit().clear().apply()
+                
+                val masterKey = MasterKey.Builder(context)
+                    .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+                    .build()
+                
+                EncryptedSharedPreferences.create(
+                    context,
+                    "vexor_secure_prefs",
+                    masterKey,
+                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+                )
             } catch (e2: Exception) {
-                // Fallback to standard prefs if crypto is permanently broken on this device
-                // This is not ideal for security but prevents crash.
-                context.getSharedPreferences("vexor_secure_prefs_fallback", Context.MODE_PRIVATE)
+                e2.printStackTrace()
+                // Ultimate fallback - use regular prefs
+                context.getSharedPreferences("vexor_prefs_fallback", Context.MODE_PRIVATE)
             }
         }
-    }
-
-    private fun createEncryptedPrefs(): SharedPreferences {
-        return EncryptedSharedPreferences.create(
-            context,
-            "vexor_secure_prefs",
-            masterKey,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
     }
     
     companion object {
