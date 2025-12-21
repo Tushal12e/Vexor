@@ -15,12 +15,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
+import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.vexor.vault.databinding.ActivityCalculatorBinding
 import net.objecthunter.exp4j.ExpressionBuilder
+import java.io.File
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
 /**
- * Main Calculator Activity with all features
+ * Main Calculator Activity with all features including intruder detection
  */
 class CalculatorActivity : AppCompatActivity() {
 
@@ -30,6 +37,10 @@ class CalculatorActivity : AppCompatActivity() {
     private val prefs by lazy {
         getSharedPreferences("vexor_prefs", MODE_PRIVATE)
     }
+    
+    // Camera for intruder detection
+    private var imageCapture: ImageCapture? = null
+    private lateinit var cameraExecutor: ExecutorService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,10 +61,17 @@ class CalculatorActivity : AppCompatActivity() {
             binding = ActivityCalculatorBinding.inflate(layoutInflater)
             setContentView(binding.root)
             
+            cameraExecutor = Executors.newSingleThreadExecutor()
+            
             if (!prefs.getBoolean("setup_complete", false)) {
                 startActivity(Intent(this, SetupActivity::class.java))
                 finish()
                 return
+            }
+            
+            // Start camera for intruder detection
+            if (prefs.getBoolean("intruder_detection", true)) {
+                startCamera()
             }
             
             setupCalculatorUI()
@@ -81,6 +99,25 @@ class CalculatorActivity : AppCompatActivity() {
             val write = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
             cameraGranted && read && write
         }
+    }
+    
+    private fun startCamera() {
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
+        
+        cameraProviderFuture.addListener({
+            try {
+                imageCapture = ImageCapture.Builder()
+                    .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                    .build()
+                
+                val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
+                val cameraProvider = cameraProviderFuture.get()
+                cameraProvider.unbindAll()
+                cameraProvider.bindToLifecycle(this, cameraSelector, imageCapture)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }, ContextCompat.getMainExecutor(this))
     }
     
     private fun setupCalculatorUI() {
@@ -186,8 +223,32 @@ class CalculatorActivity : AppCompatActivity() {
         
         if (attempts >= 3) {
             vibrate()
-            // Could add intruder photo capture here
+            // Capture intruder photo
+            captureIntruder()
         }
+    }
+    
+    private fun captureIntruder() {
+        val imageCapture = imageCapture ?: return
+        
+        val intruderDir = File(filesDir, "intruders").apply { mkdirs() }
+        val photoFile = File(intruderDir, "intruder_${System.currentTimeMillis()}.jpg")
+        
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+        
+        imageCapture.takePicture(
+            outputOptions,
+            ContextCompat.getMainExecutor(this),
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                    // Photo saved - can be viewed in IntruderLogActivity
+                }
+                
+                override fun onError(exception: ImageCaptureException) {
+                    exception.printStackTrace()
+                }
+            }
+        )
     }
     
     private fun showBiometricPrompt() {
@@ -233,5 +294,12 @@ class CalculatorActivity : AppCompatActivity() {
         intent.putExtra("fake_vault", isFake)
         startActivity(intent)
         finish()
+    }
+    
+    override fun onDestroy() {
+        super.onDestroy()
+        if (::cameraExecutor.isInitialized) {
+            cameraExecutor.shutdown()
+        }
     }
 }
