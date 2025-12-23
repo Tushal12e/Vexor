@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Display Screen -->
+    <TextView
+        android:id="@+id/display_screen"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="bottom|end"
+        android:padding="16dp"
+        android:text="0"
+        android:textColor="@color/text_primary"
+        android:textSize="48sp"
+        android:ellipsize="start"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text=""
+        android:textColor="@color/status_error"
+        android:textSize="14sp" />
+
+    <!-- Calculator Grid -->
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:columnCount="4"
+        android:rowCount="5"
+        android:alignmentMode="alignMargins"
+        android:columnOrderPreserved="false"
+        android:useDefaultMargins="true">
+
+        <!-- Row 1: AC, Del, %, / -->
+        <Button style="@style/CalculatorButton.Action" android:text="AC" android:id="@+id/btnAC" />
+        <Button style="@style/CalculatorButton.Action" android:text="C" android:id="@+id/btnDelete" />
+        <Button style="@style/CalculatorButton.Action" android:text="%" android:id="@+id/btnPercent" />
+        <Button style="@style/CalculatorButton.Action" android:text="/" android:id="@+id/btnDivide" />
+
+        <!-- Row 2: 7, 8, 9, * -->
+        <Button style="@style/CalculatorButton" android:text="7" android:id="@+id/btn7" />
+        <Button style="@style/CalculatorButton" android:text="8" android:id="@+id/btn8" />
+        <Button style="@style/CalculatorButton" android:text="9" android:id="@+id/btn9" />
+        <Button style="@style/CalculatorButton.Action" android:text="x" android:id="@+id/btnMultiply" />
+
+        <!-- Row 3: 4, 5, 6, - -->
+        <Button style="@style/CalculatorButton" android:text="4" android:id="@+id/btn4" />
+        <Button style="@style/CalculatorButton" android:text="5" android:id="@+id/btn5" />
+        <Button style="@style/CalculatorButton" android:text="6" android:id="@+id/btn6" />
+        <Button style="@style/CalculatorButton.Action" android:text="-" android:id="@+id/btnMinus" />
+
+        <!-- Row 4: 1, 2, 3, + -->
+        <Button style="@style/CalculatorButton" android:text="1" android:id="@+id/btn1" />
+        <Button style="@style/CalculatorButton" android:text="2" android:id="@+id/btn2" />
+        <Button style="@style/CalculatorButton" android:text="3" android:id="@+id/btn3" />
+        <Button style="@style/CalculatorButton.Action" android:text="+" android:id="@+id/btnPlus" />
+
+        <!-- Row 5: 0, ., = -->
+        <Button style="@style/CalculatorButton" android:text="0" android:id="@+id/btn0" 
+            android:layout_columnSpan="2" android:layout_gravity="fill_horizontal" />
+        <Button style="@style/CalculatorButton" android:text="." android:id="@+id/btnDot" />
+        <Button style="@style/CalculatorButton.Action" android:text="=" android:id="@+id/btnEquals"
+            android:backgroundTint="@color/primary" android:textColor="@color/on_primary" />
+
+    </GridLayout>
+
+</LinearLayout>

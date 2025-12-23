@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base Theme -->
+    <style name="Theme.Vexor" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:navigationBarColor">@color/background</item>
+        <item name="android:windowBackground">@color/background</item>
+    </style>
+
+    <!-- Splash Theme -->
+    <style name="Theme.Vexor.Splash" parent="Theme.Vexor">
+        <item name="android:windowBackground">@color/background</item>
+    </style>
+
+    <!-- Fullscreen Theme -->
+    <style name="Theme.Vexor.Fullscreen" parent="Theme.Vexor">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Button Styles -->
+    <style name="VexorButton" parent="Widget.Material3.Button">
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="backgroundTint">@color/primary</item>
+    </style>
+
+    <style name="CalculatorButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_rowWeight">1</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="backgroundTint">@color/surface</item>
+        <item name="cornerRadius">16dp</item>
+    </style>
+
+    <style name="CalculatorButton.Action">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="VexorButton.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="strokeColor">@color/primary</item>
+    </style>
+
+    <!-- Card Style -->
+    <style name="VexorCard" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/card_background</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="strokeColor">@color/card_border</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+
+    <!-- PIN Button Style -->
+    <style name="PinButton">
+        <item name="android:layout_width">72dp</item>
+        <item name="android:layout_height">72dp</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:background">@drawable/bg_pin_button</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- Text Styles -->
+    <style name="TextTitle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="TextSubtitle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextBody">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <!-- Small PIN Button for Share Receiver -->
+    <style name="PinButtonSmall">
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:background">@drawable/bg_pin_button</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <!-- Dialog Theme for Share Receiver -->
+    <style name="Theme.Vexor.Dialog" parent="Theme.Vexor">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@color/background</item>
+    </style>
+</resources>

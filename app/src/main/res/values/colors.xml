@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <!-- Primary Colors - Deep Purple/Violet -->
+    <color name="primary">#6C63FF</color>
+    <color name="primary_variant">#524ADD</color>
+    <color name="primary_dark">#524ADD</color>
+    <color name="on_primary">#FFFFFF</color>
+    
+    <!-- Secondary - Cyan -->
+    <color name="secondary">#03DAC6</color>
+    <color name="secondary_variant">#018786</color>
+    <color name="secondary_dark">#018786</color>
+    <color name="on_secondary">#000000</color>
+    
+    <!-- Background - Dark -->
+    <color name="background">#121212</color>
+    <color name="background_secondary">#12121A</color>
+    <color name="surface">#1E1E1E</color>
+    <color name="surface_elevated">#22222E</color>
+    <color name="on_background">#FFFFFF</color>
+    <color name="on_surface">#FFFFFF</color>
+    
+    <!-- Cards -->
+    <color name="card_background">#1E1E2A</color>
+    <color name="card_border">#2D2D3D</color>
+    <color name="outline">#606070</color>
+    
+    <!-- Text -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#A0A0B0</color>
+    <color name="text_hint">#606070</color>
+    
+    <!-- Status Colors -->
+    <color name="status_success">#00E676</color>
+    <color name="status_warning">#FFAB00</color>
+    <color name="status_error">#FF5252</color>
+    <color name="status_info">#40C4FF</color>
+    
+    <!-- File Type Colors -->
+    <color name="file_photo">#FF6B9D</color>
+    <color name="file_video">#7C4DFF</color>
+    <color name="file_document">#00E5FF</color>
+    <color name="file_audio">#00E676</color>
+    <color name="folder_color">#FFC107</color>
+    
+    <!-- Security -->
+    <color name="lock_secure">#00E676</color>
+    <color name="lock_warning">#FFAB00</color>
+    
+    <!-- PIN Pad -->
+    <color name="pin_button">#22222E</color>
+    <color name="pin_button_pressed">#7C4DFF</color>
+    <color name="pin_dot_filled">#7C4DFF</color>
+    <color name="pin_dot_empty">#3D3D4D</color>
+    
+    <!-- Ripple -->
+    <color name="ripple_color">#337C4DFF</color>
+    
+    <!-- Gradient overlay -->
+    <color name="gradient_start">#007C4DFF</color>
+    <color name="gradient_end">#997C4DFF</color>
+</resources>

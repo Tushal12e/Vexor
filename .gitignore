@@ -1,0 +1,47 @@
+# Built files
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+build_error_*.txt
+build_res_error*.txtx
+*.class
+
+# Gradle
+gradle-8.2/
+.gradle/
+gradle/wrapper/gradle-wrapper.jar
+
+# Logs
+*.log
+build_log.txt
+
+# Local configuration
+local.properties
+keystore.properties
+
+# Sensitive
+*.jks
+*.keystore
+
+# Exclusions
+*.apk
+*.ap_
+build_error_*.txt
+build_log*.txt
+*.log
+
+# Temporary files
+new_icon.png
+app/build/
