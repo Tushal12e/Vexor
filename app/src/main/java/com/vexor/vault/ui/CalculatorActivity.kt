@@ -21,6 +21,9 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.vexor.vault.databinding.ActivityCalculatorBinding
+import com.vexor.vault.data.IntruderLog
+import com.vexor.vault.data.VaultRepository
+import com.vexor.vault.security.BreakInNotificationHelper
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.io.File
 import java.util.concurrent.ExecutorService
@@ -236,16 +239,43 @@ class CalculatorActivity : AppCompatActivity() {
         
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
         
+        val failedAttempts = prefs.getInt("failed_attempts", 0)
+        
         imageCapture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    // Photo saved - can be viewed in IntruderLogActivity
+                    // Save intruder log with photo path
+                    val repository = VaultRepository(this@CalculatorActivity)
+                    val log = IntruderLog(
+                        id = System.currentTimeMillis(),
+                        timestamp = System.currentTimeMillis(),
+                        photoPath = photoFile.absolutePath,
+                        attemptCount = failedAttempts
+                    )
+                    repository.addIntruderLog(log)
+                    
+                    // Send break-in notification
+                    try {
+                        val notificationHelper = BreakInNotificationHelper(this@CalculatorActivity)
+                        notificationHelper.showBreakInNotification(failedAttempts)
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
                 }
                 
                 override fun onError(exception: ImageCaptureException) {
                     exception.printStackTrace()
+                    // Still save log even if photo failed
+                    val repository = VaultRepository(this@CalculatorActivity)
+                    val log = IntruderLog(
+                        id = System.currentTimeMillis(),
+                        timestamp = System.currentTimeMillis(),
+                        photoPath = null,
+                        attemptCount = failedAttempts
+                    )
+                    repository.addIntruderLog(log)
                 }
             }
         )

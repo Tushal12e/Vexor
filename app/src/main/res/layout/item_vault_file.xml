@@ -33,8 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_file"
-                app:tint="@color/primary_variant" />
+                android:src="@drawable/ic_file" />
 
         </androidx.cardview.widget.CardView>
 

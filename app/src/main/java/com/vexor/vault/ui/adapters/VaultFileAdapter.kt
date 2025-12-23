@@ -126,6 +126,7 @@ class VaultFileAdapter(
 
         private fun showFileTypeIcon(fileType: FileType) {
             ivIcon.scaleType = ImageView.ScaleType.CENTER // Icon mode - centered
+            ivIcon.imageTintList = ContextCompat.getColorStateList(itemView.context, R.color.primary_variant)
             ivIcon.setImageResource(when(fileType) {
                 FileType.AUDIO -> R.drawable.ic_audio
                 FileType.DOCUMENT -> R.drawable.ic_file
@@ -145,7 +146,8 @@ class VaultFileAdapter(
             ivIcon.setImageDrawable(null)
             
             if (file.thumbnailPath != null && (file.fileType == FileType.PHOTO || file.fileType == FileType.VIDEO)) {
-                // Video/Photo thumbnail
+                // Video/Photo thumbnail - clear tint for bitmaps
+                ivIcon.imageTintList = null
                 ivIcon.scaleType = ImageView.ScaleType.CENTER_CROP // Thumbnail mode
                 thumbnailJob = (itemView.context as? LifecycleOwner)?.lifecycleScope?.launch {
                     val bitmap = encryptionManager.decryptThumbnail(file.thumbnailPath)

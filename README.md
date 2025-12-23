@@ -9,8 +9,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Tushal12e/Vexor/releases/tag/v4.5.6">
-    <img src="https://img.shields.io/badge/Version-4.5.6-blue.svg" alt="Version"/>
+  <a href="https://github.com/Tushal12e/Vexor/releases/tag/v4.5.7">
+    <img src="https://img.shields.io/badge/Version-4.5.7-blue.svg" alt="Version"/>
   </a>
   <img src="https://img.shields.io/badge/Android-8.0%2B-green.svg" alt="Android"/>
 </p>
@@ -24,11 +24,11 @@ Part of the **Tushal12e App Series**.
 
 ## 📥 Download
 
-**[⬇️ Download Vexor v4.5.6 APK](https://github.com/Tushal12e/Vexor/releases/download/v4.5.6/Vexor-v4.5.6-debug.apk)**
+**[⬇️ Download Vexor v4.5.7 APK](https://github.com/Tushal12e/Vexor/releases/download/v4.5.7/Vexor-v4.5.7-debug.apk)**
 
 | Info | Details |
 |------|---------|
-| **Version** | 4.5.6 |
+| **Version** | 4.5.7 |
 | **Size** | ~18 MB |
 | **Min Android** | 8.0 (API 26) |
 | **Target SDK** | Android 14 (API 34) |
@@ -90,7 +90,13 @@ Part of the **Tushal12e App Series**.
 
 ## 📋 Changelog
 
-### v4.5.6 (Latest)
+### v4.5.7 (Latest)
+- ✅ Fixed intruder detection - now saves photos and shows in logs
+- ✅ Fixed media thumbnails - photos/videos now show actual previews
+- ✅ Fixed theme switching - changes apply immediately
+- ✅ Improved notification for security alerts
+
+### v4.5.6
 - ✅ Improved media grid layout - fixed overlap issues
 - ✅ Enhanced vault file adapter for better thumbnails
 - ✅ UI/UX improvements for media display

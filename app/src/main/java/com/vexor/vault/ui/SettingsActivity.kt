@@ -147,6 +147,8 @@ class SettingsActivity : BaseActivity() {
                 }
                 ThemeManager.setTheme(this, mode)
                 dialog.dismiss()
+                // Recreate activity to apply theme immediately
+                recreate()
             }
             .show()
     }
